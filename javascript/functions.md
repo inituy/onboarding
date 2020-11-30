@@ -81,7 +81,7 @@ var three = sum(2, 1);
 
 Podríamos utilizar aplicación parcial para resolver este problema, devolviendo una nueva función que tenga el primer parámetro fijo y espere solo un parámetro para completar la suma:
 
-```
+```javascript
 function sum(x) {
 	return function (y) {
 		return x + y;
@@ -100,7 +100,7 @@ Por ejemplo, un programa del mundo real quiere guardar registros en una base de 
 
 La función `saveItem` que pertenece al modulo de las reglas de negocio no debe saber como persistir el registro en la base de datos. Entonces sus parámetros van a ser los datos del registro y una función que los persista en la base de datos:
 
-```
+```javascript
 function saveItem(persistItem, itemData) {
 	// Do stuff before persisting item
 	persistItem(itemData);
@@ -113,7 +113,7 @@ saveItem(databasePersistItem, { id: 3 });
 
 Podemos obtener una función `saveItem` que no necesite que la función de base de datos cada vez que se la llame utilizando aplicación parcial:
 
-```
+```javascript
 function saveItem(persistItem, itemData) {
 	// Do stuff before persisting item
 	persistItem(itemData);
@@ -125,14 +125,16 @@ function saveItemToDatabase() {
 	};
 }
 
-saveItemToDatabase({ id: 1 });
-saveItemToDatabase({ id: 2 });
-saveItemToDatabase({ id: 2 });
+var saveItem2 = saveItemToDatabase();
+
+saveItem2({ id: 1 });
+saveItem2({ id: 2 });
+saveItem2({ id: 2 });
 ```
 
 En un programa real, la inyección de dependencia ocurre generalmente en el arranque. Usando aplicación parcial podemos definir todas las dependencias de nuestras funciones en el arranque del programa y utilizar las funciones parcialmente aplicadas de ahí en adelante:
 
-```
+```javascript
 function saveItem(persistItem, itemData) {
 	// Do stuff before persisting item
 	persistItem(itemData);
@@ -166,7 +168,7 @@ Esta complejidad agregada nos trae como beneficio la capacidad de desacoplar nue
 
 Consideremos el siguiente ejemplo en el cual creamos un test para la función `saveItem` sin tener que correr queries en la base de datos:
 
-```
+```javascript
 describe('saveItem', function () {
 	var saveItem = require('./save_item.js');
 	var persistedItemData = null;
