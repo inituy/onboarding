@@ -135,23 +135,33 @@ saveItem2({ id: 2 });
 En un programa real, la inyección de dependencia ocurre generalmente en el arranque. Usando aplicación parcial podemos definir todas las dependencias de nuestras funciones en el arranque del programa y utilizar las funciones parcialmente aplicadas de ahí en adelante:
 
 ```javascript
+/* Applies business logic validations/filters
+   to itemData before persisting it using the
+   persistItem option. */
 function saveItem(persistItem, itemData) {
 	// Do stuff before persisting item
 	persistItem(itemData);
 }
 
-function saveItemToDatabase(databaseConnection) {
-	return function (itemData) {
-		return saveItem(databasePersistItem(databaseConnection), itemData);
-	};
-}
-
+/* Given a database connection, this function will
+   save the itemData to the database. */
 function databasePersistItem(databaseConnection) {
 	return function (itemData) {
 		// Run queries using item data.
 	};
 }
 
+/* Returns a pre-configured saveItem function
+   that saves itemData to the database. */
+function saveItemToDatabase(databaseConnection) {
+	return function (itemData) {
+		return saveItem(databasePersistItem(databaseConnection), itemData);
+	};
+}
+
+/* Returns all functions available in our app.
+   Ideally called within a scope so that the other
+   functions can't be called directly. */
 function init() {
 	var databaseConnection = new DatabaseConnection();
 	return {
@@ -159,8 +169,7 @@ function init() {
 	};
 }
 
-var app = init();
-
+var app = init();       // Initialize the app.
 app.saveItem({ id: 1 }) // Saves item to the database.
 ```
 
@@ -179,6 +188,10 @@ describe('saveItem', function () {
 
 	it('persists item data', function () {
 		var itemData = { id: Math.random() };
+
+		/* We call saveItem, but we pass our
+		   fakePersistItem function to find
+		   out how it gets called. */
 		saveItem(fakePersistItem, itemData);
 
 		/* Did the function persist the data
