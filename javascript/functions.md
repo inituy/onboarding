@@ -4,7 +4,7 @@ En esta parte de la guía vamos a hablar sobre el uso de funciones en Javascript
 
 Aunque las nuevas versiones de Javascript vienen con otra sintaxis para crear funciones, nosotros vamos a crear nuestras funciones de la siguiente manera:
 
-```
+```javascript
 function nameOfTheFunction(param1, param2, param3) {
 	// Contents of the function
 }
@@ -20,7 +20,7 @@ A partir de la declaración de la función en adelante, podemos usar el nombre d
 
 Por ejemplo:
 
-```
+```javascript
 var result = nameOfTheFunction(1, '2', "tres");
 ```
 
@@ -38,7 +38,7 @@ Los callbacks son funciones que se usan para notificar al que llama una funcion 
 
 Por ejemplo en NodeJS, la [siguiente función](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) lee un archivo y ejecuta el callback cuando el contenido del archivo está disponible:
 
-```
+```javascript
 var fs = require('fs');
 
 var callback = function (error, fileContents) {
@@ -51,7 +51,7 @@ fs.readFile('../filename.txt', callback);
 
 En algunos casos podemos encontrar funciones que reciben callbacks, que a su vez tambien reciben callbacks. Por ejemplo, [la función `it` del framework de testing Jasmine funciona de esa manera](https://jasmine.github.io/tutorials/async#callbacks).
 
-```
+```javascript
 it('does a thing', function(done) {
   someAsyncFunction(function(result) {
     expect(result).toEqual(someExpectedValue);
@@ -70,11 +70,11 @@ Function(String, Function(Function))
 
 ### Aplicación parcial
 
-Aplicación parcial es una técnica que sirve para fabricar funciones de menor cantidad de parametros a partir de una funcion con mayor cantidad de parametros.
+Aplicación parcial es una técnica que sirve para fabricar funciones de menor cantidad de parametros a partir de una función con mayor cantidad de parametros.
 
-El ejemplo mas utilizado para explicar esta técnica son las operaciones matematicas. La siguiente función va a devolver la suma de dos numeros:
+El ejemplo más utilizado para explicar esta técnica son las operaciones matemáticas. La siguiente función va a devolver la suma de dos números:
 
-```
+```javascript
 function sum(x, y) { return x + y; }
 var three = sum(2, 1);
 ```
@@ -111,7 +111,7 @@ saveItem(databasePersistItem, { id: 2 });
 saveItem(databasePersistItem, { id: 3 });
 ```
 
-Podemos obtener una función `saveItem` que no necesite que la función de base de datos cada vez que se la llame utilizando aplicación parcial:
+Podemos obtener una función `saveItem` que no necesite que le pasemos la función de base de datos cada vez que se la llame utilizando aplicación parcial:
 
 ```javascript
 function saveItem(persistItem, itemData) {
