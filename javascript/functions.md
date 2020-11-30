@@ -68,7 +68,7 @@ La firma de la función `it` podría ser de la siguiente manera:
 Function(String, Function(Function))
 ```
 
-## Aplicación parcial
+### Aplicación parcial
 
 Aplicación parcial es una técnica que sirve para fabricar funciones de menor cantidad de parametros a partir de una funcion con mayor cantidad de parametros.
 
