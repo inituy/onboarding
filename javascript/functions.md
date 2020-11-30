@@ -62,8 +62,131 @@ it('does a thing', function(done) {
 
 `it` es una función cuyo segundo parámetro es un callback que se ejecuta cuando la herramienta está lista para correr los tests. Al mismo tiempo, este callback va a recibir por parametro otro callback para indicarle al framework que el test debe terminar.
 
-La firma de la función `it` podría ser de la siguiente manera.
+La firma de la función `it` podría ser de la siguiente manera:
 
 ```
 Function(String, Function(Function))
 ```
+
+## Aplicación parcial
+
+Aplicación parcial es una técnica que sirve para fabricar funciones de menor cantidad de parametros a partir de una funcion con mayor cantidad de parametros.
+
+El ejemplo mas utilizado para explicar esta técnica son las operaciones matematicas. La siguiente función va a devolver la suma de dos numeros:
+
+```
+function sum(x, y) { return x + y; }
+var three = sum(2, 1);
+```
+
+Podríamos utilizar aplicación parcial para resolver este problema, devolviendo una nueva función que tenga el primer parámetro fijo y espere solo un parámetro para completar la suma:
+
+```
+function sum(x) {
+	return function (y) {
+		return x + y;
+	}
+}
+var sumTwo = sum(2);
+var three = sumTwo(y);
+var five = sum(3)(2);
+```
+
+#### En el mundo real
+
+La técnica de aplicación parcial se usa en el mundo real para lograr la [inyección de dependencias](https://en.wikipedia.org/wiki/Dependency_injection).
+
+Por ejemplo, un programa del mundo real quiere guardar registros en una base de datos. Esta funcionalidad esta compuesta por las reglas de negocio (como debe guardarse el registro según el problema que el programa soluciona) y por el código de base de datos (las queries que hay que ejectura para que los datos se guarden).
+
+La función `saveItem` que pertenece al modulo de las reglas de negocio no debe saber como persistir el registro en la base de datos. Entonces sus parámetros van a ser los datos del registro y una función que los persista en la base de datos:
+
+```
+function saveItem(persistItem, itemData) {
+	// Do stuff before persisting item
+	persistItem(itemData);
+}
+
+saveItem(databasePersistItem, { id: 1 });
+saveItem(databasePersistItem, { id: 2 });
+saveItem(databasePersistItem, { id: 3 });
+```
+
+Podemos obtener una función `saveItem` que no necesite que la función de base de datos cada vez que se la llame utilizando aplicación parcial:
+
+```
+function saveItem(persistItem, itemData) {
+	// Do stuff before persisting item
+	persistItem(itemData);
+}
+
+function saveItemToDatabase() {
+	return function (itemData) {
+		return saveItem(databasePersistItem, itemData);
+	};
+}
+
+saveItemToDatabase({ id: 1 });
+saveItemToDatabase({ id: 2 });
+saveItemToDatabase({ id: 2 });
+```
+
+En un programa real, la inyección de dependencia ocurre generalmente en el arranque. Usando aplicación parcial podemos definir todas las dependencias de nuestras funciones en el arranque del programa y utilizar las funciones parcialmente aplicadas de ahí en adelante:
+
+```
+function saveItem(persistItem, itemData) {
+	// Do stuff before persisting item
+	persistItem(itemData);
+}
+
+function saveItemToDatabase(databaseConnection) {
+	return function (itemData) {
+		return saveItem(databasePersistItem(databaseConnection), itemData);
+	};
+}
+
+function databasePersistItem(databaseConnection) {
+	return function (itemData) {
+		// Run queries using item data.
+	};
+}
+
+function init() {
+	var databaseConnection = new DatabaseConnection();
+	return {
+		saveItem: saveItemToDatabase(databaseConnection)
+	};
+}
+
+var app = init();
+
+app.saveItem({ id: 1 }) // Saves item to the database.
+```
+
+Esta complejidad agregada nos trae como beneficio la capacidad de desacoplar nuestro código, separando la lógica de negocio de la base de datos, y permitiendonos correr tests sobre la lógica de negocio sin utilizar la base de datos.
+
+Consideremos el siguiente ejemplo en el cual creamos un test para la función `saveItem` sin tener que correr queries en la base de datos:
+
+```
+describe('saveItem', function () {
+	var saveItem = require('./save_item.js');
+	var persistedItemData = null;
+
+	function fakePersistItem(itemData) {
+		persistedItemData = itemData;
+	}
+
+	it('persists item data', function () {
+		var itemData = { id: Math.random() };
+		saveItem(fakePersistItem, itemData);
+
+		/* Did the function persist the data
+		   using the function that we passed
+		   as parameter? */
+		expect(persistedItemData).toBe(itemData);
+	});
+})
+```
+
+Esto es todo por ahora en cuanto a funciones.
+
+Para seguir con la guía, clic [acá](https://bitbucket.org/inituy/onboarding/src/master/javascript/parallelism.md).
