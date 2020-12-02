@@ -8,7 +8,7 @@ Para hacer esto en lenguajes como Java se usa una abstraccion llamada `Thread`. 
 
 Consideremos el siguiente ejemplo: Tenemos una coleccion de numeros y nuestro programa debe mostrar el doble de cada numero en la coleccion. Para resolver esto podemos hacer una multiplicacion a la vez, en un solo procesador, hasta que hayamos recorrido toda la collection o podemos darle a cada procesador una cantidad igual de numeros, esperar que cada procesador termine de multiplicar, y juntar los resultados.
 
-![paralelismo](/inituy/onboarding/src/master/javascript/parallelism.jpg)
+![paralelismo](/javascript/parallelism.jpg)
 
 Siempre que un problema se pueda resolver ejecutando procesos en paralelo, resolverlo con un solo procesador es teoricamente menos eficiente, excepto en el caso que el problema sea tan sencillo que sea mas el esfuerzo de correrlo en mas de un procesador que en uno solo.
 
