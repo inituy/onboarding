@@ -24,4 +24,4 @@ La guía contiene lo siguiente:
 
 Te recomendamos que sigas esta guía de principio a fín, en orden y sin saltarte partes.
 
-Para empezar, [hacé clic acá](https://bitbucket.org/inituy/onboarding/src/master/vagrant/vagrant.md).
+Para empezar, [hacé clic acá](/inituy/onboarding/src/master/vagrant/vagrant.md).
