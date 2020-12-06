@@ -70,7 +70,7 @@ Los indices tienen el mismo rol en MongoDB que en las bases de datos relacionale
 
 Si tuvieramos 5 millones de animales en nuestra coleccion y quisieramos buscar uno en particular por nombre, esa consulta llevaria mucho tiempo en resolverse sin un indice.
 
-```
+```javascript
 db.animals.findOne({ name: 'Ronco' });
 ```
 
@@ -78,7 +78,7 @@ Para encontrar ese animal sin un indice, MongoDB debe recorrer la coleccion ente
 
 Para crear un indice tenemos que indicar uno o mas campos y la direccion en la cual queremos aplicar el orden para cada campo.
 
-```
+```javascript
 db.animals.createIndex({
 	name: 1,
 	age: -1
