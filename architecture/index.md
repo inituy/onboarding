@@ -120,3 +120,81 @@ La decision de que base de datos usar se puede tomar al final del desarrollo. In
 <img src="/architecture/archetype.png" width="400" />
 
 ### Pipeline pattern
+
+Dentro de cada accion vamos a encontar funciones organizadas de la siguiente manera:
+
+```javascript
+function doSomethingImportant(deps) {
+	return function (payload) {
+		// Each of the following function
+		// calls is a step in the use case.
+		// The `payload` object will travel
+		// through the pipeline and be
+		// manipulated by the functions.
+		return Promise.resolve(payload)
+			.then(validateUserInput)
+			.then(saveSomethingNew)
+			.then(sendSomeEmails)
+			.then(presentResult);
+	}
+}
+```
+
+Los elementos que participan de la accion son los siguientes:
+
+* La variable `deps` contiene las dependencias (funciones) que vienen desde fuera de la logica de negocio.
+* La variable `payload` contiene el input del usuario y otros tipos de inputs enviados por el cliente.
+* La funcion `doSomethingImportant` que devuelve la funcion que ejecuta la accion.
+* La funcion que devuelve `doSomethingImportant` tiene parcialmente aplicadas las dependencies.
+* `Promise.resolve(payload)` crea la promesa inicial para poder encadenar `then`s.
+* El pipeline de funciones que se llaman en orden usando `then`.
+
+En este caso nos vamos a enfocar en las funciones que forman parte del pipeline. Estas funciones representan cada uno de los pasos a dar para completar la accion y todas tienen una interfaz en comun que nos permite llamarlas de esta manera.
+
+Las funciones del pipeline reciben un objeto (en lenguajes de tipos fuertes este objeto seria del tipo `ActionPayload`), usan los datos dentro del objeto, opcionalmente lo manipulan y lo vuelven a devolver.
+
+```
+payload -> validateUserInput -> payload
+payload -> saveSomethingNew  -> payload
+payload -> sendSomeEmails    -> payload
+payload -> presentResult     -> result
+```
+
+Si estuvieramos trabajando en un lenguaje de tipado fuerte, la firma de todas las funciones del payload seria de la siguiente forma:
+
+```
+ActionPayload -> Promise<ActionPayload>
+```
+
+Excepto en el caso de las funciones dentro del modulo de presentacion, donde las funciones no devuelven el payload sino que devuelven un objeto para presentar al usuario que en general tiene menos informacion que la que esta cargada en el payload.
+
+```
+ActionPayload -> Promise<ActionResult>
+```
+
+Como el tipo `ActionPayload` es en realidad una estructura de datos sencilla, como un hash o diccionario, la firma de la funcion tambien funciona en caso de errores. Solo colocamos la informacion del error en el payload y tiramos un error.
+
+Esto nos permite desacoplar completamente el codigo de la accion del codigo de cada function individual dentro del pipeline.
+
+#### Manejo de errores
+
+Como estamos usando promises para coordinar la llamada de las funciones, podemos usar `catch` para capturar un error que se genere en cualquiera de las funciones del pipeline.
+
+```javascript
+readUserInput()
+	.then(doSomethingImportant)
+	.then(function (result) {
+		console.log('Success!')
+	})
+	.catch(function (error) {
+		console.log('It failed...', error);
+	});
+```
+
+Esta tecnica de manejo de errores se puede encontrar en Internet como Railway Oriented Programming. La imagen de abajo muestra como cada funcion de nuestro pipeline tiene dos caminos, el de exito y el de error, y como podemos componer la funcion de accion con las funciones del pipeline.
+
+<img src="/architecture/railway.png" height="130">
+
+Usando estos patrones logramos construir programas que son sencillos de entender, desacoplados y faciles de testear y entender.
+
+Para seguir con la guia, [clic aca](/success.md)
