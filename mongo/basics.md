@@ -62,7 +62,7 @@ animals.forEach(function (animal) {
 
 Por lo tanto el schema existe, pero no se especifica en la base de datos sino en el codigo.
 
-Este tipo de base de datos nos da mayor flexibilidad en el desarollo a cambio de mayor dificultad en la organizacion de los datos. Pero rara vez encontramos un programa en el cual el acceso a los datos sea un problema.
+Este tipo de base de datos nos da mayor flexibilidad en el desarollo a cambio de mayor dificultad en la organizacion de los datos. Pero rara vez encontramos un programa en el cual el acceso a los datos es un problema.
 
 ### Indices
 
@@ -74,12 +74,12 @@ Si tuvieramos 5 millones de animales en nuestra coleccion y quisieramos buscar u
 db.animals.findOne({ name: 'Ronco' });
 ```
 
-Para encontrar ese animal sin un indice, MongoDB debe recorrer la coleccion entera con sus 5 millones de documentos y comprar el campo `name` de cada documento con el filtro que especificamos en la consulta. Las consultas tambien pueden tener filtros mucho mas complejos, como expresiones regulares o multiples filtros, que pueden hacer que sea todavia mas lenta.
+Para encontrar ese animal sin un indice, MongoDB debe recorrer la coleccion entera con sus 5 millones de documentos y comparar el campo `name` de cada documento con el filtro que especificamos en la consulta. Las consultas tambien pueden tener filtros mucho mas complejos, como expresiones regulares o multiples filtros, que pueden hacer que sea todavia mas lenta.
 
 Para crear un indice tenemos que indicar uno o mas campos y la direccion en la cual queremos aplicar el orden para cada campo.
 
 ```
-db.animals.createInde({
+db.animals.createIndex({
 	name: 1,
 	age: -1
 })
@@ -87,6 +87,8 @@ db.animals.createInde({
 
 El indice anterior va a tener los documentos de la coleccion de animales ordenados por nombre y por edad (cuando los nombres sean iguales). El indice tambien va a decirle al motor de busqueda en que lugar de la coleccion se encuentra cada valor.
 
-Por ejemplo, si vuelvo a buscar animales con el nombre "Ronco", MongoDB va a saber que esta cerca del final de la coleccion y no va a comprar conta los primeros 3.5 millones de documentos. El indice le va a indicar que los documentos cuyo nombre empiezan con "R" estan ubicados entre el documento numero 3.500.000 y 4.200.000.
+Por ejemplo, si vuelvo a buscar animales con el nombre "Ronco", MongoDB va a saber que esta cerca del final de la coleccion y no va a comparar contra los primeros 3.5 millones de documentos.
+
+El indice le va a indicar que los documentos cuyo nombre empiezan con "R" estan ubicados entre el documento numero 3.500.000 y 4.200.000.
 
 [Clic para ir al siguiente articulo](/mongo/nodejs.md)
