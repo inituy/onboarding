@@ -10,7 +10,7 @@ Consideremos el siguiente ejemplo: Tenemos una coleccion de numeros y nuestro pr
 
 ![paralelismo](/javascript/parallelism.png)
 
-Siempre que un problema se pueda resolver ejecutando procesos en paralelo, resolverlo con un solo procesador es teoricamente menos eficiente, excepto en el caso que el problema sea tan sencillo que sea mas el esfuerzo de correrlo en mas de un procesador que en uno solo.
+Siempre que un problema se pueda resolver ejecutando procesos en paralelo, resolverlo con un solo procesador es en general menos eficiente, excepto en el caso que el problema sea tan sencillo que sea mas el esfuerzo de correrlo en mas de un procesador que en uno solo.
 
 ## Event-driven Javascript
 
