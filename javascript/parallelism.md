@@ -206,4 +206,4 @@ var promise3 = promise1 // Wrong!
 // - Task 5
 ```
 
-Para seguir con la guía, clic [acá](/inituy/onboarding/src/master/mongo/basics.md).
+Para seguir con la guía, clic [acá](/mongo/basics.md).

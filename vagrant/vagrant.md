@@ -32,4 +32,4 @@ La máquina virtual va a quedar levantada hasta que la apagues con:
 vagrant halt
 ```
 
-Para seguir con la guía [hacé clic acá](/inituy/onboarding/src/master/javascript/functions.md).
+Para seguir con la guía [hacé clic acá](/javascript/functions.md).

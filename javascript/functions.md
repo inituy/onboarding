@@ -204,4 +204,4 @@ describe('saveItem', function () {
 
 Esto es todo por ahora en cuanto a funciones.
 
-Para seguir con la guía, clic [acá](/inituy/onboarding/src/master/javascript/parallelism.md).
+Para seguir con la guía, clic [acá](/javascript/parallelism.md).
