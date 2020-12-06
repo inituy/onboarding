@@ -117,6 +117,6 @@ Si miramos el codigo de mas arriba, podemos ver como hariamos para crear la logi
 
 La decision de que base de datos usar se puede tomar al final del desarrollo. Incluso podemos trabajar simultaneamente en la logica de negocio y en la persistencia. De hecho, podriamos delegar completamente el moduloe de persistencia a un equipo de trabajo distinto.
 
-![archetype](/architecture/archetype.png | width=400)
+<img src="/architecture/archetype.png" width="400" />
 
 ### Pipeline pattern
