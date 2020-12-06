@@ -150,4 +150,58 @@ sum(2, 3).then(function (result) {
 });
 ```
 
+## Chaining
+
+Es posible encadenar promesas para coordinar la ejecución de tareas asincrónicas. Esto se puede hacer utilizando la promise que devuelve ejectuar la función `then`.
+
+La función `then` se ejecuta cuando la promise se completa, y a su vez devuelve una promise. Esto nos permite agendar una tarea asincrónica para ejecutarse al terminar la tarea anterior.
+
+```javascript
+var promise1 = new Promise(function (resolve) {
+	// Run async operation 1
+});
+
+var promise2 = promise1.then(function () {
+  // Run async operation 2
+})
+ 
+var promise3 = promise2.then(function () {
+  // Run async operation 3
+})
+```
+
+No es recomendable asignar mas de una función a la misma promise usando `then`, es confuso y puede generar bugs.
+
+```javascript
+/* DO NOT DO IT LIKE THIS! */
+
+var promise1 = new Promise(function (resolve) {
+	console.log('Task 1');
+	resolve();
+});
+
+var promise2 = promise1
+  .then(function () {
+    console.log('Task 2');
+  })
+  .then(function () {
+  	console.log('Task 3');
+  })
+
+var promise3 = promise1
+  .then(function () {
+	console.log('Task 4');
+  })
+  .then(function () {
+  	console.log('Task 5');
+  });
+
+// Prints:
+// - Task 1
+// - Task 2
+// - Task 4
+// - Task 3
+// - Task 5
+```
+
 Para seguir con la guía, clic [acá](/inituy/onboarding/src/master/mongo/basics.md).
