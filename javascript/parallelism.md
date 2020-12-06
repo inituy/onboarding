@@ -162,11 +162,11 @@ var promise1 = new Promise(function (resolve) {
 });
 
 var promise2 = promise1.then(function () {
-  // Run async operation 2
+	// Run async operation 2
 })
  
 var promise3 = promise2.then(function () {
-  // Run async operation 3
+	// Run async operation 3
 })
 ```
 
@@ -181,20 +181,22 @@ var promise1 = new Promise(function (resolve) {
 });
 
 var promise2 = promise1
-  .then(function () {
-    console.log('Task 2');
-  })
-  .then(function () {
-  	console.log('Task 3');
-  })
+	.then(function () {
+		console.log('Task 2');
+	})
+	.then(function () {
+		console.log('Task 3');
+	});
 
-var promise3 = promise1
-  .then(function () {
-	console.log('Task 4');
-  })
-  .then(function () {
-  	console.log('Task 5');
-  });
+// Do not do this:
+// Use `then` again on promise1
+var promise3 = promise1 // Wrong!
+	.then(function () {
+		console.log('Task 4');
+	})
+	.then(function () {
+		console.log('Task 5');
+	});
 
 // Prints:
 // - Task 1
