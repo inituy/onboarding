@@ -195,6 +195,67 @@ Esta tecnica de manejo de errores se puede encontrar en Internet como Railway Or
 
 <img src="/architecture/railway.png" height="130">
 
+#### Inyeccion de dependencia
+
+Usamos el [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern) para desacoplar la logica de negocio de los modulos de I/O. A esto es a lo que nos referimos cuando decimos que esas funcionalidades vienen desde fuera de los limites de la aplicacion.
+
+El strategy pattern consiste de agregar un parametro a una funcion u objeto que contiene el algoritmo a utilizar dentro de una operacion. De esta manera podemos elegir el algoritmo al correr la aplicacion, y que la funcion que usa el algoritmo no tenga una relacion directa con el.
+
+En el siguiente ejemplo la funcion esta acoplada al algoritmo:
+
+```javascript
+function searchUserByName() {
+	// Searches a user by name.
+}
+
+function findUser(keyword) {
+	return searchUserByName(keyword);
+}
+
+findUser('romina@test')
+```
+
+Y en el siguiente la funcion esta desacoplada del algoritmo:
+
+```javascript
+function searchUserByName() {
+	// Searches a user by name
+}
+
+function findUser(strategy) {
+	return function (keyword) {
+		return strategy(keyword);
+	};
+}
+
+findUser(searchUserByName)('romina@test');
+```
+
+En el segundo ejemplo, `findUser` funciona siempre que la firma de `strategy` sea `string -> User` pero en el primero si `searchUserByName` no esta disponible la funcion falla.
+
+En un programa del mundo real, este patron se usa para delegar al cliente la responsabilidad de saber como se hace I/O. El cliente va a llamar a las funciones del programa especificando las estrategias de I/O.
+
+```javascript
+// This is the index.js file
+
+var app = require('app');
+var mongo = require('app/mongo');
+var sendgrid = require('app/sendgrid');
+
+// Initialize the app and inject
+// dependencies.
+app({
+	sendEmail: sendgrid.sendEmail,
+	persistUser: mongo.persistUser
+});
+
+// Start HTTP server and pass request and
+// response to the app for processing.
+require('http').createServer(function (request, response) {
+	app.processRequest(request, response);
+});
+```
+
 Usando estos patrones logramos construir programas que son sencillos de entender, desacoplados y faciles de testear y entender.
 
 Para seguir con la guia, [clic aca](/success.md)
