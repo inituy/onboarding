@@ -103,7 +103,7 @@ describe('saveNewUser', function () {
 });
 ```
 
-Las acciones tampoco deben saber sobre la base de datos. Eso quiere decir que la funcionalida de base de datos siempre viene desde afuera de la fachada de nuestro programa (en un programa en NodeJS, este seria el archivo `index.js`).
+Las acciones tampoco deben saber sobre la base de datos. Eso quiere decir que la funcionalidad de base de datos siempre viene desde afuera de la fachada de nuestro programa (en un programa en NodeJS, este seria el archivo `index.js`).
 
 #### I/O as a plugin / Delayed decisions
 
@@ -116,5 +116,7 @@ El beneficio que recibimos de organizar nuestro codigo de esta manera es que la 
 Si miramos el codigo de mas arriba, podemos ver como hariamos para crear la logica de negocio que persiste un usuario de nuestro sistema sin saber que base de datos vamos a usar (o si vamos a usar una).
 
 La decision de que base de datos usar se puede tomar al final del desarrollo. Incluso podemos trabajar simultaneamente en la logica de negocio y en la persistencia. De hecho, podriamos delegar completamente el moduloe de persistencia a un equipo de trabajo distinto.
+
+[archetype](/architecture/archetype.png)
 
 ### Pipeline pattern
