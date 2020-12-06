@@ -4,9 +4,9 @@ Hay dos cosas que es necesario mencionar para trabajar con MongoDB en NodeJS: Co
 
 ### Conexiones
 
-En general creamos Singletons que nos permite mantener la menor cantidad de conexiones abiertas con el servidor de MongoDB.
+En general creamos Singletons que nos permiten mantener la menor cantidad de conexiones abiertas con el servidor de MongoDB.
 
-En MongoDB la funcion que nos da la conexion activa se ve asi:
+En NodeJS la funcion que nos da la conexion activa se ve asi:
 
 ```javascript
 var MongoClient = require('mongodb').MongoClient;
@@ -33,7 +33,7 @@ function connect() {
 			// the client to the `connect` function.
 			if (connect.client) return connect.client;
 
-			// MongoClient.connect returns a promise
+			// `MongoClient.connect` returns a promise
 			// because its an async task. This comes from
 			// the official MongoDB package.
 			return MongoClient.connect(url, {
@@ -60,7 +60,7 @@ function connect() {
 };
 
 // This runs only once on NodeJS and then `connect`
-// remains the same throughout the executing of the
+// remains the same throughout the execution of the
 // program. That's why we can store the client to it
 // and not worry about it getting lost and a new
 // connection being created every time.
@@ -72,29 +72,22 @@ Conectarse a la base de datos es una tarea asincronica y por lo tanto la funcion
 ```javascript
 var mongoConnect = require('...');
 
-mongoConnect()
-	.then(function (mongoConnectionClient) {
-		// `findOne` returns a promise that
-		// we can work with in the next `then`.
-		return mongoConnectionClient
-			.collection('animals')
-			.findOne({ name: 'Ronco' })
-	})
-	.then(function (result) {
-		// Here `result` will either be a Javascript
-		// object with the full document.
-		// It will be `null` if there is no document
-		// with "Ronco" value in the `name` field.
-	});
+mongoConnect().then(function (mongoConnectionClient) {
+	// `findOne` returns a promise that
+	// we can work with in the next `then`.
+	return mongoConnectionClient
+		.collection('animals')
+		.findOne({ name: 'Ronco' })
+});
 ```
 
 La sintaxis del cliente de MongoDB en NodeJS es diferente a la que encontramos cuando corremos consultas directamente en la consola.
 
 ### ObjectIds
 
-MongoDB asigna un campo `_id` a cada documento. Este campo es un tipo en particular y puede confundirse con un string.
+MongoDB asigna un campo `_id` a cada documento. Este campo es de un tipo en particular y puede confundirse con un string si no se presta atencion.
 
-Por ejemplo, si tuvieramos un documento de esta manera `{ "_id": ObjectId("asd123") }` en la coleccion de animales, la siguiente consulta no funcionaria:
+Por ejemplo, si tuvieramos un documento `{ "_id": ObjectId("asd123") }` en la coleccion de animales, la siguiente consulta no funcionaria:
 
 ```javascript
 mongoConnect()
