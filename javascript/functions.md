@@ -16,7 +16,7 @@ Los paréntesis después del nombre de la funcion encierran los parámetros de l
 
 Al final están los corchetes `{}` que encierran el cuerpo de la función que esta compuesto de las sentencias que se van a ejecutar cuando ejecutemos nuestra función.
 
-A partir de la declaración de la función en adelante, podemos usar el nombre de la función (en este caso `nameOfTheFunction`) seguido por paréntesis para ejectuar las sentencias dentro del cuerpo de la función, con los valores que queramos asignarle a los parametros.
+A partir de la declaración de la función en adelante, podemos usar el nombre de la función (en este caso `nameOfTheFunction`) seguido por paréntesis para ejecutar las sentencias dentro del cuerpo de la función, con los valores que queramos asignarle a los parametros.
 
 Por ejemplo:
 
@@ -96,7 +96,7 @@ var five = sum(3)(2);
 
 La técnica de aplicación parcial se usa en el mundo real para lograr la [inyección de dependencias](https://en.wikipedia.org/wiki/Dependency_injection).
 
-Por ejemplo, un programa del mundo real quiere guardar registros en una base de datos. Esta funcionalidad esta compuesta por las reglas de negocio (como debe guardarse el registro según el problema que el programa soluciona) y por el código de base de datos (las queries que hay que ejectura para que los datos se guarden).
+Por ejemplo, un programa del mundo real quiere guardar registros en una base de datos. Esta funcionalidad esta compuesta por las reglas de negocio (como debe guardarse el registro según el problema que el programa soluciona) y por el código de base de datos (las queries que hay que ejecutar para que los datos se guarden).
 
 La función `saveItem` que pertenece al modulo de las reglas de negocio no debe saber como persistir el registro en la base de datos. Entonces sus parámetros van a ser los datos del registro y una función que los persista en la base de datos:
 
