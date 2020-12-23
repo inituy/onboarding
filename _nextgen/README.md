@@ -31,64 +31,64 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
     2. Nginx
         1. Funcion
         2. Configuracion
-  3. Git
-  	1. Funcion
-  	2. git status
-  	3. git add
-  	4. git commit
-  	5. git push
-  	6. git pull
-  	7. git reset
-  	8. git checkout
-  	9. git merge
-  4. Javascript
-  	1. Funciones
-  	2. Callbacks
-  	3. Promises
-  	4. Closures
-  	5. Serializacion
-  5. MongoDB
-  	1. Funcion
-  	2. Insert, find, update y delete
-  	3. Indices
+    3. Git
+        1. Funcion
+  	    2. git status
+  	    3. git add
+  	    4. git commit
+  	    5. git push
+  	    6. git pull
+  	    7. git reset
+  	    8. git checkout
+  	    9. git merge
+    4. Javascript
+  	    1. Funciones
+  	    2. Callbacks
+  	    3. Promises
+  	    4. Closures
+  	    5. Serializacion
+    5. MongoDB
+  	    1. Funcion
+  	    2. Insert, find, update y delete
+  	    3. Indices
 2. Arquitectura de software
-  1. Proposito de una arquitectura de software
-    1. Ejemplos de otras arquitecturas
-    2. Arquitectura de nuestro software
-  2. Use case driven development
-    1. Que es un caso de uso
-    2. Responsabilida de los casos de uso
-  3. Railway oriented programming
-  	1. Patron pipeline
-  	2. Responsabilidad de las funciones del pipeline
-  4. I/O as a plugin
-  	1. Que es I/O
-  	2. Que es un plugin
-  	3. Como logramos que el I/O sea un plugin
-  5. User centered design
-  	1. Que es user centered design
-  	2. Interaccion del usuario con nuestro software
-  	3. Proceso iterativo
+    1. Proposito de una arquitectura de software
+        1. Ejemplos de otras arquitecturas
+        2. Arquitectura de nuestro software
+    2. Use case driven development
+        1. Que es un caso de uso
+        2. Responsabilida de los casos de uso
+    3. Railway oriented programming
+  	    1. Patron pipeline
+  	    2. Responsabilidad de las funciones del pipeline
+    4. I/O as a plugin
+      	1. Que es I/O
+  	    2. Que es un plugin
+  	    3. Como logramos que el I/O sea un plugin
+    5. User centered design
+  	    1. Que es user centered design
+  	    2. Interaccion del usuario con nuestro software
+  	    3. Proceso iterativo
 3. Procesos internos
-  1. Test driven development
-    1. Como probamos nuestro software sin tests
-  	2. Test driven development segun el libro
-  	3. Como aplicamos test driven development
-  2. Gitflow
-    1. Branch de deploy
-    2. Branch de desarrollo
-    3. Branch personal
-    4. Branch de hotfix
-  3. Scrum
-  	1. Backlog
-  	2. Puntos de esfuerzo
-  	3. Estimacion
-  	4. Reunion de planificacion
-  	5. Evaluacion de tareas terminadas
-  4. Contabilidad
-  	1. Trabajadores independientes
-  	2. Pagos por tareas terminadas
-  	3. Facturacion
+    1. Test driven development
+        1. Como probamos nuestro software sin tests
+  	    2. Test driven development segun el libro
+  	    3. Como aplicamos test driven development
+    2. Gitflow
+        1. Branch de deploy
+        2. Branch de desarrollo
+        3. Branch personal
+        4. Branch de hotfix
+    3. Scrum
+  	    1. Backlog
+  	    2. Puntos de esfuerzo
+  	    3. Estimacion
+  	    4. Reunion de planificacion
+  	    5. Evaluacion de tareas terminadas
+    4. Contabilidad
+  	    1. Trabajadores independientes
+  	    2. Pagos por tareas terminadas
+  	    3. Facturacion
 
 ### Vamo' arriba!
 
