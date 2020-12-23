@@ -28,6 +28,8 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
 
 1. Habilidades tecnicas
     1. Vagrant
+        1. Funcion
+        2. Configuracion
     2. Nginx
         1. Funcion
         2. Configuracion
@@ -57,7 +59,7 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         2. Arquitectura de nuestro software
     2. Use case driven development
         1. Que es un caso de uso
-        2. Responsabilida de los casos de uso
+        2. Responsabilidad de los casos de uso
     3. Railway oriented programming
   	    1. Patron pipeline
   	    2. Responsabilidad de las funciones del pipeline
