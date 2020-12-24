@@ -32,8 +32,8 @@ server {
   // para HTTPS (https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers).
   listen 443;
 
-  // Configuracion del certificado SSL. En este
-  // caso los certificados se consiguen con 
+  // Configuracion de los certificados SSL. En
+  // este caso los certificados se consiguen con 
   // Let's Encrypt (https://letsencrypt.org/)
   ssl on;
   ssl_certificate /etc/letsencrypt/live/api.init.uy/fullchain.pem;
@@ -46,9 +46,9 @@ server {
 }
 ```
 
-##### Respuesta fija en Nginx
+#### Respuesta fija
 
-Para configurar los HTTP request directamente en la configuracion de Nginx usamos lo siguiente:
+Para configurar las respuestas directamente en la configuracion de Nginx usamos lo siguiente:
 
 ```javascript
 server {
@@ -71,7 +71,7 @@ server {
 
 Esto se puede usar para configurar un redirect, para probar que el servidor web este levantado o para devolver errores en ciertas URLs.
 
-##### Contenido estatico
+#### Contenido estatico
 
 La siguiente configuracion sirve contenido estatico desde un directorio:
 
@@ -80,9 +80,8 @@ server {
   // server_name, listen, ssl;
 
   location / {
-    // El root del servidor va a ser este
-    // directorio.
-    // Un la URI de este estilo:
+    // El root del servidor va a ser este directorio.
+    // Para una URL de este estilo:
     // https://website.init.uy/blog/articulo.html
     // Va a devolver el contenido del archivo en
     // /home/ubuntu/website/blog/articulo.html
@@ -98,22 +97,22 @@ server {
 }
 ```
 
-Esta configuracion sirve si estamos desarrollando un sitio web o una aplicacion web que sirvan contenidos estaticos como HTML, CSS, Javascript, imagenes, etc.
+Esta configuracion la usamos si estamos desarrollando un sitio web o una aplicacion web que sirve contenidos estaticos como HTML, CSS, Javascript, imagenes, etc.
 
-##### Proxy con otro servidor
+#### Redirigir a otro servidor
 
-En ocasiones vamos a tener otro servidor web funcionando en la maquina virtual y vamos a querer que Nginx redirija el trafico para ahi. Lo podemos hacer con la siguiente configuracion:
+En ocasiones vamos a tener otro servidor web funcionando y vamos a querer que Nginx redirija el trafico para ahi. Lo podemos hacer con la siguiente configuracion:
 
 ```javascript
 // Con upstream le decimos a Nginx donde
-// estan los servidor donde queremos redirigir
+// estan los servidores donde queremos redirigir
 // el trafico y tambien podemos especificarle
 // que estrategia usar para elegir de entre
 // los servidores.
 upstream api {
-  // Nginx va a redirigir la siguiente request
-  // al servidor con la menor cantidad de
-  // conexiones activas.
+  // Con least_conn, Nginx va a redirigir la
+  // siguiente request al servidor con la menor
+  // cantidad de conexiones activas.
   // Hay otras configuraciones para balanceo de
   // carga tambien (http://nginx.org/en/docs/http/load_balancing.html).
   least_conn;
@@ -121,7 +120,8 @@ upstream api {
   // Lista de los servidores a donde Nginx
   // va a redirigir el trafico.
   // Pueden estar en otros dominios, en un
-  // socket o IP.
+  // archivo (https://serverfault.com/questions/124517/what-is-the-difference-between-unix-sockets-and-tcp-ip-sockets)
+  // o IP.
   server api2.init.uy;
   server unix:/home/ubuntu/api/server.sock;
   server 127.0.0.1:8080;
@@ -150,8 +150,6 @@ var server = http.createServer(function (request, response) {
   response.end('Gracias.');
 });
 
-// El servidor "escucha" a el archivo en
-// esta direccion.
 server.listen('/home/ubuntu/api/server.sock');
 ```
 
