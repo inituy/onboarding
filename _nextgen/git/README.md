@@ -238,7 +238,7 @@ Si hay conflictos (cambios al mismo codigo de maneras distintas) entre las branc
 ```
 $ git status
 
-On branch minuevabranch
+On branch otrabranch
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
