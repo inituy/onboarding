@@ -80,7 +80,9 @@ Sin `-m` abre el editor de texto en consola para agregarle el mensaje de commit:
 
 ```
 $ git commit
+```
 
+```
   1 Git updated picture
   2 # Please enter the commit message for your changes. Lines starting
   3 # with '#' will be ignored, and an empty message aborts the commit.
@@ -90,7 +92,8 @@ $ git commit
   7 #
   8 # Changes to be committed:
   9 #&modified:   _nextgen/git/git.png
-
+```
+```
 [master cf3ad67] Git updated picture
  1 file changed, 0 insertions(+), 0 deletions(-)
  rewrite _nextgen/git/git.png (99%)
@@ -104,9 +107,7 @@ Sin parametros funciona de esta manera:
 
 ```
 $ git status
-```
 
-```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
@@ -124,9 +125,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 $ git add _nextgen/README.md
 $ git status
-```
 
-```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
@@ -145,9 +144,7 @@ Changes not staged for commit:
 
 ```
 $ git reset
-```
 
-```
 Unstaged changes after reset:
 M       _nextgen/README.md
 M       _nextgen/git/README.md
@@ -155,9 +152,7 @@ M       _nextgen/git/README.md
 
 ```
 $ git status
-```
 
-```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
