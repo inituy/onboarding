@@ -238,7 +238,7 @@ Si hay conflictos (cambios al mismo codigo de maneras distintas) entre las branc
 ```
 $ git status
 
-On branch otrabranch
+On branch minuevabranch
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
@@ -259,7 +259,14 @@ $ git commit -a -m "README"
 $ git checkout master
 
 Switched to branch 'master'
+Your branch is up to date with 'origin/master'
 ```
 
 ```
+$ git merge otrabranch
+
+Updating 55d4c85..03e6e47
+Fast-forward
+ _nextgen/git/README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 ```
