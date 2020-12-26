@@ -228,3 +228,38 @@ $ git status
 On branch minuevabranch
 nothing to commit, working tree clean
 ```
+
+### `git merge`
+
+Con `git merge` agregamos los commits de una branch dentro de la branch en la que estamos parados. Se crea un nuevo commit en la branch actual que tiene los cambios que vienen de la branch que elegimos.
+
+Si hay conflictos (cambios al mismo codigo de maneras distintas) entre las branches, los archivos que necesitan ajustes quedan en el working directory para que los agregues al commit de merge. En este caso hay que editar los archivos para quitar los conflictos, usar `git add` y despues `git commit`.
+
+```
+$ git status
+
+On branch minuevabranch
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/git/README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+```
+$ git commit -a -m "README"
+
+[minuevabranch bcd1c96] README
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+```
+
+```
+$ git checkout master
+
+Switched to branch 'master'
+```
+
+```
+```
