@@ -61,3 +61,39 @@ git add app/data/save_session_request_for_user.js # Agrega un archivo
 git add spec/data/ # Agrega todos los cambios dentro del directorio al siguiente commit
 git add -A # Agrega todos los cambios al siguiente commit
 ```
+
+### `git commit`
+
+Crea un commit. Si no se usa el parametro `-m` para agregarle el mensaje de commit, abre un editor de texto en la consola.
+
+Con `-m` crea el commit sin mas interaccion:
+
+```
+$ git commit -m "Git updated picture"
+
+[master cf3ad67] Git updated picture
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rewrite _nextgen/git/git.png (99%)
+```
+
+Sin `-m` abre el editor de texto en consola para agregarle el mensaje de commit:
+
+```
+$ git commit
+
+  1 Git updated picture
+  2 # Please enter the commit message for your changes. Lines starting
+  3 # with '#' will be ignored, and an empty message aborts the commit.
+  4 #
+  5 # On branch master
+  6 # Your branch is up to date with 'origin/master'.
+  7 #
+  8 # Changes to be committed:
+  9 #&modified:   _nextgen/git/git.png
+
+[master cf3ad67] Git updated picture
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rewrite _nextgen/git/git.png (99%)
+```
+
+###
