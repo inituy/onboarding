@@ -166,3 +166,65 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
+
+### `git checkout`
+
+Este comando sirve para volver para atras cambios hechos a los archivos y para crear nuevas branch.
+
+Si se le pasa un archivo o un directorio por parametro, `git checkout` lo vuelve a como estaba en el ultimo commit, o sea, borra todos los cambios que se le hicieron.
+
+```
+$ git status
+
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/git/README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+```
+$ git checkout _nextgen/git/
+$ git status
+
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+```
+
+Tambien se puede usar el parametro `-b` para crear un nuevo branch.
+
+```
+$ git status
+
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+```
+
+```
+$ git checkout -b minuevabranch
+
+Switched to a new branch 'minuevabranch'
+```
+
+```
+$ git branch
+
+  master
+* minuevabranch
+```
+
+```
+$ git status
+
+On branch minuevabranch
+nothing to commit, working tree clean
+```
