@@ -1,0 +1,61 @@
+# Git
+
+Git es un sistema de control de version que tambien sirve para distribuir codigo. Usamos Git para empaquetar codigo segun tarea y funcion y para compatirlo entre las personas que estan trabajando en un proyecto.
+
+# Funcion
+
+Git funciona con pequeños paquetes de codigo llamados `commits` que aparecen ordenados en el tiempo en una especie de estructura de arbol. Idealmente el codigo dentro de cada commit esta relacionado a una misma tarea o a una misma funcion dentro del sistema.
+
+El trabajo del programador es crear los commits y agregarlos al historial. Cuando mas de una persona trabaja en el mismo proyecto creamos una copia del historial para cada una. A estas copias se le llaman `branches`.
+
+Al terminar la tarea los programadores tienen que combinar los historiales que partieron del mismo punto pero que ahora son diferentes. A este proceso se le llama `merge`. Cuando el `merge` esta completo terminamos con una sola `branch` que contiene el historial inicial, mas los `commit` que cada programador agrego.
+
+Un `merge` puede generar un conflicto si los dos programadores pusieron codigo diferente en la misma linea del mismo archivo pero en distintas `branch`. El proceso de `merge` te da la oportunidad de solucionar los conflictos antes de terminar.
+
+Este es un glosario rapido para poder seguir con los comandos de Git:
+
+1. *Repository*: Un repositorio es un proyecto en Git. Creamos un repositorio para cada aplicacion para mantener su historia separada de otros proyectos.
+2. *Working directory*: Esta es la carpeta raiz del proyecto donde inicializamos el repositorio.
+3. *Commit*: Es un paquete que contiene una lista de cambios al repositorio. Cuando se agrega, se modifica o se borra un archivo eso se guarda en el repositorio usando un `commit`.
+4. *Branch*: Una lista de `commit` que funciona como historial de cambios hechos al repositorio. Todos los repositorios empiezan con una sola `branch`, pero se pueden tener mas de una.
+5. *Remote*: Una version del mismo repositorio pero que esta en otra computadora. En casi todos los proyectos, el `remote` es la version del repositorio que esta en la nube.
+
+### `git status`
+
+El comando `git status` nos muestra el estado actual del working directory. Muestra que archivos cambiaron y cuales de esos cambios fueron agregados al siguiente commit.
+
+```
+$ git status
+
+On branch banafederico
+Your branch is behind 'origin/banafederico' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   spec/presentation/present_nothing_spec.js
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   app/data/find_or_save_user_by_email.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        app/data/save_session_request_for_user.js
+        app/presentation/present_nothing.js
+        spec/data/save_session_request_for_user_spec.js
+```
+
+### `git add`
+
+Agrega uno de los archivos que cambiaron al siguiente commit. Se pueden agregar todos los archivos pasandole `-A` por parametro.
+
+```bash
+git add app/data/save_session_request_for_user.js # Agrega un archivo
+git add spec/data/ # Agrega todos los cambios dentro del directorio al siguiente commit
+git add -A # Agrega todos los cambios al siguiente commit
+```
