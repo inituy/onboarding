@@ -96,4 +96,64 @@ $ git commit
  rewrite _nextgen/git/git.png (99%)
 ```
 
-###
+### `git reset`
+
+Este comando retrocede en la historia, borrando los commits pero sin modificar los archivos. Sin parametros, `git reset` borra los cambios que se agregaron al siguiente commit. Si se le pasa un ID de commit, `git reset` elimina commits del final de la lista hasta llegar al commit indicado.
+
+Sin parametros funciona de esta manera:
+
+```
+$ git status
+
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/README.md
+        modified:   _nextgen/git/README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add _nextgen/README.md
+$ git status
+
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   _nextgen/README.md
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/git/README.md
+
+$ git reset
+
+Unstaged changes after reset:
+M       _nextgen/README.md
+M       _nextgen/git/README.md
+
+$ git status
+
+On branch master
+Your branch is ahead of 'origin/master' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/README.md
+        modified:   _nextgen/git/README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```

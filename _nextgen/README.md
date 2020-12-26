@@ -38,11 +38,11 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
   	    2. git status
   	    3. git add
   	    4. git commit
+        7. git reset
+        8. git checkout
+        9. git merge
   	    5. git push
   	    6. git pull
-  	    7. git reset
-  	    8. git checkout
-  	    9. git merge
     4. Javascript
   	    1. Funciones
   	    2. Callbacks
