@@ -293,4 +293,18 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 $ git commit -a -m "README"
 
+[master d207d39] README
+ 1 file changed, 24 insertions(+)
+```
+
+```
+$ git push origin master
+
+Counting objects: 5, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 749 bytes | 107.00 KiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:inituy/onboarding
+   c32dd49..d207d39  master -> master
 ```

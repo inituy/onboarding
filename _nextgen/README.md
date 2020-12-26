@@ -42,7 +42,6 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         8. git checkout
         9. git merge
   	    5. git push
-  	    6. git pull
     4. Javascript
   	    1. Funciones
   	    2. Callbacks
