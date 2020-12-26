@@ -270,3 +270,27 @@ Fast-forward
  _nextgen/git/README.md | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
+
+### `git push`
+
+Este comando sirve para enviar el historial de commits a un remote. Funciona solamente si el remote tiene el mismo historial sin los nuevos commits agregados. Si el remote no tiene los mismo commits (tiene otros commits luego del ultimo commit en comun) es necesario hacer `git pull` para traer los commits que estan en el remote, resolver conflictos y pushear de nuevo.
+
+```
+$ git status
+
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   _nextgen/git/README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+```
+$ git commit -a -m "README"
+
+```
