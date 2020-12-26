@@ -104,7 +104,9 @@ Sin parametros funciona de esta manera:
 
 ```
 $ git status
+```
 
+```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
@@ -117,10 +119,14 @@ Changes not staged for commit:
         modified:   _nextgen/git/README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
+```
 
+```
 $ git add _nextgen/README.md
 $ git status
+```
 
+```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
@@ -135,15 +141,23 @@ Changes not staged for commit:
   (use "git checkout -- <file>..." to discard changes in working directory)
 
         modified:   _nextgen/git/README.md
+```
 
+```
 $ git reset
+```
 
+```
 Unstaged changes after reset:
 M       _nextgen/README.md
 M       _nextgen/git/README.md
+```
 
+```
 $ git status
+```
 
+```
 On branch master
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
