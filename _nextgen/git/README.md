@@ -2,7 +2,7 @@
 
 Git es un sistema de control de version que tambien sirve para distribuir codigo. Usamos Git para empaquetar codigo segun tarea y funcion y para compatirlo entre las personas que estan trabajando en un proyecto.
 
-# Funcion
+### Funcion
 
 Git funciona con pequeños paquetes de codigo llamados `commits` que aparecen ordenados en el tiempo en una especie de estructura de arbol. Idealmente el codigo dentro de cada commit esta relacionado a una misma tarea o a una misma funcion dentro del sistema.
 
@@ -11,6 +11,8 @@ El trabajo del programador es crear los commits y agregarlos al historial. Cuand
 Al terminar la tarea los programadores tienen que combinar los historiales que partieron del mismo punto pero que ahora son diferentes. A este proceso se le llama `merge`. Cuando el `merge` esta completo terminamos con una sola `branch` que contiene el historial inicial, mas los `commit` que cada programador agrego.
 
 Un `merge` puede generar un conflicto si los dos programadores pusieron codigo diferente en la misma linea del mismo archivo pero en distintas `branch`. El proceso de `merge` te da la oportunidad de solucionar los conflictos antes de terminar.
+
+![git](./git.png)
 
 Este es un glosario rapido para poder seguir con los comandos de Git:
 
