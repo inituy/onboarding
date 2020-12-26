@@ -251,7 +251,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 $ git commit -a -m "README"
 
-[minuevabranch bcd1c96] README
+[otrabranch bcd1c96] README
  1 file changed, 7 insertions(+), 1 deletion(-)
 ```
 
