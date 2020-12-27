@@ -42,16 +42,17 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         8. git checkout
         9. git merge
   	    5. git push
-    4. Javascript
+    4. MongoDB
+        1. Funcion
+        2. Insert, find, update y delete
+        3. Indices
+    3. Javascript
   	    1. Funciones
   	    2. Callbacks
   	    3. Promises
   	    4. Closures
   	    5. Serializacion
-    5. MongoDB
-  	    1. Funcion
-  	    2. Insert, find, update y delete
-  	    3. Indices
+        6. Patrones
 2. Arquitectura de software
     1. Proposito de una arquitectura de software
         1. Ejemplos de otras arquitecturas

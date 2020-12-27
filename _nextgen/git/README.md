@@ -101,7 +101,7 @@ $ git commit
 
 ### `git reset`
 
-Este comando retrocede en la historia, borrando los commits pero sin modificar los archivos. Sin parametros, `git reset` borra los cambios que se agregaron al siguiente commit. Si se le pasa un ID de commit, `git reset` elimina commits del final de la lista hasta llegar al commit indicado.
+Este comando retrocede en la historia, borrando los commits pero sin modificar los archivos. Sin parametros, `git reset` borra los cambios que se agregaron al siguiente commit. Si se le pasa un ID de commit, `git reset` elimina commits del final de la historia hasta llegar al commit indicado.
 
 Sin parametros funciona de esta manera:
 
@@ -169,7 +169,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ### `git checkout`
 
-Este comando sirve para volver para atras cambios hechos a los archivos y para crear nuevas branch.
+Este comando sirve para volver para atras cambios hechos a los archivos, para crear nuevas branch y cambiarse de branch.
 
 Si se le pasa un archivo o un directorio por parametro, `git checkout` lo vuelve a como estaba en el ultimo commit, o sea, borra todos los cambios que se le hicieron.
 
@@ -229,9 +229,17 @@ On branch minuevabranch
 nothing to commit, working tree clean
 ```
 
+Si no le pasamos `-b` pero si le ponemos el nombre de un branch, nos cambia a ese branch.
+
+```
+$ git checkout minuevabranch
+
+Switched to branch 'minuevabranch'
+```
+
 ### `git merge`
 
-Con `git merge` agregamos los commits de una branch dentro de la branch en la que estamos parados. Se crea un nuevo commit en la branch actual que tiene los cambios que vienen de la branch que elegimos.
+Con `git merge` agregamos los commits de una branch dentro de otra. Se crea un nuevo commit en la branch destino que tiene los cambios que vienen de la branch de origen.
 
 Si hay conflictos (cambios al mismo codigo de maneras distintas) entre las branches, los archivos que necesitan ajustes quedan en el working directory para que los agregues al commit de merge. En este caso hay que editar los archivos para quitar los conflictos, usar `git add` y despues `git commit`.
 
@@ -273,7 +281,7 @@ Fast-forward
 
 ### `git push`
 
-Este comando sirve para enviar el historial de commits a un remote. Funciona solamente si el remote tiene el mismo historial sin los nuevos commits agregados. Si el remote no tiene los mismo commits (tiene otros commits luego del ultimo commit en comun) es necesario hacer `git pull` para traer los commits que estan en el remote, resolver conflictos y pushear de nuevo.
+Este comando sirve para enviar el historial de commits a un remote. Funciona solamente si el remote tiene el mismo historial sin los nuevos commits agregados. Si el remote no tiene los mismo commits (tiene otros commits despues del ultimo commit en comun) es necesario hacer `git pull` para traer los commits que estan en el remote, resolver conflictos y pushear de nuevo.
 
 ```
 $ git status
