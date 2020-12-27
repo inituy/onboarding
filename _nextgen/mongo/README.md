@@ -88,4 +88,43 @@ La firma de la funcion `insertMany`, es apenas diferente. Recibe un array en vez
 { "_id" : ObjectId("5fe80501531d44e7d62f5c75"), "email" : "random5@email.com" }
 ```
 
-### `deleteOne` &
+### `deleteOne` & `deleteMany`
+
+Estas funciones eliminan documentos de una coleccion. Igual que con `insertOne` e `insertMany`, la diferencia entre `deleteOne` y `deleteMany` esta en que el segundo recibe un array.
+
+Desde la consola es asi:
+
+```javascript
+> db.users.deleteOne({ _id: ObjectId("5fe7fad934b392788c01df72") })
+{ "acknowledged" : true, "deletedCount" : 1 }
+```
+
+```javascript
+> db.users.find()
+{ "_id" : ObjectId("5fe7fb9534b392788c01df73"), "email" : "random2@email.com" }
+{ "_id" : ObjectId("5fe802e9538755d73dbb3ca2"), "email" : "random3@email.com" }
+{ "_id" : ObjectId("5fe80501531d44e7d62f5c74"), "email" : "random4@email.com" }
+{ "_id" : ObjectId("5fe80501531d44e7d62f5c75"), "email" : "random5@email.com" }
+```
+
+Desde Javascript:
+
+```javascript
+var query = {
+  _id: mongoObjectId('5fe7fad934b392788c01df72')
+};
+
+connectToMongo().then(function (connection) {
+  return connection
+    .collection('users')
+    .deleteOne(query);
+})
+```
+
+### `updateOne` & `updateMany`
+
+...
+
+### Object IDs
+
+...
