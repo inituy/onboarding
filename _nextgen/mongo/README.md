@@ -10,11 +10,11 @@ MongoDB es una herramienta super flexible gracias a que es no relacional y no re
 
 ### `insertOne` & `insertMany`
 
-Para agregar un nuevo documento a una coleccion usamos `insertOne`. Podemos usar `insertMany` si tenemos mas de una documento y queremos agregarlos todos al mismo tiempo.
+Para agregar un nuevo documento a una coleccion usamos `insertOne`. Podemos usar `insertMany` si tenemos mas de un documento y queremos agregarlos todos al mismo tiempo.
 
-No necesitamos hacer nada antes de poder agregar un documento a una coleccion, incluso si la coleccion no existe, MongoDB la crea automaticamente.
+No necesitamos hacer nada antes de poder agregar un documento a una coleccion. Si la coleccion no existe MongoDB la crea automaticamente.
 
-Desde el cliente para consola:
+Desde la consola:
 
 ```javascript
 > db.users.insertOne({ email: 'random3@email.com' })
@@ -66,7 +66,7 @@ connectToMongo()
   })
 ```
 
-La firma de la funcion `insertMany`, es apenas diferente. Recibe un array en vez de un objeto.
+La firma de la funcion `insertMany` recibe un array en vez de un objeto.
 
 ```javascript
 > db.users.insertMany([ { email: 'random4@email.com' }, { email: 'random5@email.com' } ])
@@ -92,11 +92,11 @@ La firma de la funcion `insertMany`, es apenas diferente. Recibe un array en vez
 
 Estas funciones eliminan documentos de una coleccion. Igual que con `insertOne` e `insertMany`, la diferencia entre `deleteOne` y `deleteMany` esta en que el segundo recibe un array.
 
-Lo que recibe por parametro es un objeto que MongoDB va a comparar con los documentos de la coleccion. Cualquier documento que tenga el mismo valor para cada una de las claves es candidato para la operacion. Por supuesto, tambien existen operadores que modifican este comportamiento y permiten ejecutar consultas mas complejas.
+Lo que recibe por parametro es un objeto que MongoDB va a comparar con los documentos de la coleccion. Cualquier documento que tenga el mismo valor para cada una de las claves es candidato para la operacion. Tambien existen operadores que modifican este comportamiento y permiten hacer consultas mas complejas.
 
-Por ejemplo, vamos a llamar la funcion `deleteOne` con `{ _id: ObjectId("5fe7fad934b392788c01df72") }` como parametro. Como el proposito de la funcion es eliminar un solo documento, MongoDB se va a quedar con el primero que encuentra que cumpla con las condiciones. En este caso, la condicion es que el campo `_id` debe ser `ObjectId("5fe7fad934b392788c01df72")`.
+Por ejemplo, vamos a llamar la funcion `deleteOne` con `{ _id: ObjectId("5fe7fad934b392788c01df72") }` como parametro. Como la funcion elimina un solo documento, MongoDB se va a quedar con el primero que encuentre que cumpla con las condiciones. En este caso, la condicion es que el campo `_id` debe ser igual a `ObjectId("5fe7fad934b392788c01df72")`.
 
-Desde la consola es asi:
+Desde la consola:
 
 ```javascript
 > db.users.deleteOne({ _id: ObjectId("5fe7fad934b392788c01df72") })
@@ -157,7 +157,7 @@ connectToMongo()
 
 ### `find`
 
-La funcion `find` es diferente a `findOne` porque no devuelve un documento sin un cursor. Para no cargar todos los posibles resultados de una consulta todos a la vez, MongoDB devuelve este cursor que sabe cuales son los resultados y le permite al usuario navegarlos.
+La funcion `find` es diferente a `findOne` porque no devuelve un documento sino un *cursor*. Para no cargar todos los posibles resultados de una consulta todos a la vez, MongoDB devuelve un iterador que nos va dando los resultados de a pocos.
 
 Desde la consola:
 
@@ -169,7 +169,7 @@ Desde la consola:
 { "_id" : ObjectId("5fe80501531d44e7d62f5c75"), "email" : "random5@email.com" }
 ```
 
-En este caso son pocos los resultados y entonces el cursor imprime todos los resultados y desaparece. Si fueron mas resultados, tendriamos que correr `it` para seguir iterando sobre el cursor para conseguir la siguiente pagina de resultados.
+En este caso son pocos los resultados y entonces el cursor imprime todos los resultados. Si fueran mas resultados, tendriamos que correr `it` para seguir iterando sobre el cursor para conseguir la siguiente pagina de resultados.
 
 Desde Javascript:
 
@@ -193,7 +193,7 @@ connectToMongo()
 
 Estas funciones se usan para modificar documentos. El primer parametro de ambas funciona igual que en `deleteOne` y `deleteMany`, con la misma diferenciacion entre `One` y `Many`.
 
-`updateOne` y `updateMany` tambien reciben un segundo parametro que le va a explicar a MongoDB como debe cambiar los documentos a medida que los encuentra. Este segundo parametro es un objeto y sus claves (en el primer nivel) deben ser las que corresponden a las operaciones de MongoDB.
+`updateOne` y `updateMany` tambien reciben un segundo parametro que le va a explicar a MongoDB como debe cambiar los documentos a medida que los encuentra. Este segundo parametro es un objeto y sus claves (en el primer nivel) deben corresponder a las operaciones de MongoDB.
 
 En el siguiente ejemplo vamos a actualizar uno de los usuarios y le vamos a agregar un nombre `{ name: 'Random User 3' }` usando la operacion `$set`:
 
@@ -227,9 +227,9 @@ connectToMongo().then(function (connection) {
 
 ### Object IDs
 
-En los ejemplos de arriba vas a ver que aparecen las funciones `ObjectId` (consola) y `mongoObjectId` (Javascript). Estas dos funciones reciben strings y devuelven un tipo especial de objeto que MongoDB usa para crear los valores de los campos `_id`.
+En los ejemplos de arriba vas a ver que aparecen las funciones `ObjectId` (consola) y `mongoObjectId` (Javascript). Estas dos funciones reciben strings y devuelven un tipo especial que MongoDB usa para crear los valores de los campos `_id`.
 
-Es importante tener en cuenta la diferencia entre este tipo y string. No es raro ver consultas que no devuelven nada y es porque le estamos pasando un string sin convertirlo en un `ObjectId`.
+Hay que tener en cuenta la diferencia entre este tipo especial y string. Si estas haciendo una consulta y no te devuelve nada, puede ser porque le estas pasando un string sin convertirlo en un `ObjectId`.
 
 ```javascript
 > db.users.findOne({ _id: '5fe7fb9534b392788c01df73' })
@@ -246,9 +246,11 @@ null
 
 ### Indices
 
-Cuando tenemos muchos datos guardados en MongoDB las consultas pueden demorar mucho en devolver un resultado. Si no hay indices creados para una coleccion, MongoDB tiene que escanear la coleccion entera para encontrar los documentos que corresponden con la consulta.
+Cuando hay muchos datos guardados en una coleccion las consultas pueden demorar mucho en devolver un resultado. Si no hay indices creados para una coleccion, MongoDB tiene que recorrer la coleccion entera para encontrar los documentos que corresponden con la consulta.
 
 Un indice es basicamente una estructura de datos que tiene informacion sobre una determinada coleccion ordenada de una determinada manera. Para crear un indice debemos indicarle a MongoDB en que orden queremos que se ordenen los documentos de una coleccion.
+
+Si hubieran millones de usuarios y estuvieramos buscandolos por email, un indice creado como se muestra abajo nos ayudaria a acelerar la consulta:
 
 ```javascript
 > db.users.createIndex({ email: 1 })
@@ -259,5 +261,7 @@ Un indice es basicamente una estructura de datos que tiene informacion sobre una
         "ok" : 1
 }
 ```
+
+Sin este indice MongoDB tendria que ir uno a uno por todos los usuarios, ordenados por ID, comparando el valor de `email` con el valor de la consulta. Pero como creamos este indice, puede recorrer la coleccion de usuarios ordenados por email y no tiene que empezar desde el principio, porque tambien sabe aproximadamente en que posicion esta el email que esta buscando.
 
 Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mongodb.com/manual/indexes/).
