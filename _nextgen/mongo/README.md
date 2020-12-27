@@ -47,7 +47,8 @@ connectToMongo()
       .insertOne(user);
   })
   .then(function () {
-    console.log(user); // { _id: ObjectId("5fe802e9538755d73dbb3ca2"), email: 'random3@email.com' }
+    console.log(user);
+    // { _id: ObjectId("5fe802e9538755d73dbb3ca2"), email: 'random3@email.com' }
   })
   .then(function () {
     return connection
@@ -64,3 +65,27 @@ connectToMongo()
     // ]
   })
 ```
+
+La firma de la funcion `insertMany`, es apenas diferente. Recibe un array en vez de un objeto.
+
+```javascript
+> db.users.insertMany([ { email: 'random4@email.com' }, { email: 'random5@email.com' } ])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("5fe80501531d44e7d62f5c74"),
+                ObjectId("5fe80501531d44e7d62f5c75")
+        ]
+}
+```
+
+```javascript
+> db.users.find()
+{ "_id" : ObjectId("5fe7fad934b392788c01df72"), "email" : "random1@email.com" }
+{ "_id" : ObjectId("5fe7fb9534b392788c01df73"), "email" : "random2@email.com" }
+{ "_id" : ObjectId("5fe802e9538755d73dbb3ca2"), "email" : "random3@email.com" }
+{ "_id" : ObjectId("5fe80501531d44e7d62f5c74"), "email" : "random4@email.com" }
+{ "_id" : ObjectId("5fe80501531d44e7d62f5c75"), "email" : "random5@email.com" }
+```
+
+### `deleteOne` &
