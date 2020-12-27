@@ -227,4 +227,37 @@ connectToMongo().then(function (connection) {
 
 ### Object IDs
 
-...
+En los ejemplos de arriba vas a ver que aparecen las funciones `ObjectId` (consola) y `mongoObjectId` (Javascript). Estas dos funciones reciben strings y devuelven un tipo especial de objeto que MongoDB usa para crear los valores de los campos `_id`.
+
+Es importante tener en cuenta la diferencia entre este tipo y string. No es raro ver consultas que no devuelven nada y es porque le estamos pasando un string sin convertirlo en un `ObjectId`.
+
+```javascript
+> db.users.findOne({ _id: '5fe7fb9534b392788c01df73' })
+null
+```
+
+```javascript
+> db.users.findOne({ _id: ObjectId('5fe7fb9534b392788c01df73') })
+{
+        "_id" : ObjectId("5fe7fb9534b392788c01df73"),
+        "email" : "random2@email.com"
+}
+```
+
+### Indices
+
+Cuando tenemos muchos datos guardados en MongoDB las consultas pueden demorar mucho en devolver un resultado. Si no hay indices creados para una coleccion, MongoDB tiene que escanear la coleccion entera para encontrar los documentos que corresponden con la consulta.
+
+Un indice es basicamente una estructura de datos que tiene informacion sobre una determinada coleccion ordenada de una determinada manera. Para crear un indice debemos indicarle a MongoDB en que orden queremos que se ordenen los documentos de una coleccion.
+
+```javascript
+> db.users.createIndex({ email: 1 })
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+```
+
+Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mongodb.com/manual/indexes/).
