@@ -100,7 +100,7 @@ promise.then(function (file) {
 });
 ```
 
-Tambien podemos encadenar tareas asincronicas para que una empiece cuando termina la anterior. Esto lo podemos hacer porque tanto `then` como `catch` devuelven al ejecutarlos un nuevo objeto `Promise`. La tarea que reprensenta este nuevo objeto es la que lleva a cabo el callback.
+Tambien podemos encadenar tareas asincronicas para que una empiece cuando termina la anterior. Esto lo podemos hacer porque tanto `then` como `catch` devuelven a su vez un nuevo objeto `Promise`. La tarea que reprensenta este nuevo objeto es la que lleva a cabo el callback.
 
 En el ejemplo que viene, los callbacks no se ejecutan todos a la vez sino que uno se ejecuta cuando termina el anterior:
 
@@ -135,3 +135,55 @@ readFile(filepath)
 ```
 
 ![promises2](./javascript_promises_2.png)
+
+### Closures
+
+En esta parte vamos a ver en mas detalle que pasa cuando definimos y cuando ejecutamos una funcion.
+
+En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Entonces un ejemplo como el siguiente crearia mucha cantidad de funciones:
+
+```javascript
+// Creamos una funcion anonima para
+// poder pasarsela como callback
+// a `forEach`.
+filepaths.forEach(function (filepath) {
+  // Creamos una funcion mas por cada vez
+  // que se ejecuta el callback de `forEach`.
+  // Cuando `forEach` termine  vamos a
+  // haber creado tantas funciones como
+  // archivos hubo en `filepaths`.
+  fs.readFile(filepath, function (error, file) {
+    console.log('Leimos este archivo:', filepath, file);
+  });
+});
+```
+
+Cada vez que se crea una funcion, tambien se crea un "closure". Un closure es una referencia al contexto donde la funcion fue creada. La funcion "recuerda" en que contexto fue creada para poder usar sus variables.
+
+Por ejemplo, en el codigo de arriba el callback de `readFile` puede acceder a la variable `filepath` porque fue creada dentro del callback de `forEach`.
+
+Los closures viven en el programa hasta que la funcion a la que estan conectados desaparece. Para entender como es que una funcion desaparece del programa tenemos que hablar sobre contextos de ejecucion.
+
+Cuando ejecutamos una funcion, el interprete de Javascript (NodeJS, un navegador web o donde sea que corre nuestro programa) reserva un espacio en la memoria del sistema para esa funcion.
+
+En esta memoria se guardan los valores de los parametros y todas las variables que se definen dentro de la funcion. Cuando la funcion termina de ejecutar esta memoria se libera y las variables y parametros desaparecen. Si se definio una funcion dentro del contexto de ejecucion esta tambien desaparece.
+
+```javascript
+function doStuffWithFiles(filepaths) {
+  filepaths.forEach(function (filepath) {
+    fs.readFile(filepath, function (error, file) {
+      // do stuff
+    });
+  });
+}
+
+// El interprete va a reservar memoria para
+// la ejecucion de esta funcion y al terminar
+// de ejecutarla va a descartar los valores
+// de los parametros, las variables y las
+// funciones que se crearon en ese contexto.
+// Esto incluye los callbacks de `forEach`,
+// de `readFile` y las variables `filepaths`,
+// `filepath`, `error` y `file`.
+doStuffWithFiles([...]);
+```
