@@ -182,8 +182,12 @@ function doStuffWithFiles(filepaths) {
 // de ejecutarla va a descartar los valores
 // de los parametros, las variables y las
 // funciones que se crearon en ese contexto.
-// Esto incluye los callbacks de `forEach`,
+// Esto incluye el callback de `forEach`,
 // de `readFile` y las variables `filepaths`,
 // `filepath`, `error` y `file`.
 doStuffWithFiles([...]);
 ```
+
+El uso de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
+
+![closures1](./javascript_closures_1.png)
