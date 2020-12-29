@@ -24,10 +24,34 @@ Como las funciones son objetos podemos guardarlas en variables y moverlas a dist
 
 ### Callbacks
 
-Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion. Se llama asi porque cuando pasamos una funcion por parametro es para que se ejecute y recuperar el control de flujo.
+Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion. Se llama asi porque cuando pasamos una funcion por parametro es para recuperar el control de flujo cuando se ejecute.
 
 ![callbacks](./javascript_callbacks.png)
 
-La palabra "call" significa "llamar" o "ejecuar" y "back" se puede traducir como "de vuelta" o "de regreso". En ingles decimos "call me back" cuando queremos que alguien nos "vuelva a llamar".
+La palabra "call" significa "llamar" o "ejecutar" y "back" se puede traducir como "de vuelta" o "de regreso". En ingles decimos "call me back" cuando queremos que alguien nos "vuelva a llamar".
 
-Los callbacks, si bien es importante saber que son, se estan
+Los callbacks se usan cuando hay una tarea asincronica como leer un archivo o hacer una consulta a la base de datos. Usando callbacks podemos llamar, por ejemplo, a la funcion `readFile` y que nos notifique cuando la lectura del archivo haya terminado ejecutando la funcion que le pasamos por parametro.
+
+Usar callbacks tiene un costo para la prolijidad del programa terminado. El codigo de un programa con muchas tareas asincronicas y callbacks no es muy legible.
+
+```javascript
+readJsonFile("...", function (json) {
+  saveJsonToDatabase(json, function () {
+    saveLog(function () {
+      console.log('Success!')
+    });
+  });
+});
+```
+
+Por eso es que hoy en dia vamos a encontrar mas librerias y funciones que prefieren usar `Promise` sobre callbacks.
+
+```javascript
+Promise.resolve()
+  .then(function ()     { return readJsonFile("..."); })
+  .then(function (json) { return saveJsonToDatabase(json); })
+  .then(function ()     { return saveLog(); })
+  .then(function ()     { console.log('Success!'); });
+```
+
+### Promises
