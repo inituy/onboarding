@@ -52,7 +52,8 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         3. Promises
         4. Closures
         5. Serializacion
-        6. Patrones
+        6. Factory
+        7. Strategy
   2. Arquitectura de software
       1. Proposito de una arquitectura de software
           1. Ejemplos de otras arquitecturas
