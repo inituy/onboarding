@@ -54,4 +54,8 @@ Promise.resolve()
   .then(function ()     { console.log('Success!'); });
 ```
 
-### Promises
+### Promise
+
+Una promesa es un objeto que representa una tarea que todavia no termino de ejecutar. Esta tarea puede terminar exitosamente o no, y la interfaz de `Promise` nos permite interactuar con ambos casos.
+
+![promises1](./javascript_promises_1.png)
