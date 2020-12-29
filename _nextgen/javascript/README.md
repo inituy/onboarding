@@ -59,3 +59,79 @@ Promise.resolve()
 Una promesa es un objeto que representa una tarea que todavia no termino de ejecutar. Esta tarea puede terminar exitosamente o no, y la interfaz de `Promise` nos permite interactuar con ambos casos.
 
 ![promises1](./javascript_promises_1.png)
+
+Un objeto `Promise` tiene dos metodos llamados `then` y `catch`. El metodo `then` recibe una funcion como parametro (callback) que se ejecuta si la tarea que la promesa representa termina con exito. El metodo `catch` funciona de la misma manera, pero se ejecuta en caso que la tarea termine en error. En ambos casos el callback recibe el resultado de la tarea.
+
+```javascript
+var promise = readFile(filepath);
+
+promise.then(function (file) {
+  console.log('Read successfully!', file);
+});
+
+promise.catch(function (error) {
+  console.log('Could not read file!', error);
+});
+```
+
+Los metodos `then` y `catch` son muy versatiles y nos permiten hacer muchas cosas distintas.
+
+Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de un callback a la misma tarea. Todos los callbacks en el siguiente ejemplo se ejecutan al terminar de leer el mismo archivo:
+
+```javascript
+var promise = readFile(filepath);
+
+// Con este callback le vamos a avisar al
+// usuario que el archivo se leyo con exito.
+promise.then(function (file) {
+  console.log('Read successfully!', file);
+});
+
+// En este vamos a dejar registro de que
+// leimos el archivo.
+promise.then(function (file) {
+  return saveLog(file);
+});
+
+// En este vamos a copiar el archivo usando
+// otra funcion.
+promise.then(function (file) {
+  return copyFile(file, copypath);
+});
+```
+
+Tambien podemos encadenar tareas asincronicas para que una empiece cuando termina la anterior. Esto lo podemos hacer porque tanto `then` como `catch` devuelven al ejecutarlos un nuevo objeto `Promise`. La tarea que reprensenta este nuevo objeto es la que lleva a cabo el callback.
+
+En el ejemplo que viene, los callbacks no se ejecutan todos a la vez sino que uno se ejecuta cuando termina el anterior:
+
+```javascript
+var promise1 = readFile(filepath);
+var promise2 = promise1.then(function (file) {
+  console.log('Read successfully!', file);
+  return file;
+});
+var promise3 = promise2.then(function (file) {
+  return saveLog(file);
+});
+promise3.then(function (file) {
+  return copyFile(file, copypath);
+});
+```
+
+Escrito de otra manera, sin guardar cada promesa en una variable sino llamando directamente el metodo `then` sobre el resultado de la ejecucion anterior:
+
+```javascript
+readFile(filepath)
+  .then(function (file) {
+    console.log('Read successfully!', file);
+    return file;
+  })
+  .then(function (file) {
+    return saveLog(file);
+  })
+  .then(function (file) {
+    return copyFile(file, copypath);
+  });
+```
+
+![promises2](./javascript_promises_2.png)
