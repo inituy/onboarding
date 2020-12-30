@@ -198,12 +198,12 @@ A traves de los closures, el contexto de ejecucion de una funcion tiene acceso a
 
 Se le dice serializacion al proceso por el cual transformamos un objeto en un string u otro formato que se puede enviar fuera del programa. El formato que vamos a ver ahora es JSON (JavaScript Object Notation).
 
-Tenemos que serializar un objeto cuando necesitamos enviarlo a otro programa. Como no podemos pasarle variables a otros programas, o a traves de una red, tenemos que enviarle un string.
+Cuando necesitamos enviar un objeto a otro programa, por ejemplo si nos comunicamos con un servidor web, tenemos que serializarlo primero. Como no podemos pasarle variables a otros programas, o a traves de una red, tenemos que enviarle un string.
 
 Javascript tiene una libreria que viene incluida con el lenguaje para convertir objetos en strings JSON:
 
 ```javascript
-JSON.stringify({ importante: 123456 }); // {"importante":123456}
+JSON.stringify({ importante: 123456 }); // '{"importante":123456}'
 ```
 
 Tambien convierte strings JSON en objetos:
@@ -215,4 +215,18 @@ JSON.parse('{"importante":123456}'); // { importante: 123456 }
 No se pueden serializar funciones por lo que explicamos en la seccion anterior. Para poder pasar el contexto entero de una funcion necesitariamos serializar el contexto de ejecucion global, o sea todo el programa.
 
 [En esta pagina](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#Full_JSON_syntax) podes encontrar la sintaxis JSON entera.
+
+### Patrones de diseño
+
+Para terminar con Javascript vamos a ver como se pueden aplicar algunos patrones de diseño. Estos patrones de diseño tienen uso mas que nada en lenguajes de programacion orientados a objetos pero tambien podemos aplicarlos usando el paradigma funcional, aunque parezca un poco improvisado.
+
+Los patrones que vienen mas abajo son los que aplicamos todos los dias cuando programamos APIs y aplicaciones web. Los patrones que no usamos nos los vamos a ver.
+
+#### [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
+
+Un "command" en programacion orientada a objetos es un objeto ejecutable. Estos objetos tienen un metodo `execute` que hace lo que sea que el objeto tenga que hacer.
+
+A estos objetos nosotros les llamamos funciones. Las funciones son basicamente objetos ejecutables. La sintaxis `()` es simplemente un atajo para `hacerAlgo.call()`.
+
+Las arquitecturas que creamos con funciones se pueden reproducir en lenguajes orientados a objetos usando el command pattern en todos lados.
 
