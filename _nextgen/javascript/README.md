@@ -226,7 +226,90 @@ Los patrones que vienen mas abajo son los que aplicamos todos los dias cuando pr
 
 Un "command" en programacion orientada a objetos es un objeto ejecutable. Estos objetos tienen un metodo `execute` que hace lo que sea que el objeto tenga que hacer.
 
-A estos objetos nosotros les llamamos funciones. Las funciones son basicamente objetos ejecutables. La sintaxis `()` es simplemente un atajo para `hacerAlgo.call()`.
+A estos objetos nosotros les llamamos funciones. Las funciones son basicamente objetos ejecutables e incluyen un metodo `call` aparte de la sintaxis `()` que tambien las ejecuta.
 
 Las arquitecturas que creamos con funciones se pueden reproducir en lenguajes orientados a objetos usando el command pattern en todos lados.
+
+#### [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
+
+El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando. Partes de nuestro sistema pueden variar segun el estado del sistema o segun otras cosas. O simplemente podemos diseñar el sistema para nos sea mas facil cambiar determinadas funciones.
+
+Veamos un ejemplo de como el sistema puede variar segun el estado. Este sistema de ejemplo registra la entrada y salida de personas de un edificio, y debe actuar diferente segun el horario en el que se registran las entradas. Cuando una persona entra entre las 22:00 y las 6:00, el sistema notifica a seguridad, fuera de ese horario notifica a recursos humanos.
+
+Digamos que seguridad y recursos humanos son dos grupos diferentes de personas y que cada una quiere poder programar la manera en la que se les notifica. Podemos usar el strategy pattern para tener una funcion para cada grupo de personas.
+
+```javascript
+// La funcion `notificar` es nuestra "estrategia"
+// y va a variar segun quien llame a `registrarEntrada`.
+// Esta funcion la va a mantener el equipo de TI.
+function registrarEntrada(entrada, notificar) { 
+  validarEntrada(entrada);
+  guardarEntradaEnBaseDeDatos(entrada);
+  notificar(entrada);
+}
+
+// Esta funcion la va a mantener el equipo de seguridad
+// del edificio.
+function notificarSeguridad(entrada) {
+  llamar911();
+}
+
+// Esta funcion la va a mantener el equipo de recursos
+// humanos de la empresa.
+function notificarRecursosHumanos(entrada) {
+  empezarContadorDeHoras();
+}
+
+// Nuestro sensor de entrada nos notificar cuando
+// haya datos nuevos.
+sensor.addEventListener('...', function sensorActivado(sensorData) {
+  var date = new Date();
+  if (date.getHours() > 22 && date.getHours() < 6)
+    registrarEntrada(sensorData, notificarSeguridad);
+  else
+    registrarEntrada(sensorData, notificarRecursosHumanos);
+});
+```
+
+Ahora veamos un ejemplo donde el mismo programador elige usar un strategy pattern para darse la libertad de poder cambiar facilmente una parte de la funcionalidad sin cambiar otras. En este caso el programador tiene que guardar un usuario en la base de datos, pero no esta seguro que base de datos es mejor.
+
+Va a empezar usando MongoDB, pero quizas en el futuro necesite cambiar la aplicacion entera para que use PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
+
+```javascript
+// Nuestra funcion `guardarUsuario` sabe todo
+// lo que se debe hacer para guardar un nuevo
+// usuario en el sistema, excepto como persistirlo
+// en la base de datos.
+function guardarUsuario(usuario, persistir) {
+  usuario.id = generarIdUsuario();
+  persistir(usuario);
+  return usuario;
+}
+
+// Esta funcion va a recibir datos del usuario
+// y lo va a guardar en MongoDB.
+function persistirUsuarioEnMongoDb(usuario) {
+  // ...
+}
+
+// Esta funcion va a recibir datos del usuario
+// y lo va a guardar en PostgresSQL.
+// No necesitamos tener esta funcion hasta que
+// realmente queramos usar PostgresSQL.
+// De hecho, cambiar de base de datos es tan
+// sencillo como cambiar estos strategies.
+function persistirUsuarioEnPostgresSql(usuario) {
+  // ...
+}
+
+function crearNuevoUsuario(inputUsuario) {
+  validarInputUsuario(inputUsuario);
+  guardarUsuario(inputUsuario, persistirUsuarioEnMongoDb);
+  enviarEmailNuevoUsuario(inputUsuario);
+}
+```
+
+Una vez que tenemos instalado un stategy pattern, es sencillo agregar nuevas estrategias. Muy facilmente podriamos notificar a un tercer grupo sobre las entradas de personas y muy facilmente podriamos agregar codigo para base de datos.
+
+#### [Factory pattern](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming))
 
