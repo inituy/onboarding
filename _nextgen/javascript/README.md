@@ -262,9 +262,9 @@ function notificarRecursosHumanos(entrada) {
   empezarContadorDeHoras();
 }
 
-// Nuestro sensor de entrada nos notificar cuando
-// haya datos nuevos.
-sensor.addEventListener('...', function sensorActivado(sensorData) {
+// Nuestro sensor de entrada nos notifica cuando
+// hay datos nuevos.
+sensor.addEventListener(function sensorActivado(sensorData) {
   var date = new Date();
   if (date.getHours() > 22 && date.getHours() < 6)
     registrarEntrada(sensorData, notificarSeguridad);
@@ -275,7 +275,7 @@ sensor.addEventListener('...', function sensorActivado(sensorData) {
 
 Ahora veamos un ejemplo donde el mismo programador elige usar un strategy pattern para darse la libertad de poder cambiar facilmente una parte de la funcionalidad sin cambiar otras. En este caso el programador tiene que guardar un usuario en la base de datos, pero no esta seguro que base de datos es mejor.
 
-Va a empezar usando MongoDB, pero quizas en el futuro necesite cambiar la aplicacion entera para que use PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
+Va a empezar usando MongoDB, pero capaz despues necesite cambiarse a PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
 
 ```javascript
 // Nuestra funcion `guardarUsuario` sabe todo
@@ -299,7 +299,7 @@ function persistirUsuarioEnMongoDb(usuario) {
 // No necesitamos tener esta funcion hasta que
 // realmente queramos usar PostgresSQL.
 // De hecho, cambiar de base de datos es tan
-// sencillo como cambiar estos strategies.
+// sencillo como crear un nuevo strategy.
 function persistirUsuarioEnPostgresSql(usuario) {
   // ...
 }
