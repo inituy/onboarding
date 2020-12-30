@@ -134,6 +134,8 @@ readFile(filepath)
   });
 ```
 
+Podemos crear nuestras propias promises de la siguiente manera: ...
+
 ![promises2](./javascript_promises_2.png)
 
 ### Closures
@@ -188,7 +190,7 @@ function doStuffWithFiles(filepaths) {
 doStuffWithFiles([...]);
 ```
 
-El uso de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
+La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
 
 ![closures1](./javascript_closures_1.png)
 
@@ -232,7 +234,7 @@ Las arquitecturas que creamos con funciones se pueden reproducir en lenguajes or
 
 #### [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 
-El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando. Partes de nuestro sistema pueden variar segun el estado del sistema o segun otras cosas. O simplemente podemos diseñar el sistema para nos sea mas facil cambiar determinadas funciones.
+El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando. Partes de nuestro sistema pueden variar segun el estado del sistema o segun otras cosas. O simplemente podemos aplicar el strategy pattern para nos sea mas facil mantener el codigo para determinadas funciones del sistema.
 
 Veamos un ejemplo de como el sistema puede variar segun el estado. Este sistema de ejemplo registra la entrada y salida de personas de un edificio, y debe actuar diferente segun el horario en el que se registran las entradas. Cuando una persona entra entre las 22:00 y las 6:00, el sistema notifica a seguridad, fuera de ese horario notifica a recursos humanos.
 
@@ -313,3 +315,47 @@ Una vez que tenemos instalado un stategy pattern, es sencillo agregar nuevas est
 
 #### [Factory pattern](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming))
 
+En programacion orientada a objetos, una "factory" es un objeto cuya responsabilidad es crear otros objetos. En programacion funcional, esta mas relacionado al concepto de "partial application".
+
+Se puede aplicar este patron cuando la creacion del objeto es mas compleja que simplemente crear la funcion o usar `new` en lenguajes orientados a objetos. Por ejemplo, si necesitamos limitar la cantidad de objetos que existen de un tipo en particular o si la configuracion de un objeto es tan compleja que necesitamos encapsularla en un objeto aparte.
+
+Veamos un ejemplo de lo primero. Cuando nos conectamos a una base de datos no queremos creando conexiones nuevas a cada rato. Incluso si cerramos las conexiones para que no llegar al limite, el costo de conectarse cada vez es innecesario. Este problema se soluciona con el factory pattern, haciendo una funcion que que controla la creacion de conexiones.
+
+Cuando ejecutemos esta funcion nos va a dar una conexion que activa. Si no hubiera ninguna conexion active la crearia:
+
+```javascript
+var activa;
+
+// `conectar` aplica el factory pattern para
+// controlar la creacion de conexiones a la
+// base de datos.
+function conectar() {
+  if (!activa)
+    return baseDeDatos.conectar();
+  else
+    return activa;
+}
+
+// Todas las conexiones a la base de datos se
+// hacer a traves del factory.
+conectar().then(function (conexion) {
+  conexion.consulta('...');
+});
+```
+
+Ahora un ejemplo de configuracion compleja. Imaginemos un programa que usa [inyeccion de dependencia](https://en.wikipedia.org/wiki/Dependency_injection). Este programa tiene un objeto o funcion que tiene la sola responsabilidad de distribuir funcionalidad entre ciertos otros objetos del sistema.
+
+Sigamos el ejemplo de strategy pattern que esta mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario, sin la configuracion de persistencia. Para hacer eso nuestra funcion de inyeccion de dependencias va a aplicar el factory pattern de manera que nos devuelva la funcion `guardarUsuario` ya configurada:
+
+```javascript
+// `construirGuardarUsuario` aplica el factory
+// pattern y devuelve una funcion ya configurada
+// para usar MongoDB para la persistencia.
+function construirGuardarUsuario() {
+  return function (usuario) {
+    return guadarUsuario(usuario, persistirUsuarioEnMongoDb);
+  };
+}
+
+var guardarUsuarioEnMongoDb = construirGuardarUsuario();
+```
