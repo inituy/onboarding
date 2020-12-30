@@ -195,3 +195,24 @@ El uso de los closure se puede ver cuando una funcion sobrevive al contexto de e
 A traves de los closures, el contexto de ejecucion de una funcion tiene acceso al contexto de ejecucion donde la funcion se creo. Este efecto se repite en cada funcion y asi cada funcion tiene acceso al contexto de ejecucion global a traves de los closures.
 
 ### Serializacion
+
+Se le dice serializacion al proceso por el cual transformamos un objeto en un string u otro formato que se puede enviar fuera del programa. El formato que vamos a ver ahora es JSON (JavaScript Object Notation).
+
+Tenemos que serializar un objeto cuando necesitamos enviarlo a otro programa. Como no podemos pasarle variables a otros programas, o a traves de una red, tenemos que enviarle un string.
+
+Javascript tiene una libreria que viene incluida con el lenguaje para convertir objetos en strings JSON:
+
+```javascript
+JSON.stringify({ importante: 123456 }); // {"importante":123456}
+```
+
+Tambien convierte strings JSON en objetos:
+
+```javascript
+JSON.parse('{"importante":123456}'); // { importante: 123456 }
+```
+
+No se pueden serializar funciones por lo que explicamos en la seccion anterior. Para poder pasar el contexto entero de una funcion necesitariamos serializar el contexto de ejecucion global, o sea todo el programa.
+
+[En esta pagina](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#Full_JSON_syntax) podes encontrar la sintaxis JSON entera.
+
