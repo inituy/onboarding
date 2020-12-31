@@ -300,8 +300,6 @@ Un "command" en programacion orientada a objetos es un objeto ejecutable. Estos 
 
 A estos objetos nosotros les llamamos funciones. Las funciones son basicamente objetos ejecutables e incluyen un metodo `call` aparte de la sintaxis `()` que tambien las ejecuta.
 
-Las arquitecturas que creamos con funciones se pueden reproducir en lenguajes orientados a objetos usando el command pattern en todos lados.
-
 #### [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 
 El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando. Partes de nuestro sistema pueden variar segun el estado del sistema o segun otras cosas. O simplemente podemos aplicar el strategy pattern para nos sea mas facil mantener el codigo para determinadas funciones del sistema.
@@ -312,7 +310,7 @@ Digamos que seguridad y recursos humanos son dos grupos diferentes de personas y
 
 ```javascript
 /* La funcion `notificar` es nuestra "estrategia"
-   y va a variar segun quien llame a `registrarEntrada`.
+   y va a variar segun como se llame a `registrarEntrada`.
    Esta funcion la va a mantener el equipo de TI. */
 function registrarEntrada(entrada, notificar) { 
   validarEntrada(entrada);
@@ -335,11 +333,24 @@ function notificarRecursosHumanos(entrada) {
 /* Nuestro sensor de entrada nos notifica cuando
    hay datos nuevos. */
 sensor.addEventListener(function sensorActivado(sensorData) {
-  var date = new Date();
-  if (date.getHours() > 22 && date.getHours() < 6)
-    registrarEntrada(sensorData, notificarSeguridad);
-  else
-    registrarEntrada(sensorData, notificarRecursosHumanos);
+  var strategy;
+
+  switch (new Date().getHours()) {
+    case 22:
+    case 23:
+    case  0:
+    case  1:
+    case  2:
+    case  3:
+    case  4:
+    case  5:
+      strategy = notificarSeguridad;
+      break;
+    default:
+      strategy = notificarRecursosHumanos;
+  }
+
+  registrarEntrada(sensorData, strategy);
 });
 ```
 
