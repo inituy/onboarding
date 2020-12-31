@@ -227,6 +227,37 @@ La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto
 
 ![closures1](./javascript_closures_1.png)
 
+```javascript
+// Esta funcion devuelve otra funcion.
+// La funcion que devuelve va a tener acceso
+// al contexto de ejecucion donde se creo.
+// Entonces, la funcion que se devuelve va
+// a poder leer la variable `secreto`.
+function prepararFuncionSecreta() {
+  // La variable `secreto` se define dentro
+  // del contexto de ejecucion de `prepararFuncionSecreta`.
+  var secreto = 456;
+
+  // La funcion `funcionSecreta` tambien se
+  // define dentro del contexto de ejecucion de
+  // `prepararFuncionSecreta` por lo tanto el
+  // sigue vivo en su closure.
+  return function funcionSecreta() {
+    console.log(secreto);
+  };
+}
+
+// La variable `fn` ahora tiene como valor a
+// la `funcionSecreta`, que tiene en su closure
+// el contexto de ejecucion donde se creo.
+var fn = prepararFuncionSecreta();
+
+// Llamar a `fn` imprime 456. La `funcionSecreta`
+// tiene acceso a la variable `secreto` a traves
+// de su closure.
+fn();
+```
+
 A traves de los closures, el contexto de ejecucion de una funcion tiene acceso al contexto de ejecucion donde la funcion se creo. Este efecto se repite en cada funcion y asi cada funcion tiene acceso al contexto de ejecucion global a traves de los closures.
 
 ### Serializacion
