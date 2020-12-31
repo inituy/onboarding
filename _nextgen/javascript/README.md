@@ -387,7 +387,13 @@ function persistirUsuarioEnPostgresSql(usuario) {
 
 function crearNuevoUsuario(inputUsuario) {
   validarInputUsuario(inputUsuario);
+
+  /* En este caso no es una condicion del sistema
+     la que decide que strategy usar, sino que el
+     programador lo escribe asi para tener la
+     comodidad de poder cambiarlo facilmente despues. */
   guardarUsuario(inputUsuario, persistirUsuarioEnMongoDb);
+
   enviarEmailNuevoUsuario(inputUsuario);
 }
 ```
