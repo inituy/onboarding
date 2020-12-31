@@ -81,20 +81,20 @@ Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de
 ```javascript
 var promise = readFile(filepath);
 
-// Con este callback le vamos a avisar al
-// usuario que el archivo se leyo con exito.
+/* Con este callback le vamos a avisar al
+   usuario que el archivo se leyo con exito. */
 promise.then(function (file) {
   console.log('Read successfully!', file);
 });
 
-// En este vamos a dejar registro de que
-// leimos el archivo.
+/* En este vamos a dejar registro de que
+   leimos el archivo. */
 promise.then(function (file) {
   return saveLog(file);
 });
 
-// En este vamos a copiar el archivo usando
-// otra funcion.
+/* En este vamos a copiar el archivo usando
+   otra funcion. */
 promise.then(function (file) {
   return copyFile(file, copypath);
 });
@@ -139,9 +139,9 @@ readFile(filepath)
 Si quisieramos crear una funcion que devuelve un `Promise` podriamos hacerlo de la siguiente forma:
 
 ```javascript
-// Vamos a escribir nuesta propia funcion
-// `readFile` que recibe el path de un
-// archivo y devuelve el contenido.
+/* Vamos a escribir nuesta propia funcion
+   `readFile` que recibe el path de un
+   archivo y devuelve el contenido. */
 function readFile(filepath) {
   // Creamos una promesa con `new Promise`. 
   return new Promise(function (exito, error) {
@@ -178,15 +178,15 @@ En esta parte vamos a ver en mas detalle que pasa cuando definimos y cuando ejec
 En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Entonces un ejemplo como el siguiente crearia mucha cantidad de funciones:
 
 ```javascript
-// Creamos una funcion anonima para
-// poder pasarsela como callback
-// a `forEach`.
+/* Creamos una funcion anonima para
+   poder pasarsela como callback
+/   a `forEach`. */
 filepaths.forEach(function (filepath) {
-  // Creamos una funcion mas por cada vez
-  // que se ejecuta el callback de `forEach`.
-  // Cuando `forEach` termine  vamos a
-  // haber creado tantas funciones como
-  // archivos hubo en `filepaths`.
+  /* Creamos una funcion mas por cada vez
+     que se ejecuta el callback de `forEach`.
+     Cuando `forEach` termine  vamos a
+     haber creado tantas funciones como
+     archivos hubo en `filepaths`. */
   fs.readFile(filepath, function (error, file) {
     console.log('Leimos este archivo:', filepath, file);
   });
@@ -214,47 +214,47 @@ function doStuffWithFiles(filepaths) {
   });
 }
 
-// El interprete va a reservar memoria para
-// la ejecucion de esta funcion y al terminar
-// de ejecutarla va a descartar los valores
-// de los parametros, las variables y las
-// funciones que se crearon en ese contexto.
-// Esto incluye el callback de `forEach`,
-// de `readFile` y las variables `filepaths`,
-// `filepath`, `error` y `file`.
+/* El interprete va a reservar memoria para
+   la ejecucion de esta funcion y al terminar
+   de ejecutarla va a descartar los valores
+   de los parametros, las variables y las
+   funciones que se crearon en ese contexto.
+   Esto incluye el callback de `forEach`,
+   de `readFile` y las variables `filepaths`,
+   `filepath`, `error` y `file`. */
 doStuffWithFiles([...]);
 ```
 
 La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
 
 ```javascript
-// Esta funcion devuelve otra funcion.
-// La funcion que devuelve va a tener acceso
-// al contexto de ejecucion donde se creo.
-// Entonces, la funcion que se devuelve va
-// a poder leer la variable `secreto`.
+/* Esta funcion devuelve otra funcion.
+   La funcion que devuelve va a tener acceso
+   al contexto de ejecucion donde se creo.
+   Entonces, la funcion que se devuelve va
+   a poder leer la variable `secreto`. */
 function prepararFuncionSecreta() {
-  // La variable `secreto` se define dentro
-  // del contexto de ejecucion de `prepararFuncionSecreta`.
+  /* La variable `secreto` se define dentro
+     del contexto de ejecucion de `prepararFuncionSecreta`. */
   var secreto = 456;
 
-  // La funcion `funcionSecreta` tambien se
-  // define dentro del contexto de ejecucion de
-  // `prepararFuncionSecreta` por lo tanto el
-  // sigue vivo en su closure.
+  /* La funcion `funcionSecreta` tambien se
+     define dentro del contexto de ejecucion de
+     `prepararFuncionSecreta` por lo tanto el
+     sigue vivo en su closure. */
   return function funcionSecreta() {
     console.log(secreto);
   };
 }
 
-// La variable `fn` ahora tiene como valor a
-// la `funcionSecreta`, que tiene en su closure
-// el contexto de ejecucion donde se creo.
+/* La variable `fn` ahora tiene como valor a
+   la `funcionSecreta`, que tiene en su closure
+   el contexto de ejecucion donde se creo. */
 var fn = prepararFuncionSecreta();
 
-// Llamar a `fn` imprime 456. La `funcionSecreta`
-// tiene acceso a la variable `secreto` a traves
-// de su closure.
+/* Llamar a `fn` imprime 456. La `funcionSecreta`
+   tiene acceso a la variable `secreto` a traves
+   de su closure. */
 fn();
 ```
 
@@ -305,29 +305,29 @@ Veamos un ejemplo de como el sistema puede variar segun el estado. Este sistema 
 Digamos que seguridad y recursos humanos son dos grupos diferentes de personas y que cada una quiere poder programar la manera en la que se les notifica. Podemos usar el strategy pattern para tener una funcion para cada grupo de personas.
 
 ```javascript
-// La funcion `notificar` es nuestra "estrategia"
-// y va a variar segun quien llame a `registrarEntrada`.
-// Esta funcion la va a mantener el equipo de TI.
+/* La funcion `notificar` es nuestra "estrategia"
+   y va a variar segun quien llame a `registrarEntrada`.
+   Esta funcion la va a mantener el equipo de TI. */
 function registrarEntrada(entrada, notificar) { 
   validarEntrada(entrada);
   guardarEntradaEnBaseDeDatos(entrada);
   notificar(entrada);
 }
 
-// Esta funcion la va a mantener el equipo de seguridad
-// del edificio.
+/* Esta funcion la va a mantener el equipo de seguridad
+   del edificio. */
 function notificarSeguridad(entrada) {
   llamar911();
 }
 
-// Esta funcion la va a mantener el equipo de recursos
-// humanos de la empresa.
+/* Esta funcion la va a mantener el equipo de recursos
+   humanos de la empresa. */
 function notificarRecursosHumanos(entrada) {
   empezarContadorDeHoras();
 }
 
-// Nuestro sensor de entrada nos notifica cuando
-// hay datos nuevos.
+/* Nuestro sensor de entrada nos notifica cuando
+   hay datos nuevos. */
 sensor.addEventListener(function sensorActivado(sensorData) {
   var date = new Date();
   if (date.getHours() > 22 && date.getHours() < 6)
@@ -342,28 +342,28 @@ Ahora veamos un ejemplo donde el mismo programador elige usar un strategy patter
 Va a empezar usando MongoDB, pero capaz despues necesite cambiarse a PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
 
 ```javascript
-// Nuestra funcion `guardarUsuario` sabe todo
-// lo que se debe hacer para guardar un nuevo
-// usuario en el sistema, excepto como persistirlo
-// en la base de datos.
+/* Nuestra funcion `guardarUsuario` sabe todo
+   lo que se debe hacer para guardar un nuevo
+   usuario en el sistema, excepto como persistirlo
+   en la base de datos. */
 function guardarUsuario(usuario, persistir) {
   usuario.id = generarIdUsuario();
   persistir(usuario);
   return usuario;
 }
 
-// Esta funcion va a recibir datos del usuario
-// y lo va a guardar en MongoDB.
+/* Esta funcion va a recibir datos del usuario
+   y lo va a guardar en MongoDB. */
 function persistirUsuarioEnMongoDb(usuario) {
   // ...
 }
 
-// Esta funcion va a recibir datos del usuario
-// y lo va a guardar en PostgresSQL.
-// No necesitamos tener esta funcion hasta que
-// realmente queramos usar PostgresSQL.
-// De hecho, cambiar de base de datos es tan
-// sencillo como crear un nuevo strategy.
+/* Esta funcion va a recibir datos del usuario
+   y lo va a guardar en PostgresSQL.
+   No necesitamos tener esta funcion hasta que
+   realmente queramos usar PostgresSQL.
+   De hecho, cambiar de base de datos es tan
+   sencillo como crear un nuevo strategy. */
 function persistirUsuarioEnPostgresSql(usuario) {
   // ...
 }
@@ -390,9 +390,9 @@ Cuando ejecutemos la siguiente funcion nos va a dar una conexion que activa. Si 
 ```javascript
 var activa;
 
-// `conectar` aplica el factory pattern para
-// controlar la creacion de conexiones a la
-// base de datos.
+/* `conectar` aplica el factory pattern para
+   controlar la creacion de conexiones a la
+   base de datos. */
 function conectar() {
   if (!activa)
     return baseDeDatos.conectar();
@@ -400,8 +400,8 @@ function conectar() {
     return activa;
 }
 
-// Todas las conexiones a la base de datos se
-// hacer a traves del factory.
+/* Todas las conexiones a la base de datos se
+   hacer a traves del factory. */
 conectar().then(function (conexion) {
   conexion.consulta('...');
 });
@@ -412,9 +412,9 @@ Ahora un ejemplo de configuracion compleja. Imaginemos un programa que usa [inye
 Sigamos el ejemplo de strategy pattern que esta mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario sin previa configuracion. Para hacer eso nuestra funcion de inyeccion de dependencias va a aplicar el factory pattern de manera que nos devuelva la funcion `guardarUsuario` ya configurada:
 
 ```javascript
-// `construirGuardarUsuario` aplica el factory
-// pattern y devuelve una funcion ya configurada
-// para usar MongoDB para la persistencia.
+/* La funcion `construirGuardarUsuario` aplica el
+   factory pattern y devuelve una funcion ya configurada
+   para usar MongoDB para la persistencia. */
 function construirGuardarUsuario() {
   return function (usuario) {
     return guadarUsuario(usuario, persistirUsuarioEnMongoDb);
