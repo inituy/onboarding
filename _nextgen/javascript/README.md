@@ -402,29 +402,26 @@ Una vez que tenemos instalado un stategy pattern, es sencillo agregar nuevas est
 
 #### [Factory pattern](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming))
 
-En programacion orientada a objetos, una "factory" es un objeto cuya responsabilidad es crear otros objetos. En programacion funcional, esta mas relacionado al concepto de "partial application".
+En programacion orientada a objetos, una "factory" es un objeto cuya responsabilidad es crear otros objetos. En programacion funcional, esta mas relacionado al concepto de "[aplicacion parcial](https://en.wikipedia.org/wiki/Partial_application)".
 
-Se puede aplicar este patron cuando la creacion del objeto es mas compleja que simplemente crear la funcion o usar `new` en lenguajes orientados a objetos. Por ejemplo, si necesitamos limitar la cantidad de objetos que existen de un tipo en particular o si la configuracion de un objeto es tan compleja que necesitamos especificarla en un objeto aparte.
+Este patron se aplica cuando la creacion de un objeto es mas compleja que simplemente usar `new` o crear la funcion. Por ejemplo, si necesitamos limitar la cantidad de objetos que existen de un tipo en particular o si la configuracion de un objeto es tan compleja que necesitamos especificarla en un objeto aparte.
 
 Veamos un ejemplo de lo primero. Cuando nos conectamos a una base de datos no queremos estar creando conexiones nuevas a cada rato. Incluso si cerramos las conexiones que no vamos a usar mas para que no llegar al limite, el costo de conectarnos cada vez que hacemos una consulta es innecesario. Este problema se soluciona aplicando el factory pattern para controlar la creacion de conexiones.
 
-Cuando ejecutemos la siguiente funcion nos va a dar una conexion que activa. Si no hubiera ninguna conexion activa crearia una nueva:
+Cuando ejecutemos la siguiente funcion nos va a dar una conexion que ya este activa. Si no hubiera ninguna conexion activa crearia una nueva:
 
 ```javascript
 var activa;
 
-/* `conectar` aplica el factory pattern para
-   controlar la creacion de conexiones a la
-   base de datos. */
+/* La funciona `conectar` aplica el factory
+   pattern para controlar la creacion de
+   conexiones a la base de datos. */
 function conectar() {
-  if (!activa)
-    return baseDeDatos.conectar();
-  else
-    return activa;
+  return !activa ? baseDeDatos.conectar() : activa;
 }
 
 /* Todas las conexiones a la base de datos se
-   hacer a traves del factory. */
+   deben hacer a traves del factory. */
 conectar().then(function (conexion) {
   conexion.consulta('...');
 });
@@ -432,17 +429,28 @@ conectar().then(function (conexion) {
 
 Ahora un ejemplo de configuracion compleja. Imaginemos un programa que usa [inyeccion de dependencia](https://en.wikipedia.org/wiki/Dependency_injection). Este programa tiene un objeto o funcion que tiene la sola responsabilidad de distribuir funcionalidad entre ciertos otros objetos del sistema.
 
-Sigamos el ejemplo de strategy pattern que esta mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario sin previa configuracion. Para hacer eso nuestra funcion de inyeccion de dependencias va a aplicar el factory pattern de manera que nos devuelva la funcion `guardarUsuario` ya configurada:
+Sigamos el ejemplo de mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario sin necesidad de configurar. Para esto vamos a tener un factory que nos devuelva la funcion `guardarUsuario` configurada.
 
 ```javascript
-/* La funcion `construirGuardarUsuario` aplica el
-   factory pattern y devuelve una funcion ya configurada
-   para usar MongoDB para la persistencia. */
-function construirGuardarUsuario() {
-  return function (usuario) {
-    return guadarUsuario(usuario, persistirUsuarioEnMongoDb);
-  };
+/* La funcion `prepararGuardarUsuario` nos
+   va a devolver otra funcion que ya tiene la
+   configuracion que precisa. En este caso,
+   el strategy de persistencia. */
+function prepararGuardarUsuario() {
+  return function guardarUsuarioEnMongoDb(usuario) {
+    /* De la misma manera que en el ejemplo sobre
+       strategy pattern, esta funcion no cambia en
+       base al estado del sistema sino que le 
+       facilita al programador cambiarlo despues.
+       Para cambiar de una base de datos a otra,
+       solamente hay que cambiar la function
+       `persistirUsuarioEnMongoDb` por otra que
+       tenga la misma funcionalidad. */
+    return guardarUsuario(usuario, persistirUsuarioEnMongoDb);
+  }
 }
 
-var guardarUsuarioEnMongoDb = construirGuardarUsuario();
+inicializarPrograma({
+  guardarUsuario: prepararGuardarUsuario()
+});
 ```
