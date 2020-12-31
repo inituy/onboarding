@@ -22,9 +22,9 @@ No todos los lenguajes tienen esta caracteristica. En muchos lenguajes lo mas pa
 
 Como las funciones son objetos podemos guardarlas en variables y moverlas a distintas partes de nuestro programa. En la proxima parte vamos a ver como una funcion puede recibir a otra en sus parametros y que se puede hacer con eso.
 
-### Callbacks
+### Callback
 
-Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion. Se llama asi porque cuando pasamos una funcion por parametro es para recuperar el control de flujo cuando se ejecute.
+Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion.
 
 ![callbacks](./javascript_callbacks.png)
 
@@ -32,7 +32,7 @@ La palabra "call" significa "llamar" o "ejecutar" y "back" se puede traducir com
 
 Los callbacks se usan cuando hay una tarea asincronica como leer un archivo o hacer una consulta a la base de datos. Usando callbacks podemos llamar, por ejemplo, a la funcion `readFile` y que nos notifique cuando la lectura del archivo haya terminado ejecutando la funcion que le pasamos por parametro.
 
-Usar callbacks tiene un costo para la prolijidad del programa terminado. El codigo de un programa con muchas tareas asincronicas y callbacks no es muy legible.
+Usar callbacks tiene un costo de prolijidad de codigo. El codigo de un programa con muchas tareas asincronicas y callbacks no es facil de leer.
 
 ```javascript
 readJsonFile("...", function (json) {
@@ -60,7 +60,7 @@ Una promesa es un objeto que representa una tarea que todavia no termino de ejec
 
 ![promises1](./javascript_promises_1.png)
 
-Un objeto `Promise` tiene dos metodos llamados `then` y `catch`. El metodo `then` recibe una funcion como parametro (callback) que se ejecuta si la tarea que la promesa representa termina con exito. El metodo `catch` funciona de la misma manera, pero se ejecuta en caso que la tarea termine en error. En ambos casos el callback recibe el resultado de la tarea.
+Un objeto `Promise` tiene dos metodos llamados `then` y `catch`. El metodo `then` recibe una funcion como parametro (callback) que se ejecuta si la tarea que la promesa representa termina con exito. El metodo `catch` funciona de la misma manera, pero se ejecuta cuando la tarea termina en error. En ambos casos el callback recibe el resultado de la tarea.
 
 ```javascript
 var promise = readFile(filepath);
@@ -76,7 +76,7 @@ promise.catch(function (error) {
 
 Los metodos `then` y `catch` son muy versatiles y nos permiten hacer muchas cosas distintas.
 
-Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de un callback a la misma tarea. Todos los callbacks en el siguiente ejemplo se ejecutan al terminar de leer el mismo archivo:
+Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de un callback a la misma tarea. Todos los callbacks en el siguiente ejemplo se ejecutan al terminar de leer el archivo:
 
 ```javascript
 var promise = readFile(filepath);
@@ -134,9 +134,42 @@ readFile(filepath)
   });
 ```
 
-Podemos crear nuestras propias promises de la siguiente manera: ...
-
 ![promises2](./javascript_promises_2.png)
+
+Si quisieramos crear una funcion que devuelve un `Promise` podriamos hacerlo de la siguiente forma:
+
+```javascript
+// Vamos a escribir nuesta propia funcion
+// `readFile` que recibe el path de un
+// archivo y devuelve el contenido.
+function readFile(filepath) {
+  // Creamos una promesa con `new Promise`. 
+  return new Promise(function (exito, error) {
+    if (fileExists(filepath))
+      // Hace que se ejecuten los `then`.
+      exito({ }); 
+    else
+      // Hace que se ejecuten los `catch`.
+      error('No existe el archivo.');
+  });
+}
+```
+
+Usamos `new Promise` para crear una nueva promesa y le pasamos la funcion que va a llevar a cabo la tarea. Esta funcion va a recibir dos funciones por parametro (`exito` y `error` en el ejemplo) que sirven para finalizar el `Promise`.
+
+Si ejecutamos el primer callback (`exito`) vamos a estar marcando la promesa como finalizada exitosamente. El segundo callback (`error`) se ejecuta cuando hay un error. Ejecutar los callback hace que la promesa continue hacia los `then` o `catch` que se le hayan asignado.
+
+Tambien podemos crear promesas usando los metodos `resolve` y `reject`. Con estos metodos creamos promesas que ya estan terminadas con exito y error respectivamente:
+
+```javascript
+Promise.resolve(123).then(function (value) {
+  console.log(value); // Imprime 123
+});
+
+Promise.reject(789).catch(function (error) {
+  console.log(error); // Imprime 789
+});
+```
 
 ### Closures
 
