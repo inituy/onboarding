@@ -197,6 +197,8 @@ Cada vez que se crea una funcion, tambien se crea un "closure". Un closure es un
 
 Por ejemplo, en el codigo de arriba el callback de `readFile` puede acceder a la variable `filepath` porque fue creada dentro del callback de `forEach`.
 
+![closures1](./javascript_closures_1.png)
+
 Los closures viven en el programa hasta que la funcion a la que estan conectados desaparece. Para entender como es que una funcion desaparece del programa tenemos que hablar sobre contextos de ejecucion.
 
 Cuando ejecutamos una funcion, el interprete de Javascript (NodeJS, un navegador web o donde sea que corre nuestro programa) reserva un espacio en la memoria del sistema para esa funcion.
@@ -224,8 +226,6 @@ doStuffWithFiles([...]);
 ```
 
 La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
-
-![closures1](./javascript_closures_1.png)
 
 ```javascript
 // Esta funcion devuelve otra funcion.
