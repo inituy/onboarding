@@ -228,6 +228,11 @@ doStuffWithFiles([...]);
 La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
 
 ```javascript
+/* La variable `publico` se define en el contexto
+   ejecucion global y todas las funciones van a 
+   tener acceso a ella. */
+var publico = 123;
+
 /* Esta funcion devuelve otra funcion.
    La funcion que devuelve va a tener acceso
    al contexto de ejecucion donde se creo.
@@ -243,18 +248,19 @@ function prepararFuncionSecreta() {
      `prepararFuncionSecreta` por lo tanto el
      sigue vivo en su closure. */
   return function funcionSecreta() {
-    console.log(secreto);
+    console.log(publico, secreto);
   };
 }
 
 /* La variable `fn` ahora tiene como valor a
    la `funcionSecreta`, que tiene en su closure
-   el contexto de ejecucion donde se creo. */
+   el contexto de ejecucion de `prepararFuncionSecreta`. */
 var fn = prepararFuncionSecreta();
 
-/* Llamar a `fn` imprime 456. La `funcionSecreta`
-   tiene acceso a la variable `secreto` a traves
-   de su closure. */
+/* Llamar a `fn` imprime 123456. 
+   La `funcionSecreta` tiene acceso a la variable `secreto`
+   a traves de su closure y a `publico` a traves del
+   closure de `prepararFuncionSecreta`. */
 fn();
 ```
 
