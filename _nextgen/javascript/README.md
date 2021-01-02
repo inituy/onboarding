@@ -26,11 +26,11 @@ Como las funciones son objetos podemos guardarlas en variables y moverlas a dist
 
 Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion.
 
-![callbacks](./javascript_callbacks.png)
-
 La palabra "call" significa "llamar" o "ejecutar" y "back" se puede traducir como "de vuelta" o "de regreso". En ingles decimos "call me back" cuando queremos que alguien nos "vuelva a llamar".
 
-Los callbacks se usan cuando hay una tarea asincronica como leer un archivo o hacer una consulta a la base de datos. Usando callbacks podemos llamar, por ejemplo, a la funcion `readFile` y que nos notifique cuando la lectura del archivo haya terminado ejecutando la funcion que le pasamos por parametro.
+Los callbacks se usan cuando hay una tarea asincronica como leer un archivo o hacer una consulta a la base de datos. Usando callbacks podemos llamar, por ejemplo, a la funcion `readFile` y que nos notifique cuando la lectura del archivo haya terminado a traves de la funcion que le pasamos por parametro (callback).
+
+![callbacks](./javascript_callbacks.png)
 
 Usar callbacks tiene un costo de prolijidad de codigo. El codigo de un programa con muchas tareas asincronicas y callbacks no es facil de leer.
 
@@ -74,9 +74,7 @@ promise.catch(function (error) {
 });
 ```
 
-Los metodos `then` y `catch` son muy versatiles y nos permiten hacer muchas cosas distintas.
-
-Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de un callback a la misma tarea. Todos los callbacks en el siguiente ejemplo se ejecutan al terminar de leer el archivo:
+Los metodos `then` y `catch` son muy versatiles y nos permiten hacer muchas cosas distintas. Por ejemplo, podemos llamar `then` tantas veces como queramos y asignarle mas de un callback a la misma tarea. Todos los callbacks en el siguiente ejemplo se ejecutan al terminar de leer el archivo:
 
 ```javascript
 var promise = readFile(filepath);
@@ -118,7 +116,7 @@ promise3.then(function (file) {
 });
 ```
 
-Escrito de otra manera, sin guardar cada promesa en una variable sino llamando directamente el metodo `then` sobre el resultado de la ejecucion anterior:
+En el siguiente ejemplo lo vemos escrito de otra manera, sin guardar cada promesa en una variable sino llamando directamente el metodo `then` sobre el resultado de la ejecucion anterior. Resulta mas facil de entender que una tarea sucede a la anterior:
 
 ```javascript
 readFile(filepath)
@@ -136,14 +134,16 @@ readFile(filepath)
 
 ![promises2](./javascript_promises_2.png)
 
-Si quisieramos crear una funcion que devuelve un `Promise` podriamos hacerlo de la siguiente forma:
+Si quisieramos nosotros mismos la funcion `readFile` que devuelve un `Promise` podriamos hacerlo de la siguiente forma:
 
 ```javascript
 /* Vamos a escribir nuesta propia funcion
    `readFile` que recibe el path de un
    archivo y devuelve el contenido. */
 function readFile(filepath) {
-  // Creamos una promesa con `new Promise`. 
+  /* Creamos una promesa con `new Promise`.
+     Le pasamos por parametro la funcion que
+     va a llevar a cabo la tarea. */
   return new Promise(function (exito, error) {
     if (fileExists(filepath))
       // Hace que se ejecuten los `then`.
@@ -159,7 +159,7 @@ Usamos `new Promise` para crear una nueva promesa y le pasamos la funcion que va
 
 Si ejecutamos el primer callback (`exito`) vamos a estar marcando la promesa como finalizada exitosamente. El segundo callback (`error`) se ejecuta cuando hay un error. Ejecutar los callback hace que la promesa continue hacia los `then` o `catch` que se le hayan asignado.
 
-Tambien podemos crear promesas usando los metodos `resolve` y `reject`. Con estos metodos creamos promesas que ya estan terminadas con exito y error respectivamente:
+Tambien podemos crear promesas usando los metodos `resolve` y `reject`. Con estos metodos creamos promesas que ya estan finalizadas y que ejecutan sus `then` o `catch` inmediatamente:
 
 ```javascript
 Promise.resolve(123).then(function (value) {
@@ -173,20 +173,18 @@ Promise.reject(789).catch(function (error) {
 
 ### Closures
 
-En esta parte vamos a ver en mas detalle que pasa cuando definimos y cuando ejecutamos una funcion.
-
-En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Entonces un ejemplo como el siguiente crearia mucha cantidad de funciones:
+En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Un ejemplo como el siguiente crearia mucha cantidad de funciones:
 
 ```javascript
 /* Creamos una funcion anonima para
    poder pasarsela como callback
-/   a `forEach`. */
+   a `forEach`. */
 filepaths.forEach(function (filepath) {
   /* Creamos una funcion mas por cada vez
      que se ejecuta el callback de `forEach`.
      Cuando `forEach` termine  vamos a
      haber creado tantas funciones como
-     archivos hubo en `filepaths`. */
+     elementos hubo en el array `filepaths`. */
   fs.readFile(filepath, function (error, file) {
     console.log('Leimos este archivo:', filepath, file);
   });
@@ -225,7 +223,7 @@ function doStuffWithFiles(filepaths) {
 doStuffWithFiles([...]);
 ```
 
-La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener vivo el contexto de ejecucion donde fue creada en su closure.
+La utilidad de los closure se puede ver cuando una funcion sobrevive al contexto de ejecucion donde fue creada. Si una ejecucion termina con el retorno de una funcion, la funcion retornada va a seguir existiendo y va a mantener en su closure el contexto de ejecucion donde fue creada.
 
 ```javascript
 /* La variable `publico` se define en el contexto
@@ -254,7 +252,8 @@ function prepararFuncionSecreta() {
 
 /* La variable `fn` ahora tiene como valor a
    la `funcionSecreta`, que tiene en su closure
-   el contexto de ejecucion de `prepararFuncionSecreta`. */
+   el contexto de ejecucion que se creo para
+   `prepararFuncionSecreta`. */
 var fn = prepararFuncionSecreta();
 
 /* Llamar a `fn` imprime 123456. 
@@ -290,9 +289,9 @@ No se pueden serializar funciones por lo que explicamos en la seccion anterior. 
 
 ### Patrones de diseño
 
-Para terminar con Javascript vamos a ver como se pueden aplicar algunos patrones de diseño. Estos patrones de diseño tienen uso mas que nada en lenguajes de programacion orientados a objetos pero tambien podemos aplicarlos usando el paradigma funcional, aunque parezca un poco improvisado.
+Para terminar con Javascript vamos a ver como se pueden aplicar algunos patrones de diseño. Estos patrones de diseño fueron creados para programacion orientada a objetos pero podemos aprovechar las similitudes para aplicarlos en programacion con funciones.
 
-Los patrones que vienen mas abajo son los que aplicamos todos los dias cuando programamos APIs y aplicaciones web. Los patrones que no usamos nos los vamos a ver.
+Los patrones que vienen mas abajo son los que aplicamos todos los dias cuando programamos APIs y aplicaciones web.
 
 #### [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
 
@@ -302,9 +301,11 @@ A estos objetos nosotros les llamamos funciones. Las funciones son basicamente o
 
 #### [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 
-El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando. Partes de nuestro sistema pueden variar segun el estado del sistema o segun otras cosas. O simplemente podemos aplicar el strategy pattern para nos sea mas facil mantener el codigo para determinadas funciones del sistema.
+El strategy pattern se usa cuando necesitamos elegir que funcion usar con el programa funcionando.
 
-Veamos un ejemplo de como el sistema puede variar segun el estado. Este sistema de ejemplo registra la entrada y salida de personas de un edificio, y debe actuar diferente segun el horario en el que se registran las entradas. Cuando una persona entra entre las 22:00 y las 6:00, el sistema notifica a seguridad, fuera de ese horario notifica a recursos humanos.
+Puede ser que necesitemos usarlo porque la funcionalidad de nuestro programa varia segun su estado, o simplemente podemos aplicar el strategy pattern para nos sea mas facil mantener el codigo para determinadas funciones del sistema.
+
+Veamos un ejemplo de como la funcionalidad varia segun el estado. Este sistema de ejemplo registra la entrada y salida de personas de un edificio, y debe actuar diferente segun el horario en el que se registran las entradas. Cuando una persona entra entre las 22:00 y las 6:00, el sistema notifica a seguridad, fuera de ese horario notifica a recursos humanos.
 
 Digamos que seguridad y recursos humanos son dos grupos diferentes de personas y que cada una quiere poder programar la manera en la que se les notifica. Podemos usar el strategy pattern para tener una funcion para cada grupo de personas.
 
@@ -354,9 +355,9 @@ sensor.addEventListener(function sensorActivado(sensorData) {
 });
 ```
 
-Ahora veamos un ejemplo donde el mismo programador elige usar un strategy pattern para darse la libertad de poder cambiar facilmente una parte de la funcionalidad sin cambiar otras. En este caso el programador tiene que guardar un usuario en la base de datos, pero no esta seguro que base de datos es mejor.
+Ahora veamos un ejemplo donde el mismo programador elige usar el strategy pattern para darse la libertad de poder cambiar facilmente una parte de la funcionalidad sin cambiar otras.
 
-Va a empezar usando MongoDB, pero capaz despues necesite cambiarse a PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
+En este caso el programador tiene que guardar un usuario en la base de datos, pero no esta seguro que base de datos es mejor. Va a empezar usando MongoDB, pero capaz despues necesite cambiarse a PostgresSQL. Vamos a ver como podemos separar la logica de negocio (las reglas para guardar un usuario) y el codigo de base de datos.
 
 ```javascript
 /* Nuestra funcion `guardarUsuario` sabe todo
@@ -376,11 +377,7 @@ function persistirUsuarioEnMongoDb(usuario) {
 }
 
 /* Esta funcion va a recibir datos del usuario
-   y lo va a guardar en PostgresSQL.
-   No necesitamos tener esta funcion hasta que
-   realmente queramos usar PostgresSQL.
-   De hecho, cambiar de base de datos es tan
-   sencillo como crear un nuevo strategy. */
+   y lo va a guardar en PostgresSQL. */
 function persistirUsuarioEnPostgresSql(usuario) {
   // ...
 }
@@ -398,7 +395,7 @@ function crearNuevoUsuario(inputUsuario) {
 }
 ```
 
-Una vez que tenemos instalado un stategy pattern, es sencillo agregar nuevas estrategias. Muy facilmente podriamos notificar a un tercer grupo sobre las entradas de personas y muy facilmente podriamos agregar codigo para base de datos.
+Una vez que tenemos instalado un stategy pattern, es sencillo agregar nuevas estrategias. Muy facilmente podriamos notificar a un tercer grupo sobre la entrada de personas o agregar una funcion nueva para guardar usuarios en la base de datos.
 
 #### [Factory pattern](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming))
 
@@ -406,9 +403,9 @@ En programacion orientada a objetos, una "factory" es un objeto cuya responsabil
 
 Este patron se aplica cuando la creacion de un objeto es mas compleja que simplemente usar `new` o crear la funcion. Por ejemplo, si necesitamos limitar la cantidad de objetos que existen de un tipo en particular o si la configuracion de un objeto es tan compleja que necesitamos especificarla en un objeto aparte.
 
-Veamos un ejemplo de lo primero. Cuando nos conectamos a una base de datos no queremos estar creando conexiones nuevas a cada rato. Incluso si cerramos las conexiones que no vamos a usar mas para que no llegar al limite, el costo de conectarnos cada vez que hacemos una consulta es innecesario. Este problema se soluciona aplicando el factory pattern para controlar la creacion de conexiones.
+Veamos un ejemplo de lo primero. Cuando nos conectamos a una base de datos no queremos estar creando conexiones nuevas a cada rato. Incluso si cerramos las conexiones que no vamos a usar mas, el costo de conectarnos cada vez que hacemos una consulta es innecesario. Este problema se soluciona aplicando el factory pattern para controlar la creacion de conexiones.
 
-Cuando ejecutemos la siguiente funcion nos va a dar una conexion que ya este activa. Si no hubiera ninguna conexion activa crearia una nueva:
+En el siguiente ejemplo vamos a ver una funcion que mantiene una sola conexion activa. Crea la conexion la primera vez que se ejecuta, y luego sigue devolviendo la misma conexion. Podriamos decir que esta funcion es un factory de conexiones:
 
 ```javascript
 var activa;
@@ -429,7 +426,7 @@ conectar().then(function (conexion) {
 
 Ahora un ejemplo de configuracion compleja. Imaginemos un programa que usa [inyeccion de dependencia](https://en.wikipedia.org/wiki/Dependency_injection). Este programa tiene un objeto o funcion que tiene la sola responsabilidad de distribuir funcionalidad entre ciertos otros objetos del sistema.
 
-Sigamos el ejemplo de mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario sin necesidad de configurar. Para esto vamos a tener un factory que nos devuelva la funcion `guardarUsuario` configurada.
+Sigamos el ejemplo de mas arriba donde pasamos la funcion de persistencia por parametro. En algun momento nuestro programa va a necesitar una funcion llamada `guardarUsuario` que simplemente guarde el usuario sin necesidad de configurar. Para esto vamos a tener un factory que nos devuelva la funcion `guardarUsuario` ya configurada.
 
 ```javascript
 /* La funcion `prepararGuardarUsuario` nos
@@ -454,3 +451,31 @@ inicializarPrograma({
   guardarUsuario: prepararGuardarUsuario()
 });
 ```
+
+#### [Pipeline pattern](https://en.wikipedia.org/wiki/Pipeline_\(software\))
+
+Le llamamos "pipeline" a una lista de funciones a aplicar sobre una estructura de datos, con un orden en particular, y donde el retorno de una funcion sirve de parametro para la siguiente.
+
+En nuestro caso usamos este patron para transformar casos de uso o experiencias de usuario en codigo. Un caso de uso en cualquier programa puede ser escrito como una lista de tareas que el usuario tiene que llevar a cabo para conseguir un resultado determinado.
+
+En Javascript podemos usar objetos del tipo `Promise` como los que estudiamos mas arriba para implementar el pipeline pattern.
+
+```javascript
+/* La funcion `actualizarPerfil` implementa
+   el pipeline pattern para describir el
+   caso de uso por el cual el usuario actualiza
+   su perfil. */
+function actualizarPerfil(datos) {
+  /* Cada funcion del pipeline recibe como
+     parametro el resultado de la ejecucion
+     anterior. */
+  return Promise.resolve(datos)
+    .then(validarSesionDeUsuario)
+    .then(validarDatosDePerfil)
+    .then(guardarDatosDePerfil)
+    .then(presentarDatosDePerfil)
+    .catch(presentarError);
+}
+```
+
+Esto nos permite encapsular cada uno de los pasos del caso de uso en funciones separadas, que tienen una o dos responsabilidades sencillas y son super faciles de testear.
