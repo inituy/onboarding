@@ -18,6 +18,37 @@ Por otro lado, [Robert Martin en su presentacion Clean Architecture](https://www
 
 > The purpose of a good architecture is to defer decisions.
 
-A nosotros nos parece mas practico la definicion que nos da Robert Martin.
+A nosotros nos parece mas practica la definicion que nos da Robert Martin.
 
 En los proyectos donde aplicamos estos conceptos pudimos ver como los resultados son exactamente los que propone. Si pudieras ver el codigo de uno de los proyectos en los que trabajamos serias capaz de entender que tipo de software es y para que fue creado, gracias a que diseñamos su arquitectura con ese proposito.
+
+Veamos cuales son las caracteristicas de nuestras arquitecturas que nos permiten expresar el "para que" del software.
+
+#### [Use-case driven design](https://en.wikipedia.org/wiki/Use_case) y estructura de archivos
+
+En la proxima seccion vamos a entrar en detalle sobre que es un caso de uso y como lo ponemos dentro del software en forma de codigo.
+
+Por ahora es necesario entender que nuestros proyectos estan organizados alrededor de las acciones que un usuario puede llevar a cabo con nuestro software. A esas acciones les llamamos "casos de uso".
+
+Por ejemplo, un usuario podria iniciar sesion, ver su perfil y actualizarlo. Eso se veria reflejado en los archivos de nuestro software, ya que cada una de esas acciones se transformaria en un archivo:
+
+```
+app/
+  actions/
+    create_session.js
+    get_user_profile.js
+    update_user_profile.js
+  data/
+  validation/
+  presentation/
+database/
+http/
+```
+
+Como todos los casos de uso (o "acciones") estan a la vista inmediatamente en los archivos, no es necesario revisar el codigo ni ir mucho mas lejos para saber cual es el proposito de nuestro software. Si se tratara de un software para administrar inmuebles veriamos casos de usos como `agregar_inmueble.js` y si fuera para subir fotos habria un caso de uso llamado `agregar_foto.js` o similar.
+
+Adentro de los archivos tambien vamos a encontrar una estructura de codigo que nos permite a simple vista entender de que se trata el caso de uso. Para eso vayamos a la siguiente seccion donde vamos a hablar sobre casos de uso en detalle.
+
+### [Use-case driven design](https://en.wikipedia.org/wiki/Use_case)
+
+...
