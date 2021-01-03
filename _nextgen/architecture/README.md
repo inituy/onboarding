@@ -56,11 +56,11 @@ Adentro de los archivos tambien vamos a encontrar una estructura de codigo que n
 
 Un caso de uso es una lista de acciones que describen una interaccion del usuario con nuestro sistema. El usuario lleva a cabo un caso de uso para obtener cierto resultado del sistema. Un caso de uso tambien puede tener efectos secundarios sobre el sistema, como un cambio en la base de datos.
 
-Hacer "use-case driven design" significa crear nuestro software basandonos en los casos de uso que los componen. Esto puede ser opuesto a pensar nuestro software como elementos que interactuan entre ellos en un contexto determinado, como se da cuando diseñamos software para la facultad.
+Hacer "use-case driven design" significa crear nuestro software basandonos en los casos de uso que los componen. Esto puede ser opuesto a pensar nuestro software como elementos que interactuan entre ellos en un contexto determinado, como se da cuando diseñamos software para la facultad usando UML y programacion orientada a objetos.
 
 Diseñar nuestro software alrededor de los casos de uso nos permite enfocarnos mucho mas en las necesidades de nuestro usuario. Las necesidades de nuestros usuarios se pueden traducir casi directamente a casos de uso y luego a codigo, si diseñamos nuestra arquitectura de esta manera.
 
-Aparte de organizar y nombrar los archivos de nuestro programa basandonos en los casos de uso, el codigo dentro de los archivos tambien toma la forma de caso de uso y describe los pasos de la interaccion. Un caso de uso en nuestro programa se veria algo asi:
+Ademas de organizar y nombrar los archivos de nuestro programa basandonos en los casos de uso, el codigo dentro de los archivos tambien toma la forma de un caso de uso y describe los pasos de la interaccion. Un caso de uso en nuestro programa se veria algo asi:
 
 ```javascript
 function createSession(payload) {
@@ -71,4 +71,18 @@ function createSession(payload) {
 }
 ```
 
-Como podes ver en el ejemplo de arriba, el codigo en el nivel mas alto de nuestro software tambien fue diseñado para que exprese el "para que" del sistema. En este caso del caso de uso en particular.
+Como podes ver en el ejemplo de arriba, el codigo en el nivel mas alto de nuestro software tambien fue diseñado para que exprese el "para que" del sistema.
+
+### [Railway oriented programming](https://fsharpforfunandprofit.com/posts/recipe-part2/)
+
+Un nivel mas adentro, la funcion `saveNewSession` representa un paso en la interaccion entre el usuario y el sistema. Esta funcion forma parte del pipeline y por lo tanto su *input* va a ser el *output* de la funcion anterior.
+
+"Railway oriented programming" es una idea divertida [que presento Scott Wlaschin en el 2014](https://www.youtube.com/watch?v=E8I19uA-wGY) y que explica bastante bien lo que pasa con este patron pipeline.
+
+![Railway oriented programming](./railway_oriented_programming.png)
+
+Nuestro caso de uso es una via por donde va a pasar un tren. Ese tren es una estructura de datos que tiene la informacion que precisamos para ejecutar el caso de uso. Si queremos crear una nueva sesion de usuario, ese tren tiene el email y password del usuario. Para actualizar el perfil del usuario, el tren lleva la sesion del usuario y la informacion para actualizar el perfil.
+
+Las funciones dentro del pipeline pueden ver lo que esta en el tren y pueden agregarle cosas. Las funciones que vienen despues ven el tren en el estado en el que quedo luego de pasar por la ultima estacion.
+
+Esto implica que las funciones que forman parte del pipeline tienen un requerimiento inicial y es que deben recibir al tren como input, y el tren debe salir como output. Debe ser el mismo tren, con la excepcion que lo que tiene adentro puede ser distinto.
