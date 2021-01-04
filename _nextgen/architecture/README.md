@@ -91,15 +91,63 @@ Una funcion del pipeline se ve asi:
    informacion para ejecutar el caso
    de uso. */
 function saveNewSession(payload) {
+  var session = { userId: payload.user.id };
+
   /* Las funciones del pipeline siempre
      devuelven una promesa para complementar
      con las funciones que son asincronicas. */
-  return persistSession(payload.user)
+  return persistSession(session)
     .then(function (result) {
-      // Retorna el mismo objeto que recibio.
+      /* La funcion agrega al payload la
+         nueva sesion. Las funciones que
+         vienen despues en el pipeline pueden
+         hacer lo que quieran con ella. */
+      payload.session = result;
+
+      /* Retorna el mismo objeto que recibio
+         para que lo reciba la siguiente
+         funcion del pipeline. */
       return payload;
     });
 }
 ```
 
 ### I/O as a plugin
+
+Uno de los beneficios mas importantes de diseñar la arquitectura de esta manera es que cada parte del sistema es muy facil de testear independientemente de las demas. Por ejemplo, podemos crear un test para la funcion `saveNewSession` sin ningun otro tipo de herramienta, solo la funcion y su test.
+
+Otra caracteristica importante de los tests tiene que ser que se ejecutan rapido. Si nuestros tests toman 5 o 10 minutos en ejecutar, no vamos a poder ejecutarlos entre tarea y tarea, y mucho menos mientras escribimos codigo.
+
+Entonces para asegurarnos que nuestros tests corren rapido, tenemos que quitar del medio las partes lentas, o sea el I/O.
+
+#### Que es I/O
+
+Le vamos a llamar I/O a toda comunicacion con otras cosas que no sea el programa que esta corriendo. Las operaciones comunes que podemos poner en la category de I/O son: Consultas a bases de datos (comunicacion con otros programas), lectura y escritura de archivos (uso del disco duro), llamadas a APIs externas (uso de la red), y otras mas.
+
+#### Que es un plugin
+
+Le vamos a llamar plugin a las cosas con las que nuestro programa puede trabajar porque implementa una interfaz (se comporta de una manera determinada), pero sin necesitar saber que es exactamente ni de donde viene.
+
+Podemos entender como funciona un plugin mirando la relacion que tiene un browser como Google Chrome con sus extensiones. Los programadores de Google no saben que extensiones hay disponibles en Internet ni desarrollan el software pensando en ellas, sin embargo las extensiones funcionan igual.
+
+Cuando decimos que nuestro software va a tomar el I/O como un plugin, queremos decir que nuestras funciones van a recibir la funcionalidad de I/O por parametro y van a confiar (porque en Javascript no tenemos manera de exigir que implemente una interfaz) que se van a comportar de la manera que tienen que comportarse.
+
+#### En codigo
+
+El siguiente es un ejemplo de la funcion `saveNewSession` terminada. Usamos el [factory pattern]() para crear la funcion del pipeline configurada con su funcion de I/O que viene por parametro.
+
+En este caso la funcion de I/O va a hacer una consulta a las base de datos para guardar una nueva sesion. La funcion `saveNewSession` no necesita saber ningun detalle sobre la funcion de persistencia, excepto que persiste una sesion.
+
+```javascript
+/* La funcion de I/O viene por parametro y
+   de esta manera nos desacoplamos de la
+   funcionalidad de persistencia. */
+function saveNewSession(persistSession) {
+  var session = { userId: payload.user.id };
+  return persistSession(session)
+    .then(function (result) {
+      payload.session = result;
+      return payload;
+    });
+}
+```
