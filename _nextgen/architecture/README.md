@@ -77,10 +77,29 @@ Un nivel mas adentro, la funcion `saveNewSession` representa un paso en la inter
 
 Nuestro caso de uso es una via por donde va a pasar un tren. Ese tren es una estructura de datos que tiene la informacion que precisamos para ejecutar el caso de uso.
 
-Si queremos crear una nueva sesion de usuario, ese tren tiene el email y password del usuario. Para actualizar el perfil del usuario, el tren lleva la sesion del usuario y la informacion para actualizar el perfil.
+Si queremos crear una nueva sesion, ese tren tiene el email y password del usuario. Para actualizar el perfil del usuario, el tren lleva la sesion y la informacion para actualizar el perfil.
 
-Las funciones dentro del pipeline pueden ver lo que esta en el tren y pueden agregarle cosas. Las funciones que vienen despues ven el tren en el estado en el que quedo luego de pasar por la ultima estacion. Si ocurre un error en alguna de las estaciones, el tren toma el camino rojo y no para en ninguna estacion mas.
+Las funciones dentro del pipeline pueden ver lo que esta en el tren y pueden agregarle cosas. Las funciones que vienen despues ven el tren como quedo despues de pasar por la ultima estacion. Si aparece un error en alguna de las estaciones, el tren toma el camino rojo y no para en ninguna estacion mas.
 
 Esto implica que las funciones que forman parte del pipeline tienen un requerimiento fijo y es que deben recibir al tren como input, y el tren debe salir como output. Debe ser el mismo tren, con la excepcion que lo que tiene adentro puede ser distinto.
+
+Una funcion del pipeline se ve asi:
+
+```javascript
+/* La funcion recibe "payload" que es
+   la estructura de datos que tiene la
+   informacion para ejecutar el caso
+   de uso. */
+function saveNewSession(payload) {
+  /* Las funciones del pipeline siempre
+     devuelven una promesa para complementar
+     con las funciones que son asincronicas. */
+  return persistSession(payload.user)
+    .then(function (result) {
+      // Retorna el mismo objeto que recibio.
+      return payload;
+    });
+}
+```
 
 ### I/O as a plugin
