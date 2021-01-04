@@ -71,7 +71,7 @@ Un caso de uso se traduce a una funcion cuya responsabilidad es ordenar los paso
 
 Un nivel mas adentro, la funcion `saveNewSession` representa un paso en la interaccion entre el usuario y el sistema. Esta funcion forma parte de un [pipeline pattern](../javascript#pipeline-pattern) y por lo tanto su *input* va a ser el *output* de la funcion anterior.
 
-"Railway oriented programming" es una idea divertida [que presento Scott Wlaschin en el 2014](https://www.youtube.com/watch?v=E8I19uA-wGY) y que explica bastante bien lo que pasa con este patron pipeline. Funcion asi:
+"Railway oriented programming" es una idea divertida [que presento Scott Wlaschin en el 2014](https://www.youtube.com/watch?v=E8I19uA-wGY) y que explica bastante bien lo que pasa con este patron pipeline. Funciona asi:
 
 ![Railway oriented programming](./railway_oriented_programming.png)
 
@@ -79,7 +79,7 @@ Nuestro caso de uso es una via por donde va a pasar un tren. Ese tren es una est
 
 Si queremos crear una nueva sesion de usuario, ese tren tiene el email y password del usuario. Para actualizar el perfil del usuario, el tren lleva la sesion del usuario y la informacion para actualizar el perfil.
 
-Las funciones dentro del pipeline pueden ver lo que esta en el tren y pueden agregarle cosas. Las funciones que vienen despues ven el tren en el estado en el que quedo luego de pasar por la ultima estacion.
+Las funciones dentro del pipeline pueden ver lo que esta en el tren y pueden agregarle cosas. Las funciones que vienen despues ven el tren en el estado en el que quedo luego de pasar por la ultima estacion. Si ocurre un error en alguna de las estaciones, el tren toma el camino rojo y no para en ninguna estacion mas.
 
 Esto implica que las funciones que forman parte del pipeline tienen un requerimiento fijo y es que deben recibir al tren como input, y el tren debe salir como output. Debe ser el mismo tren, con la excepcion que lo que tiene adentro puede ser distinto.
 
