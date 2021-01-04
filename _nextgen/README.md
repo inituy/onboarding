@@ -67,10 +67,6 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         	1. Que es I/O
           2. Que es un plugin
           3. Como logramos que el I/O sea un plugin
-      5. User centered design
-          1. Que es user centered design
-          2. Interaccion del usuario con nuestro software
-          3. Proceso iterativo
   3. Procesos internos
       1. Test driven development
           1. Como probamos nuestro software sin tests
