@@ -12,7 +12,7 @@ En esta parte de curso vamos a ver como la arquitectura del software que constru
 
 > Software architecture is about making fundamental structural choices that are costly to change once implemented.
 
-Por otro lado, [Robert Martin en su presentacion "Clean Architecture"](https://www.youtube.com/watch?v=Nsjsiz2A9mg) insiste en que la arquitectura de software no deberia explicar *de que* esta hecho el software sino *para que* fue hecho. Tambien propone que el proposito de una arquitectura bien hecha es atrasar la toma de decisiones, no tomarlas de antemano.
+Por otro lado, [Robert Martin en su presentacion "Clean Architecture"](https://www.youtube.com/watch?v=Nsjsiz2A9mg) insiste en que la arquitectura de software no deberia explicar *de que* esta hecho el software sino *para que* fue hecho. Tambien propone que el proposito de una arquitectura bien hecha es *atrasar* la toma de decisiones, no tomarlas de antemano.
 
 > Architecture is about intent.
 
@@ -20,7 +20,7 @@ Por otro lado, [Robert Martin en su presentacion "Clean Architecture"](https://w
 
 > A good architecture maximizes the number of decisions not made.
 
-En los proyectos donde aplicamos la arquitectura como lo explica Robert Martin pudimos ver como los beneficios que propone estan ahi. Si pudieras ver el codigo de uno de estos proyectos podrias entender que tipo de software es y para que fue creado, gracias a que diseñamos su arquitectura con ese proposito.
+En los proyectos donde aplicamos la arquitectura como la explica Robert Martin pudimos ver enseguida los beneficios que el propone. Si vieras el codigo de uno de estos proyectos podrias entender rapidamente que tipo de software es y para que fue creado, gracias a que diseñamos su arquitectura con ese proposito.
 
 Veamos cuales son las caracteristicas de nuestras arquitecturas que nos permiten expresar el "para que" del software.
 
@@ -44,15 +44,15 @@ http/
 spec/
 ```
 
-Como todos los casos de uso (o "acciones") estan a la vista inmediatamente, no necesitas revisar el codigo ni ir mucho mas lejos para saber cual es el proposito de nuestro software. Si se tratara de un software para administrar inmuebles veriamos casos de usos como `agregar_inmueble` y si fuera para subir fotos habria un caso de uso llamado `subir_foto` o similar.
+Como todos los casos de uso (o "acciones") estan a la vista inmediatamente, no necesitamos revisar el codigo ni ir mucho mas lejos para saber cual es el proposito de nuestro software. Si se tratara de un software para administrar inmuebles veriamos casos de usos como `agregar_inmueble` o `registrar_venta_de_inmueble`. Si fuera para subir fotos habria un caso de uso llamado `subir_foto`.
 
 Adentro de los archivos tambien vamos a encontrar el codigo organizado de una manera que nos permite entender de que se trata a simple vista.
 
 ### [Use-case driven design](https://en.wikipedia.org/wiki/Use_case)
 
-Un caso de uso es una lista de acciones que describen una interaccion del usuario con nuestro sistema. Cada caso de uso le da al usuario un resultado especifico y tambien puede tener efectos secundarios sobre el sistema, como un cambio en la base de datos.
+Un caso de uso es una lista de acciones que describen una interaccion del usuario con nuestro sistema. Cada caso de uso le da al usuario un resultado especifico y puede tener efectos secundarios sobre el sistema, como un cambio en la base de datos.
 
-Hacer "use-case driven design" significa diseñar nuestro software empezando por y enfocandonos principalmente en los casos de uso. Esto puede ser opuesto a pensar nuestro software como elementos que interactuan entre ellos, como cuando diseñamos software para la facultad usando UML y programacion orientada a objetos.
+Hacer "use-case driven design" significa diseñar nuestro software en torno a sus casos de uso. Esto puede ser opuesto a pensar nuestro software como objetos que interactuan entre ellos como cuando diseñamos para la facultad usando UML y programacion orientada a objetos.
 
 Diseñar nuestro software alrededor de los casos de uso nos permite enfocarnos mucho mas en las necesidades de nuestro usuario. Las necesidades de nuestros usuarios se pueden traducir casi directamente a casos de uso y luego a codigo, si diseñamos nuestra arquitectura de esta manera:
 
@@ -65,13 +65,13 @@ function createSession(payload) {
 }
 ```
 
-Un caso de uso se traduce a una funcion cuya responsabilidad es ordenar los pasos del caso de uso, que tambien son funciones.
+Un caso de uso se traduce en una funcion cuya responsabilidad es ordenar los pasos del caso de uso, que tambien son funciones.
 
 ### [Railway oriented programming](https://fsharpforfunandprofit.com/posts/recipe-part2/)
 
 Un nivel mas adentro, la funcion `saveNewSession` representa un paso en la interaccion entre el usuario y el sistema. Esta funcion forma parte de un [pipeline pattern](../javascript#pipeline-pattern) y por lo tanto su *input* va a ser el *output* de la funcion anterior.
 
-"Railway oriented programming" es una idea divertida [que presento Scott Wlaschin en el 2014](https://www.youtube.com/watch?v=E8I19uA-wGY) y que explica bastante bien lo que pasa con este patron pipeline. Funciona asi:
+"Railway oriented programming" es una idea bien divertida [que presento Scott Wlaschin en el 2014](https://www.youtube.com/watch?v=E8I19uA-wGY) y que explica bastante bien lo que pasa con este pipeline pattern. Funciona asi:
 
 ![Railway oriented programming](./railway_oriented_programming.png)
 
@@ -116,7 +116,7 @@ function saveNewSession(payload) {
 
 El beneficio mas importante de diseñar la arquitectura de esta manera es que cada parte del sistema es muy facil de testear por separado. Muy facilmente podemos crear un test para la funcion `saveNewSession` sin ningun otro elemento del programa funcionando, solo la funcion y su test.
 
-Al mismo tiempo es importante que los tests se ejecuten rapido. Si demoramos 5 o 10 minutos en ejecutar los tests, no vamos a poder ejecutarlos entre tarea y tarea, y mucho menos mientras escribimos codigo. Para asegurarnos que nuestros tests corren rapido, tenemos que quitar del medio las partes que son lentas por naturaleza, o sea el I/O.
+Al mismo tiempo es importante que los tests se ejecuten rapido. Si demoramos 5 o 10 minutos en ejecutar los tests, no vamos a poder ejecutarlos entre tarea y tarea y mucho menos mientras escribimos codigo. Para asegurarnos que nuestros tests corren rapido, tenemos que quitar las partes que son lentas por naturaleza, o sea el I/O.
 
 #### Que es I/O
 
@@ -130,9 +130,9 @@ Podemos entender como funciona un plugin mirando la relacion que tiene un navega
 
 Cuando decimos que nuestro software va a tomar el I/O como un plugin, queremos decir que nuestras funciones van a recibir la funcionalidad de I/O por parametro y van a confiar (porque en Javascript no tenemos manera de exigir que implemente una interfaz) en que se van a comportar de la manera que tienen que comportarse.
 
-#### En odigo
+#### En codigo
 
-El siguiente es un ejemplo de la funcion `saveNewSession` terminada. Usamos el [factory pattern](../javascript#factory-pattern) para crear la funcion del pipeline configurada con su funcion de I/O. Como la funcion de I/O es un plugin nos llega por parametro desde afuera.
+La siguiente es la funcion `saveNewSession` terminada. Usamos el [factory pattern](../javascript#factory-pattern) para crear la funcion del pipeline configurada con su funcion de I/O. Como la funcion de I/O es un plugin nos llega por parametro desde afuera.
 
 En este caso la funcion de I/O va a hacer una consulta a las base de datos para guardar una nueva sesion. La funcion `saveNewSession` no necesita saber ningun detalle sobre la funcion, excepto que persiste una sesion.
 
@@ -208,4 +208,4 @@ describe('saveNewSession', function () {
 });
 ```
 
-De esta manera nos mantenemos sin conocimiento de la funcionalidad de persistencia que se vaya a usar al mismo tiempo que nos aseguramos que estamos interactuando con ella correctamente.
+De esta manera nos mantenemos sin conocimiento de la funcionalidad de persistencia al mismo tiempo que nos aseguramos que estamos interactuando con ella correctamente.
