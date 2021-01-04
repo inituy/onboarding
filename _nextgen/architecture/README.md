@@ -114,29 +114,27 @@ function saveNewSession(payload) {
 
 ### I/O as a plugin
 
-Uno de los beneficios mas importantes de diseñar la arquitectura de esta manera es que cada parte del sistema es muy facil de testear independientemente de las demas. Por ejemplo, podemos crear un test para la funcion `saveNewSession` sin ningun otro tipo de herramienta, solo la funcion y su test.
+El beneficio mas importante de diseñar la arquitectura de esta manera es que cada parte del sistema es muy facil de testear por separado. Muy facilmente podemos crear un test para la funcion `saveNewSession` sin ningun otro elemento del programa funcionando, solo la funcion y su test.
 
-Otra caracteristica importante de los tests tiene que ser que se ejecutan rapido. Si nuestros tests toman 5 o 10 minutos en ejecutar, no vamos a poder ejecutarlos entre tarea y tarea, y mucho menos mientras escribimos codigo.
-
-Entonces para asegurarnos que nuestros tests corren rapido, tenemos que quitar del medio las partes lentas, o sea el I/O.
+Al mismo tiempo es importante que los tests se ejecuten rapido. Si demoramos 5 o 10 minutos en ejecutar los tests, no vamos a poder ejecutarlos entre tarea y tarea, y mucho menos mientras escribimos codigo. Para asegurarnos que nuestros tests corren rapido, tenemos que quitar del medio las partes que son lentas por naturaleza, o sea el I/O.
 
 #### Que es I/O
 
-Le vamos a llamar I/O a toda comunicacion con otras cosas que no sea el programa que esta corriendo. Las operaciones comunes que podemos poner en la category de I/O son: Consultas a bases de datos (comunicacion con otros programas), lectura y escritura de archivos (uso del disco duro), llamadas a APIs externas (uso de la red), y otras mas.
+Le vamos a llamar I/O a toda comunicacion con otras cosas fuera del programa. Algunas operaciones comunes que podemos poner en la categoria de I/O son las consultas a bases de datos (comunicacion con otros programas), lectura y escritura de archivos (uso del disco duro) y llamadas a APIs externas (uso de la red).
 
 #### Que es un plugin
 
-Le vamos a llamar plugin a las cosas con las que nuestro programa puede trabajar porque implementa una interfaz (se comporta de una manera determinada), pero sin necesitar saber que es exactamente ni de donde viene.
+Le vamos a llamar plugin a las cosas con las que nuestro programa puede trabajar porque se comporta de una manera determinada (implementa una interfaz), pero sin necesidad de saber que es ni de donde viene.
 
-Podemos entender como funciona un plugin mirando la relacion que tiene un browser como Google Chrome con sus extensiones. Los programadores de Google no saben que extensiones hay disponibles en Internet ni desarrollan el software pensando en ellas, sin embargo las extensiones funcionan igual.
+Podemos entender como funciona un plugin mirando la relacion que tiene un navegador web como Google Chrome con sus extensiones. Los programadores de Google no saben que extensiones hay disponibles en Internet ni desarrollan el software pensando en ellas, sin embargo las extensiones funcionan igual.
 
-Cuando decimos que nuestro software va a tomar el I/O como un plugin, queremos decir que nuestras funciones van a recibir la funcionalidad de I/O por parametro y van a confiar (porque en Javascript no tenemos manera de exigir que implemente una interfaz) que se van a comportar de la manera que tienen que comportarse.
+Cuando decimos que nuestro software va a tomar el I/O como un plugin, queremos decir que nuestras funciones van a recibir la funcionalidad de I/O por parametro y van a confiar (porque en Javascript no tenemos manera de exigir que implemente una interfaz) en que se van a comportar de la manera que tienen que comportarse.
 
-#### En codigo
+#### En odigo
 
-El siguiente es un ejemplo de la funcion `saveNewSession` terminada. Usamos el [factory pattern]() para crear la funcion del pipeline configurada con su funcion de I/O que viene por parametro.
+El siguiente es un ejemplo de la funcion `saveNewSession` terminada. Usamos el [factory pattern](../javascript#factory-pattern) para crear la funcion del pipeline configurada con su funcion de I/O. Como la funcion de I/O es un plugin nos llega por parametro desde afuera.
 
-En este caso la funcion de I/O va a hacer una consulta a las base de datos para guardar una nueva sesion. La funcion `saveNewSession` no necesita saber ningun detalle sobre la funcion de persistencia, excepto que persiste una sesion.
+En este caso la funcion de I/O va a hacer una consulta a las base de datos para guardar una nueva sesion. La funcion `saveNewSession` no necesita saber ningun detalle sobre la funcion, excepto que persiste una sesion.
 
 ```javascript
 /* La funcion de I/O viene por parametro y
@@ -151,3 +149,63 @@ function saveNewSession(persistSession) {
     });
 }
 ```
+
+En el test unitario de la funcion `saveNewSession` simplemente nos aseguramos que la funcion de persistencia haya sido llamada como corresponde.
+
+```javascript
+describe('saveNewSession', function () {
+  var factory = require('./save_new_session.js');
+
+  /* Creamos una funcion de persistencia falsa
+     solo para ver como la llama `saveNewSession`
+     y ver que pasa con el resultado. */
+  function persistSession(params) {
+    persistSession.params = params;
+    persistSession.result = result;
+    return Promise.resolve(persistSession.result);
+  }
+
+  it('saves session and returns payload', function (done) {
+    /* Creamos la funcion pasandole la funcion
+       de persistencia por parametro ya que es
+       un plugin. */
+    var fn = factory(persistSession);
+
+    /* Creamos la estructura de datos que va a
+       recibir la funcion. Mas adelante nos vamos
+       a asegurar que lo que devuelve la funcion
+       sea este mismo objeto. */
+    var payload = { user: { id: Math.random() } };
+
+    /* Ejecutamos la funcion pasandole la estructura
+       de datos por parametro y le exigimos como
+       primer requerimiento que devuelva un objeto
+       `Promise` ya que usamos la funcion `then`
+       sobre el resultado. */
+    fn(payload).then(function (result) {
+      /* El resultado de la ejecucion debe ser el
+         mismo objeto que recibio por parametro ya
+         que esta funcion pertenece al pipeline de
+         un caso de uso. */
+      expect(payload).toBe(result);
+
+      /* Nos aseguramos que la funcion `saveNewsession`
+         haya respetado la interfaz de la funcion de
+         persistencia y haya enviado los parametros
+         como corresponde. */
+      expect(persistSession.params).toEqual({
+        userId: payload.user.id
+      });
+
+      /* Nos aseguramos que la funcion `saveNewSession`
+         este haciendo el uso correcto de lo que
+         devuelve la funcion de persistencia. */
+      expect(result.session).toBe(persistSession.result);
+
+      done();
+    });
+  });
+});
+```
+
+De esta manera nos mantenemos sin conocimiento de la funcionalidad de persistencia que se vaya a usar al mismo tiempo que nos aseguramos que estamos interactuando con ella correctamente.
