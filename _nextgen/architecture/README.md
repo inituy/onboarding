@@ -118,6 +118,8 @@ El beneficio mas importante de diseñar la arquitectura de esta manera es que ca
 
 Al mismo tiempo es importante que los tests se ejecuten rapido. Si demoramos 5 o 10 minutos en ejecutar los tests, no vamos a poder ejecutarlos entre tarea y tarea y mucho menos mientras escribimos codigo. Para asegurarnos que nuestros tests corren rapido, tenemos que quitar las partes que son lentas por naturaleza, o sea el I/O.
 
+![archetype](./archetype.png)
+
 #### Que es I/O
 
 Le vamos a llamar I/O a toda comunicacion con otras cosas fuera del programa. Algunas operaciones comunes que podemos poner en la categoria de I/O son las consultas a bases de datos (comunicacion con otros programas), lectura y escritura de archivos (uso del disco duro) y llamadas a APIs externas (uso de la red).

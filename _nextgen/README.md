@@ -54,19 +54,10 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         5. Serializacion
         6. Patrones de diseño
   2. Arquitectura de software
-      1. Proposito de una arquitectura de software
-          1. Ejemplos de otras arquitecturas
-          2. Arquitectura de nuestro software
+      1. Proposito de una arquitectura
       2. Use case driven development
-          1. Que es un caso de uso
-          2. Responsabilidad de los casos de uso
       3. Railway oriented programming
-          1. Patron pipeline
-          2. Responsabilidad de las funciones del pipeline
       4. I/O as a plugin
-        	1. Que es I/O
-          2. Que es un plugin
-          3. Como logramos que el I/O sea un plugin
   3. Procesos internos
       1. Test driven development
           1. Como probamos nuestro software sin tests
