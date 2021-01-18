@@ -53,31 +53,15 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         4. Closures
         5. Serializacion
         6. Patrones de diseño
-  2. Arquitectura de software
-      1. Proposito de una arquitectura
-      2. Use case driven development
-      3. Railway oriented programming
-      4. I/O as a plugin
-  3. Procesos internos
-      1. Test driven development
-          1. Como probamos nuestro software sin tests
-          2. Test driven development segun el libro
-          3. Como aplicamos test driven development
-      2. Gitflow
-          1. Branch de deploy
-          2. Branch de desarrollo
-          3. Branch personal
-          4. Branch de hotfix
-      3. Scrum
-          1. Backlog
-          2. Puntos de esfuerzo
-          3. Estimacion
-          4. Reunion de planificacion
-          5. Evaluacion de tareas terminadas
-      4. Contabilidad
-          1. Trabajadores independientes
-          2. Pagos por tareas terminadas
-          3. Facturacion
+2. Arquitectura de software
+    1. Proposito de una arquitectura
+    2. Use case driven development
+    3. Railway oriented programming
+    4. I/O as a plugin
+3. Test driven development
+4. Procesos internos
+    2. Gitflow
+    3. Scrum
 
 ### Vamo' arriba!
 
