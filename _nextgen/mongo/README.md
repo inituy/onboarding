@@ -265,3 +265,7 @@ Si hubieran millones de usuarios y estuvieramos buscandolos por email, un indice
 Sin este indice MongoDB tendria que ir uno a uno por todos los usuarios, ordenados por ID, comparando el valor de `email` con el valor de la consulta. Pero como creamos este indice, puede recorrer la coleccion de usuarios ordenados por email y no tiene que empezar desde el principio, porque tambien sabe aproximadamente en que posicion esta el email que esta buscando.
 
 Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mongodb.com/manual/indexes/).
+
+<hr />
+
+[![Siguiente](../next.svg)](./javascript/)

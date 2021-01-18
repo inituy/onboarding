@@ -479,3 +479,7 @@ function actualizarPerfil(datos) {
 ```
 
 Esto nos permite encapsular cada uno de los pasos del caso de uso en funciones separadas, que tienen una o dos responsabilidades sencillas y son super faciles de testear.
+
+<hr />
+
+[![Siguiente](../next.svg)](./architecture/)

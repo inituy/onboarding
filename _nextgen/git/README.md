@@ -317,4 +317,6 @@ To github.com:inituy/onboarding
    c32dd49..d207d39  master -> master
 ```
 
-[![Siguiente](./next.svg)](./nginx/)
+<hr />
+
+[![Siguiente](../next.svg)](./nginx/)
