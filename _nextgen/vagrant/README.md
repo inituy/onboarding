@@ -31,3 +31,5 @@ Toma unos minutos iniciar por primera vez la maquina virtual porque instala todo
 Si cambias el archivo de configuracion de Vagrant y es necesario hacer `provision` de nuevo, podes correr `vagrant reload --provision` para reiniciar la maquina virtual ignorando el `provision` anterior.
 
 Despues que la maquina virtual esta funcionando podes conectarte a ella por SSH usando `vagrant ssh`. Cuando te conectes vas a poder usar todos los comandos del sistema operativo de la maquina virtual. En nuestro caso siempre usamos Ubuntu.
+
+[![Siguiente](./next.svg)](./git/)

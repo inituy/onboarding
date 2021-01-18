@@ -154,3 +154,5 @@ server.listen('/home/ubuntu/api/server.sock');
 ```
 
 Luego usamos `proxy_pass` para que Nginx envie el trafico a ese archivo luego de validar el certificado HTTPS y otros filtros previos.
+
+[![Siguiente](./next.svg)](./vagrant/)

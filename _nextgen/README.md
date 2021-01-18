@@ -30,10 +30,7 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
     1. Vagrant
         1. Funcion
         2. Configuracion
-    2. Nginx
-        1. Funcion
-        2. Configuracion
-    3. Git
+    2. Git
         1. Funcion
         2. git status
         3. git add
@@ -42,6 +39,9 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
         8. git checkout
         9. git merge
         5. git push
+    3. Nginx
+        1. Funcion
+        2. Configuracion
     4. MongoDB
         1. Funcion
         2. Insert, find, update y delete
@@ -67,4 +67,4 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
 
 Si estas leyendo esto es porque nuestro equipo esta muy entusiasmado y esperando que te vaya bien. De parte de todo el equipo, ojala nuestro proceso de seleccion te resulte interesante y que podamos trabajar juntos pronto.
 
-[![Siguiente](./next.png)](./vagrant/)
+[![Siguiente](./next.svg)](./vagrant/)
