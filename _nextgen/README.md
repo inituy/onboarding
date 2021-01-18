@@ -60,8 +60,8 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
     4. I/O as a plugin
 3. Test driven development
 4. Procesos internos
-    2. Gitflow
-    3. Scrum
+    1. Gitflow
+    2. Scrum
 
 ### Vamo' arriba!
 
