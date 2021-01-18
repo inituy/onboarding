@@ -319,4 +319,4 @@ To github.com:inituy/onboarding
 
 <hr />
 
-[![Siguiente](../next.svg)](./nginx/)
+[![Siguiente](../next.svg)](../nginx/)

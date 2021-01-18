@@ -268,4 +268,4 @@ Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mon
 
 <hr />
 
-[![Siguiente](../next.svg)](./javascript/)
+[![Siguiente](../next.svg)](../javascript/)

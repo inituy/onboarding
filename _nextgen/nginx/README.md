@@ -157,4 +157,4 @@ Luego usamos `proxy_pass` para que Nginx envie el trafico a ese archivo luego de
 
 <hr />
 
-[![Siguiente](../next.svg)](./mongo/)
+[![Siguiente](../next.svg)](../mongo/)

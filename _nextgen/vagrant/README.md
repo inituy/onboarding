@@ -34,4 +34,4 @@ Despues que la maquina virtual esta funcionando podes conectarte a ella por SSH 
 
 <hr />
 
-[![Siguiente](../next.svg)](./git/)
+[![Siguiente](../next.svg)](../git/)
