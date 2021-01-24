@@ -2,7 +2,7 @@
 
 Usamos Vagrant (https://vagrantup.com) para compartir maquinas virtuales que ya tienen las herramientas que precisamos para desarrollar software y nos permiten trabajar independientemente del sistema operativo de nuestra computadora.
 
-###	Funcion
+### Funcion
 
 Vagrant es un programa que funciona encima de VirtualBox (https://www.virtualbox.org/), un programa de virtualizacion que permite crear maquinas virtuales sin tener que cambiar nuestro sistema operativo actual.
 
@@ -34,6 +34,8 @@ Despues que la maquina virtual esta funcionando podes conectarte a ella por SSH 
 
 
 ### YouTube
+
+Mira este tutorial explicado en el video de abajo.
 
 [![Video thumbnail](./video.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
