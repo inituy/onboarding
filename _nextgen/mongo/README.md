@@ -266,6 +266,8 @@ Sin este indice MongoDB tendria que ir uno a uno por todos los usuarios, ordenad
 
 Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mongodb.com/manual/indexes/).
 
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+
 <hr />
 
-[![Siguiente](../next.svg)](../javascript/)
+[![Siguiente](../next.png)](../javascript/)

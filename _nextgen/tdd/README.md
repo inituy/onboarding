@@ -9,4 +9,4 @@ Gracias!
 
 <hr />
 
-[![Siguiente](../next.svg)](../)
+[![Siguiente](../next.png)](../)

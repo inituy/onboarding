@@ -214,4 +214,4 @@ De esta manera nos mantenemos sin conocimiento de la funcionalidad de persistenc
 
 <hr />
 
-[![Siguiente](../next.svg)](../tdd/)
+[![Siguiente](../next.png)](../tdd/)

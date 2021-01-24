@@ -70,4 +70,4 @@ Si estas leyendo esto es porque nuestro equipo esta muy entusiasmado y esperando
 
 <hr />
 
-[![Siguiente](./next.svg)](./vagrant/)
+[![Siguiente](./next.png)](./vagrant/)

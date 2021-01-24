@@ -482,4 +482,4 @@ Esto nos permite encapsular cada uno de los pasos del caso de uso en funciones s
 
 <hr />
 
-[![Siguiente](../next.svg)](../architecture/)
+[![Siguiente](../next.png)](../architecture/)
