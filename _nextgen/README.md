@@ -62,6 +62,7 @@ El curso va de objetivo (temas tecnicos duros, donde no influyen nuestras opinio
 4. Procesos internos
     1. Gitflow
     2. Scrum
+5. Proyecto final
 
 ### Vamo' arriba!
 
