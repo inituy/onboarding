@@ -268,6 +268,6 @@ Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mon
 
 <hr />
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://www.youtube.com/watch?v=qs6LNiqffGk)
 
 [![Siguiente](../next.png)](../javascript/)
