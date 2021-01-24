@@ -268,17 +268,6 @@ Se puede encontrar mas informacion sobre indices aca: [Indexes](https://docs.mon
 
 <hr />
 
-<table cellpadding="0" cellspacing="0" border="0">
-  <tr>
-    <td>
-      <a href="../javascript/">
-        <img title="Siguiente" src="../next.png" />
-      </a>
-    </td>
-    <td>
-      <a target="_blank" href="https://youtube.com/watch?v=Vescsbo3VC0">
-        <img title="Ver en YouTube" src="../youtube.png" />
-      </a>
-    </td>
-  </td>
-</table>
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+
+[![Siguiente](../next.png)](../javascript/)

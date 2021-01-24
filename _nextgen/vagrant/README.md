@@ -32,8 +32,8 @@ Si cambias el archivo de configuracion de Vagrant y es necesario hacer `provisio
 
 Despues que la maquina virtual esta funcionando podes conectarte a ella por SSH usando `vagrant ssh`. Cuando te conectes vas a poder usar todos los comandos del sistema operativo de la maquina virtual. En nuestro caso siempre usamos Ubuntu.
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
-
 <hr />
+
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
 [![Siguiente](../next.png)](../git/)
