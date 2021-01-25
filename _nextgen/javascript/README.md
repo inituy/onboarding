@@ -6,6 +6,8 @@ Vamos a empezar hablando de las funciones como el bloque fundamental del lenguaj
 
 ### Funciones
 
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+
 Asi como un programa es un conjunto de sentencias que se ejecutan una despues de la otra, una funcion tambien se puede ver como una serie de sentencias que vamos a ejecutar mas tarde.
 
 Los elementos que componen una funcion son los siguientes:
@@ -23,6 +25,8 @@ No todos los lenguajes tienen esta caracteristica. En muchos lenguajes lo mas pa
 Como las funciones son objetos podemos guardarlas en variables y moverlas a distintas partes de nuestro programa. En la proxima parte vamos a ver como una funcion puede recibir a otra en sus parametros y que se puede hacer con eso.
 
 ### Callback
+
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
 Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion.
 
@@ -55,6 +59,8 @@ Promise.resolve()
 ```
 
 ### Promise
+
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
 Una promesa es un objeto que representa una tarea que todavia no termino de ejecutar. Esta tarea puede terminar exitosamente o no, y la interfaz de `Promise` nos permite interactuar con ambos casos.
 
@@ -173,6 +179,8 @@ Promise.reject(789).catch(function (error) {
 
 ### Closures
 
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+
 En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Un ejemplo como el siguiente crearia mucha cantidad de funciones:
 
 ```javascript
@@ -267,6 +275,8 @@ A traves de los closures, el contexto de ejecucion de una funcion tiene acceso a
 
 ### Serializacion
 
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+
 Se le dice serializacion al proceso por el cual transformamos un objeto en un string u otro formato que se puede enviar fuera del programa. El formato que vamos a ver ahora es JSON (JavaScript Object Notation).
 
 Cuando necesitamos enviar un objeto a otro programa, por ejemplo si nos comunicamos con un servidor web, tenemos que serializarlo primero. Como no podemos pasarle variables a otros programas, o a traves de una red, tenemos que enviarle un string.
@@ -288,6 +298,8 @@ No se pueden serializar funciones por lo que explicamos en la seccion anterior. 
 [En esta pagina](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#Full_JSON_syntax) podes encontrar la sintaxis JSON entera.
 
 ### Patrones de diseño
+
+[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
 Para terminar con Javascript vamos a ver como se pueden aplicar algunos patrones de diseño. Estos patrones de diseño fueron creados para programacion orientada a objetos pero podemos aprovechar las similitudes para aplicarlos en programacion con funciones.
 
