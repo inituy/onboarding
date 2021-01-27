@@ -6,7 +6,7 @@ Vamos a empezar hablando de las funciones como el bloque fundamental del lenguaj
 
 ### Funciones
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/2EGVAWdD_hQ)
 
 Asi como un programa es un conjunto de sentencias que se ejecutan una despues de la otra, una funcion tambien se puede ver como una serie de sentencias que vamos a ejecutar mas tarde.
 
