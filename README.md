@@ -1,27 +1,73 @@
-# Onboarding
+# Introduccion
 
-Bienvenido a [init.uy](https://init.uy)!
+Bienvenido al onboarding de init.uy.
 
-Esta es la guía para nuevos developers. Cuando la completes vas a estar al día con nuestro modo de trabajo, desde como usamos los lenguajes de programación, arquitectura y hasta vas a haber terminado tu primero aplicación de ejemplo.
+El objetivo principal de este onboarding es explicarte como funciona nuestro equipo internamente, de que manera creamos productos y como nos comunicamos.
 
-Los contenidos a continuación son de carácter introductorio en lo técnico y muy opinionado en cuanto al uso de las herramientas. Vamos a hablar más sobre como utilizamos las herramientas que de como funcionan.
+Tambien nos sirve para evaluar tus habilidades en desarrollo de software ya que nos da la oportunidad de ver tu desempeño en cada una de las tematicas del onboarding.
 
-Siempre esperamos curiosidad y proactividad de los profesionales con quienes trabajamos y esta guía fue diseñada con eso en mente. Esperamos que los miembros de nuestro equipo agoten todos los recursos disponibles antes de interrumpir a sus compañeros. Nuestro tiempo y el tuyo es muy valioso.
+En init.uy creemos en un sistema de evaluacion mas interactivo y extendido en el tiempo. A diferencia de las tipicas entrevistas tecnicas que dificilmente le permiten al entrevistado demostrar sus capacidades y al entrevistador entenderlas. Como tambien somos programadores, sabemos como funciona el sistema tradicional y sabemos (porque no sos el primero que hace este onboarding) que nuestro sistema, si bien tiene mas idas y vueltas e mayor dedicacion tiempo, da mucho mejores resultados.
 
-Qué tenés que saber:
+Si todo sale bien, al terminar el onboarding vamos a conocer bien tus capacidades tecnicas, vas a haber aprendido nuestra manera de trabajar y seguro nosotros hayamos aprendido algo de vos tambien!
 
-* Ubuntu: Navegar el file system, ejecutar comandos con consola.
-* Git: Manipular el working directory, pull y push, merge.
-* Javascript básico: Sintaxis, object literals, functions. 
+### Contenido opinionado
 
-La guía contiene lo siguiente:
+Como dice mas arriba, en este onboarding vamos a hablar sobre nuestra manera particular de trabajar. Sabemos que nuestros metodos pueden no ser los mismos que en el resto de la industria, pero a nosotros nos han dado resultados.
 
-* [Vagrant](https://vagrantup.com): Qué es y cómo lo usamos.
-* Javascript: Funciones, paralelismo y promesas.
-* [MongoDB](https://docs.mongodb.com/manual/tutorial/): NoSQL y NodeJS.
-* [Arquitectura](https://www.youtube.com/watch?v=Nsjsiz2A9mg): Diseño fundamental, pipeline pattern ([1](https://fsharpforfunandprofit.com/rop/), [2](https://www.youtube.com/watch?v=E8I19uA-wGY), [3](https://martinfowler.com/articles/collection-pipeline/)) y ejemplos.
-* [Test-driven development](https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92): Herramientas y ejemplos.
+### Proactividad y el valor del tiempo
 
-Te recomendamos que sigas esta guía de principio a fín, en orden y sin saltarte partes.
+A lo largo del onboarding vas a contar con todo el apoyo de nuestro equipo. Sin embargo, valoramos mucho la proactividad y la autonomia. Tendemos a contestar con mucha pereza (y a veces un poco de disgusto) las preguntas que se pueden buscar en Google.
 
-Para empezar, [hacé clic acá](/vagrant/vagrant.md).
+Esperamos de vos una actitud enfocada en resolver problemas y asumir responsabilidades. Esperamos que puedas convertirte en un valor agregado de nuestro equipo, al cual podamos acudir con problemas serios y que requieran paciencia e ingenio.
+
+El tiempo es lo mas valioso que tenemos. Debemos agotar todos los recursos a nuestro alcance antes de utilizar el tiempo de los demas.
+
+### Contenidos del onboarding
+
+El onboarding va de objetivo (temas tecnicos duros, donde no influyen nuestras opiniones) a subjetivo (temas relacionados a diseño, donde tomamos decisiones basadas en nuestras experiencias previas) y se organiza de la siguiente manera:
+
+1. Habilidades tecnicas
+    1. Vagrant
+        1. Funcion
+        2. Configuracion
+    2. Git
+        1. Funcion
+        2. git status
+        3. git add
+        4. git commit
+        7. git reset
+        8. git checkout
+        9. git merge
+        5. git push
+    3. Nginx
+        1. Funcion
+        2. Configuracion
+    4. MongoDB
+        1. Funcion
+        2. Insert, find, update y delete
+        3. Indices
+    3. Javascript
+        1. Funciones
+        2. Callbacks
+        3. Promises
+        4. Closures
+        5. Serializacion
+        6. Patrones de diseño
+2. Arquitectura de software
+    1. Proposito de una arquitectura
+    2. Use case driven development
+    3. Railway oriented programming
+    4. I/O as a plugin
+3. Test driven development
+4. Procesos internos
+    1. Gitflow
+    2. Scrum
+5. Proyecto final
+
+### Vamo' arriba!
+
+Si estas leyendo esto es porque nuestro equipo esta muy entusiasmado y esperando que te vaya bien. De parte de todo el equipo, ojala nuestro proceso de seleccion te resulte interesante y que podamos trabajar juntos pronto.
+
+<hr />
+
+[![Siguiente](./next.png)](./vagrant/)
