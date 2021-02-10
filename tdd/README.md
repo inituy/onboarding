@@ -67,6 +67,91 @@ Sin embargo ningun beneficio viene sin un costo. En el caso de TDD el costo es l
 
 El video de arriba muestra otros beneficios que no voy a poner aca. Te recomiendo que veas el video entero varias veces.
 
+## Crear unit tests para funciones con dependencias
+
+En muchos casos vamos a tener casos nos va a tocar probar la interaccion de una funcion con otras funciones.
+
+Para que dos funciones sean "testeables" independientemente primero [tienen que estar desacopladas](https://en.wikipedia.org/wiki/Loose_coupling), o sea que la relacion entre ellas debe ser flexible.
+
+En lenguajes de tipado fuerte podemos usar interfaces para que una funcion, tipo o clase no dependa especificamente de otra funcion sino de la interfaz que esta implementa.
+
+```java
+/* Java es un lenguaje de tipado fuerte
+   y nos permite crear interfaces para 
+   desacoplar las clases. */
+interface Driver() {
+  void driveToPlace(Place place);
+}
+
+/* Nuestros clase Car no requiere un
+   objeto Person para inicializarse sino
+   un objeto que implemente la interfaz
+   Driver. */
+public class Car {
+  Driver driver;
+  public Car(Driver driver) {
+    this.driver = driver;
+  }
+  public void goTo(Place place) {
+    this.driver.driveToPlace(place);
+  }
+}
+
+public class Person implements Driver {
+  public void driveToPlace() {}
+}
+
+/* Esto nos permite intercambiar el
+   driver por lo que mas nos convenga
+   cuando estemos creando el unit test
+   de la clase Car. */
+public class TestPerson implements Driver {
+  public void driveToPlace() {
+    /* El metodo drive de TestPerson
+       lo vamos a usar en el unit test
+       de la clase Car para probar su
+       interaccion con los objetos de
+       tipo Driver. */
+  }
+}
+
+/* En el unit test: */
+Driver testPerson = new TestPerson();
+Car car = new Car(testPerson);
+
+/* En el codigo de produccion: */
+Driver person = new Person();
+Car car = new Car(person);
+```
+
+En Javascript vamos a hacer lo mismo pero sin los tipos de datos. Simplemente vamos a hacer que nuestras funciones reciban sus dependencias por parametro y que el unit test le pase lo que mas convenga para probar la interaccion entre nuestra funcion y su dependencia.
+
+```javascript
+/* En Javascript no podemos definir
+   interfaces, entonces simplemente
+   hacemos que nuesta funcion reciba
+   una funcion y en el unit test
+   pasamos otra funcion que se comporta
+   de la misma manera que la original. */
+function goTo(place, driveToPlace) {
+  driveToPlace(place);
+}
+
+function driveToPlace(place) {}
+
+function testDriveToPlace(place) {
+  /* Usamos una funcion que nos de
+     informacion sobre como `goTo` uso
+     su dependencia. */
+}
+
+/* En el unit test: */
+goTo(place, testDriveToPlace);
+
+/* En el codigo de produccion: */
+goTo(place, driveToPlace);
+```
+
 ## La practica hace al maestro
 
 No hay mucho mas que decir sobre test-driven development. Las reglas son sencillas y los beneficios es mejor experimentarlos que leerlos. Te invito a que practiques TDD a partir de ahora para que veas lo genial que es 🚀.
