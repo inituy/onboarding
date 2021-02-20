@@ -26,7 +26,7 @@ Como las funciones son objetos podemos guardarlas en variables y moverlas a dist
 
 ### Callback
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/JMFABDFL6aA)
 
 Se le llama *callback* a una funcion que se le pasa por parametro a otra funcion para que esta la ejecute.
 
@@ -74,7 +74,7 @@ En el ejemplo de arriba, la funcion `onUserProfileObtained` es un callback. Porq
 
 ### Promise
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/TqEA1A-jLp0)
 
 Una promesa es un objeto que representa una tarea que todavia no termino de ejecutar. Esta tarea puede terminar exitosamente o no, y la interfaz de `Promise` nos permite interactuar con ambos casos.
 
