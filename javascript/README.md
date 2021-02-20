@@ -193,7 +193,7 @@ Promise.reject(789).catch(function (error) {
 
 ### Closures
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/JIQIju0zF-E)
 
 En Javascript, una funcion se puede crear en cualquier momento de la ejecucion del programa. De hecho, cada vez que usamos la palabra clave `function` estamos creando una nueva funcion. Un ejemplo como el siguiente crearia mucha cantidad de funciones:
 
@@ -289,7 +289,7 @@ A traves de los closures, el contexto de ejecucion de una funcion tiene acceso a
 
 ### Serializacion
 
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/Z0MQRsZB__Q)
 
 Se le dice serializacion al proceso por el cual transformamos un objeto en un string u otro formato que se puede enviar fuera del programa. El formato que vamos a ver ahora es JSON (JavaScript Object Notation).
 
@@ -312,8 +312,6 @@ No se pueden serializar funciones por lo que explicamos en la seccion anterior. 
 [En esta pagina](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON#Full_JSON_syntax) podes encontrar la sintaxis JSON entera.
 
 ### Patrones de diseño
-
-[![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
 Para terminar con Javascript vamos a ver como se pueden aplicar algunos patrones de diseño. Estos patrones de diseño fueron creados para programacion orientada a objetos pero podemos aprovechar las similitudes para aplicarlos en programacion con funciones.
 
