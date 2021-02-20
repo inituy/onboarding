@@ -28,35 +28,49 @@ Como las funciones son objetos podemos guardarlas en variables y moverlas a dist
 
 [![Ver en YouTube](../youtube.png)](https://youtube.com/watch?v=Vescsbo3VC0)
 
-Se le llama "callback" a una funcion que se le pasa por parametro a otra funcion.
+Se le llama *callback* a una funcion que se le pasa por parametro a otra funcion para que esta la ejecute.
 
-La palabra "call" significa "llamar" o "ejecutar" y "back" se puede traducir como "de vuelta" o "de regreso". En ingles decimos "call me back" cuando queremos que alguien nos "vuelva a llamar".
+Para poder entender bien de que se tratan los callbacks, primero tenemos que hablar sobre *concurrencia*. El tema es mucho mas extenso y complicado que lo que vamos a ver abajo. Nos vamos a enfocar en lo minimo necesario para darle sentido a los callbacks.
 
-Los callbacks se usan cuando hay una tarea asincronica como leer un archivo o hacer una consulta a la base de datos. Usando callbacks podemos llamar, por ejemplo, a la funcion `readFile` y que nos notifique cuando la lectura del archivo haya terminado a traves de la funcion que le pasamos por parametro (callback).
+Cuando hablamos de concurrencia, nos referimos a la capacidad que tienen las computadoras de ejecutar distintas partes de un programa en paralelo.
 
-![callbacks](./javascript_callbacks.png)
+Y para poder entender concurrencia tenemos que hablar del concepto de *thread* o hilo. Podemos pensar en un hilo como el responsable de ejecutar las sentencias de nuestro programa siempre que no sean concurrentes. Si alguna de las sentencias del programa inicia un nuevo hilo, vamos a decir que el programa es concurrente o multi-hilo.
 
-Usar callbacks tiene un costo de prolijidad de codigo. El codigo de un programa con muchas tareas asincronicas y callbacks no es facil de leer.
+![concurrency 1](./concurrency_1.png)
 
-```javascript
-readJsonFile("...", function (json) {
-  saveJsonToDatabase(json, function () {
-    saveLog(function () {
-      console.log('Success!')
-    });
-  });
-});
-```
+Cuando trabajamos con un programa concurrente tenemos que prestar atencion a la interaccion entre los hilos. Cada hilo se mueve a su ritmo y puede desaparecer o trancarse. Cuando un hilo inicia otro, el primero debe esperar a que el segundo responda y debe determinar cuanto tiempo esta dispuesto a esperar.
 
-Por eso es que hoy en dia vamos a encontrar mas librerias y funciones que prefieren usar `Promise` sobre callbacks.
+Para poner un ejemplo, imaginemos que tenemos una aplicacion web que hace llamadas HTTP a un servidor a medida que el usuario interactua con la interfaz.
+
+![concurrency 2](./concurrency_2.png)
+
+Cuando el usuario toca un boton, la interfaz no se congela. Esto pasa porque el navegador web ejecuta las llamadas HTTP de manera concurrente. El Javascript que inicia la llamada HTTP especifica cuanto esperar y que hacer al recibir una respuesta.
+
+Los callbacks entran en accion cuando necesitamos especificar que hacer cuando esa tarea concurrente termina o falla. Si tuvieramos una funcion llamada `getUserProfile` para hacer una llamada HTTP, esta funcion recibiria un callback que nos permita decidir que hacer con el resultado de la tarea:
 
 ```javascript
-Promise.resolve()
-  .then(function ()     { return readJsonFile("..."); })
-  .then(function (json) { return saveJsonToDatabase(json); })
-  .then(function ()     { return saveLog(); })
-  .then(function ()     { console.log('Success!'); });
+function getUserProfile(callback) {
+  /* Hacemos una llamada HTTP y cuando
+     obtenemos un resultado invocamos al
+     callback. */
+  callback(resultadoLlamadaHttp);
+}
+
+function onUserProfileObtained(userProfile) {
+  /* Esta funcion se va a ejecutar cuando
+     la llamada HTTP se complete y va a 
+     recibir el resultado por parametro. */
+}
+
+/* Invocamos getUserProfile y le pasamos
+   onUserProfileObtained como callback.
+   Cuando la llamada HTTP que inicia
+   getUserProfile termine, se va a ejectuar
+   onUserProfileObtained. */
+getUserProfile(onUserProfileObtained);
 ```
+
+En el ejemplo de arriba, la funcion `onUserProfileObtained` es un callback. Porque es una funcion que se pasa por parametro a otra funcion, en este caso `getUserProfile`.
 
 ### Promise
 
