@@ -2,7 +2,7 @@
 
 El concepto de arquitectura de software es muy ignorado por los programadores cuando empiezan a trabajar en un nuevo proyecto. O si se habla sobre arquitectura, es un concepto que se toma como resuelto hace años y que no vale la pena intentar mejorar.
 
-En esta parte de curso vamos a ver como la arquitectura del software que construimos es algo que podemos controlar y que es importante hacerlo para que no sea un infierno mantener nuestro codigo en el futuro.
+En esta parte del onboarding vamos a ver como la arquitectura del software que construimos es algo que podemos controlar y que es importante hacerlo para que no sea un infierno mantener nuestro codigo en el futuro.
 
 ### Proposito de una arquitectura
 
