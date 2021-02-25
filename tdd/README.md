@@ -2,15 +2,15 @@
 
 TDD es una disciplina que consiste de crear pruebas automatizadas (tests) antes de crear el codigo de aplicacion. Practicar esta disciplina nos obliga a encarar el desarrollo desde otro punto de vista y nos da beneficios que no tendriamos de otra manera, como por ejemplo, poder confiar que cuando nuestras pruebas pasan el codigo funciona.
 
-## Que es un test
+### Que es un test
 
-Una *test suite* es un programa que escribimos en paralelo con el codigo de aplicacion que se encarga de usar el programa principal y observar como funciona.
+Una *test suite* es un programa que escribimos en paralelo con el codigo de aplicacion que se encarga de usar el programa principal y evaluar su funcionamiento.
 
-[imagen sobre prueba]
+![Test](./tdd_1.png)
 
 Cuando escribimos una prueba automatizada tenemos que mirar el codigo desde el punto de vista de un tester ya que no estamos creando el codigo de aplicacion. Esto puede ser particularmente dificil cuando practicamos test-driven development, ya que tenemos que cambiarnos de programador a tester en ciclos muy cortos.
 
-### Composicion
+#### Composicion
 
 Un test tiene tres etapas que van en orden: Precondicion, ejecucion y evaluacion.
 
