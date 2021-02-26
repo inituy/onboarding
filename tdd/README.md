@@ -1,4 +1,4 @@
-# Test-driven development (En construccion)
+# Test-driven development
 
 TDD es una disciplina que consiste de crear pruebas automatizadas (tests) antes de crear el codigo de aplicacion. Practicar esta disciplina nos obliga a encarar el desarrollo desde otro punto de vista y nos da beneficios que no tendriamos de otra manera, como por ejemplo, poder confiar que cuando nuestras pruebas pasan el codigo esta pronto para produccion.
 
@@ -29,24 +29,17 @@ En un mismo test vamos a repetir estas tres etapas tantas veces como casos de us
 Nuestro ejemplo tiene por lo menos dos casos de uso: El caso en el que el parametro coincide con un ID de un usuario en la base de datos y el caso en el que no.
 
 ```javascript
-/* Usamos Jasmine para crear tests en
-   Javascript. Las funciones `describe`,
-   `beforeAll` e `it` vienen definidas
-   en la libreria. */
+
 describe('buscarUsuario', function () {
   var usuario;
 
-  /* `beforeAll` se va a ejecutar antes
-     que los tests. Aca vamos a definir
-     nuestras pre-condiciones. */
   beforeAll(function () {
+    /* Guardamos el usuario en la base
+       de datos como pre-condicion. */
     usuario = { id: 123, email: 'usuario@servicio.com' };
     baseDeDatos.insertar(usuario); // Asumimos que funciona!
   });
 
-  /* `it` se usa para expresar el caso de
-     uso. Aca vamos a ejecutar la funcion
-     y evaluar el resultado. */
   it('encuentra el usuario', function () {
     /* Ejecutamos la funcion con el ID de
        usuario correcto y verificamos
