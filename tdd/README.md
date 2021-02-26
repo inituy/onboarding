@@ -85,23 +85,23 @@ Un *integration test* prueba mas de una funcion en conjunto. El nivel de integra
 
 ![Integration testing](./tdd_3.png)
 
-Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo haria una de las interfaces de usuario o personas reales si nuestro producto es la API.
+Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo harian las interfaces de usuario o personas reales si nuestro producto es la API en si misma.
 
-A este nivel de integracion los tests tambien sirven de documentacion para cuando estemos desarrollando la interfaz de usuario, ya que terminan siendo ejemplos completos de todas las interacciones con el servidor HTTP.
+A este nivel de integracion los tests tambien sirven de documentacion ya que terminan siendo ejemplos completos de todas las interacciones posibles con el servidor HTTP.
 
-Los tipos de tests que siguen tambien se pueden considerar tests de integracion porque prueban mas de una funcion interactuando entre ellas. Pero cuando hablemos de "integration testing" vamos a estar refiriendonos solamente a los tests que hacemos a traves del servidor HTTP.
+Los tipos de tests que siguen tambien se pueden considerar tests de integracion porque prueban varias funciones interactuando entre ellas. Pero cuando hablemos de "integration testing" vamos a estar refiriendonos solamente a los tests que hacemos a traves del servidor HTTP.
 
 #### End-to-end testing
 
-Los tests *end-to-end* son los que simulan una persona real usando el sistema. Idealmente se ejecutan en un ambiente lo mas similar posible al de produccion y sin tomar atajos en cuanto a la interfaz de usuario.
+Los tests *end-to-end* son los que simulan una persona real usando el sistema. Se ejecutan en un ambiente identico al de produccion (con excepciones) y sin tomar atajos en cuanto a la interfaz de usuario para que se lo mas parecido a la experiencia de un usuario real.
 
 ![End-to-end testing](./tdd_4.png)
 
 Estos tests pueden ser los que mas valor agregan al test suite pero son costosos, tanto para ejecutar como para desarrollarlos.
 
-Cuando hacemos tests que van de una punta tenemos que considerar desde el CSS hasta los servicios externos. Por ejemplo, algunas herramientas para testing en el browser fallan si un boton que queremos cliquear no esta visible en la pantalla. Tambien podemos cometer el error de llamar una API que usa un servicio externo que cobra por uso y generar un gasto cada vez que corremos los tests.
+Cuando hacemos tests que van de una punta a la otra tenemos que considerar desde el CSS hasta los servicios externos. Por ejemplo, algunas herramientas para testing en el browser fallan si un boton que queremos cliquear no esta visible en la pantalla. Tambien podemos cometer el error de llamar una API que usa un servicio externo pago y generar un gasto innecesario.
 
-Al mismo tiempo precisa de muchas cosas funcionando a la vez y eso hace que que ejecutar los tests lleve mucho tiempo y recursos. Por eso es que este tipo de test no es parte del dia a dia del programador, sino que se ejecutan de vez en cuando.
+Al mismo tiempo, este tipo de tests precisan muchas cosas funcionando a la vez y eso hace que ejecutarlos lleve mucho tiempo y recursos. Por eso es que no es parte del dia a dia del programador mantener estos tests, sino que se ejecutan de vez en cuando y se desarrollan de otra manera, dependiendo que decida el equipo.
 
 ### Contract testing y test doubles 
 
