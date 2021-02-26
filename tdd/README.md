@@ -75,7 +75,7 @@ En este onboarding nos vamos a enfocar en tres tipos de test: Unitarios, de inte
 
 ![Unit testing](./tdd_2.png)
 
-Llamamos *unit test* al que prueba una sola funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En nuestro caso le vamos a llamar unidad a cada `function`.
+Llamamos *unit test* al que prueba una sola funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En un lenguaje orientado a objetos podria una clase, un grupo de clases, un metodo solo de una clase. En nuestro caso le vamos a llamar unidad a cada `function` que definamos en Javascript.
 
 Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y dan granularidad tal que podemos asegurar de manera individual y aislada que cada elemento en el nivel mas bajo del programa funciona bien.
 
