@@ -69,7 +69,19 @@ En este onboarding nos vamos a enfocar en tres tipos de test: Unitarios, de inte
 
 #### Unit testing
 
+![Unit testing](./tdd_2.png)
+
+Llamamos *unit test* al que prueba una unica funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En nuestro caso le vamos a llamar unidad a cada `function`.
+
+Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y dan granularidad tal que podemos asegurar de manera individual y aislada que cada elemento en el nivel mas bajo del programa funciona bien.
+
 #### Integration testing
+
+Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que vamos a probar a este nivel depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio) y base de datos.
+
+![Unit testing](./tdd_3.png)
+
+Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo haria un usuario y tambien sirve de documentacion.
 
 #### End-to-end testing
 
