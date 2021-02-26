@@ -101,9 +101,19 @@ Estos tests pueden ser los que mas valor agregan al test suite pero son costosos
 
 Cuando hacemos tests que van de una punta a la otra tenemos que considerar desde el CSS hasta los servicios externos. Por ejemplo, algunas herramientas para testing en el browser fallan si un boton que queremos cliquear no esta visible en la pantalla. Tambien podemos cometer el error de llamar una API que usa un servicio externo pago y generar un gasto innecesario.
 
-Al mismo tiempo, este tipo de tests precisan muchas cosas funcionando a la vez y eso hace que ejecutarlos lleve mucho tiempo y recursos. Por eso es que no es parte del dia a dia del programador mantener estos tests, sino que se ejecutan de vez en cuando y no se escriben junto con la aplicacion sino despues.
+Al mismo tiempo, este tipo de tests precisan muchas cosas funcionando a la vez y eso hace que ejecutarlos lleve mucho tiempo y recursos. Por eso es que no es parte del dia a dia del programador mantener estos tests, sino que se ejecutan de vez en cuando y no se escriben junto con la aplicacion.
 
 ### Contract testing y test doubles 
+
+Cuando nos encontremos en una situacion donde no podemos o no queremos probar ambos lados de una interaccion, vamos a hacer *contract testing*.
+
+Un "contrato" en este contexto se refiere a la interfaz que ofrece un elemento fuera o dentro de nuestro sistema. Por ejemplo, el contrato de nuestra funcion para buscar usuarios define los parametros que recibe (un string que debe coincidir con una ID de usuario) y los valores que devuelve (un objeto con informacion sobre el usuario o `null`).
+
+Un ejemplo diferente puede ser el de un servicio externo que publica los parametros y resultados de los puntos de entrada de su API.
+
+Si conocemos el contrato que un elemento se compromete a cumplir, podemos crear *test doubles* que reemplacen al elemento en situaciones donde no nos conviene tenerlo. Nuestros test doubles van a estar atados al mismo contrato que el elemento real pero sin los costos relacionados.
+
+![Test double](./tdd_5.png)
 
 <hr />
 
