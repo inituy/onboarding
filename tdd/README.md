@@ -4,7 +4,7 @@ TDD es una disciplina que consiste de crear pruebas automatizadas (tests) antes 
 
 ### Que es un test
 
-Una *test suite* es un programa que escribimos en paralelo con el codigo de aplicacion que se encarga de usar el programa principal y evaluar su funcionamiento.
+Una *test suite* es un programa que escribimos en paralelo con el codigo de aplicacion que se encarga de usar el sistema principal y evaluar su funcionamiento.
 
 La test suite deberia interactuar con todos los elementos de la aplicacion mas de una vez, de todas las maneras posibles y desde varios niveles de abstraccion. Cuando practicamos test-driven development correctamente, podemos estar seguros que nuestros tests cubren todo el codigo de aplicacion.
 
@@ -75,19 +75,19 @@ En este onboarding nos vamos a enfocar en tres tipos de test: Unitarios, de inte
 
 ![Unit testing](./tdd_2.png)
 
-Llamamos *unit test* al que prueba una sola funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En un lenguaje orientado a objetos podria una clase, un grupo de clases, un metodo solo de una clase. En nuestro caso le vamos a llamar unidad a cada `function` que definamos en Javascript.
+Llamamos *unit test* al que prueba una sola funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En un lenguaje orientado a objetos podria una clase, un grupo de clases o un metodo solo de una clase. En nuestro caso le vamos a llamar "unidad" a cada `function` que definamos en Javascript.
 
-Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y dan granularidad tal que podemos asegurar de manera individual y aislada que cada elemento en el nivel mas bajo del programa funciona bien.
+Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y dan granularidad tal que podemos asegurar de manera individual y aislada que cada elemento funciona en el nivel mas bajo del sistema.
 
 #### Integration testing
 
-Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que probamos depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio) y base de datos.
+Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que probamos depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio), base de datos y demas servicios externos.
 
 ![Integration testing](./tdd_3.png)
 
-Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo haria un usuario y tambien sirve de documentacion.
+Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo haria una de las interfaces de usuario o personas reales si nuestro producto es la API.
 
-La [explicacion de Martin Fowler](https://martinfowler.com/bliki/IntegrationTest.html) es interesante y vale la pena leer. Tambien incluye *contract testing* que es lo que vamos a ver mas abajo. Lo que hacemos nosotros es lo que el describe como "broad" integration testing.
+A este nivel de integracion los tests tambien sirven de documentacion para cuando estemos desarrollando la interfaz de usuario, ya que terminan siendo ejemplos completos de todas las interacciones con el servidor HTTP.
 
 Los tipos de tests que siguen tambien se pueden considerar tests de integracion porque prueban mas de una funcion interactuando entre ellas. Pero cuando hablemos de "integration testing" vamos a estar refiriendonos solamente a los tests que hacemos a traves del servidor HTTP.
 
