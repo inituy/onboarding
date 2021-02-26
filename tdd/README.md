@@ -18,15 +18,15 @@ Un test tiene tres etapas que van en este orden: Precondicion, ejecucion y evalu
 
 ![Test](./tdd_1.png)
 
-La etapa de precondicion la usamos para crear el contexto necesario para poder ejecutar la funcion en cuestion de manera significativa. Por ejemplo, si estuvieramos probando una funcion que busca un usuario en la base de datos, usariamos la etapa de precondicion para insertar ese usuario. Si no tenemos el usuario en la base de datos, ejecutar la funcion no nos seria util ya que no podriamos evaluar si funciona.
+La etapa de pre-condicion la usamos para crear el contexto necesario para poder ejecutar la funcion en cuestion de manera significativa. Por ejemplo, si estuvieramos probando una funcion que busca un usuario en la base de datos, usariamos la etapa de pre-condicion para insertar ese usuario. Si no tenemos el usuario en la base de datos, ejecutar la funcion no nos seria util ya que no podriamos evaluar si funciona.
 
 En la segunda etapa vamos a ejecutar la funcion con los parametros que correspondan.
 
-La ultima etapa es la de evaluacion. En base a los parametros que le pasamos en la etapa de ejecucion, vamos a verificar que el resultado de la funcion es lo que esperabamos. Siguiendo con el ejemplo de la funcion que busca el usuario, en esta etapa vamos a verificar que la funcion encontro el usuario.
+La ultima etapa es la de evaluacion. En base a los parametros que le pasamos en la etapa de ejecucion, vamos a verificar que el resultado de la funcion es lo que esperabamos. Siguiendo con el ejemplo de la funcion que busca el usuario, en esta etapa vamos a confirmar que la funcion encontro el usuario.
 
 En un mismo test vamos a repetir estas tres etapas tantas veces como casos de uso tenga la funcion.
 
-Nuestro ejemplo tiene por lo menos dos casos de uso: El caso en el que la ID corresponde con un usuario en la base de datos y el caso en el que no.
+Nuestro ejemplo tiene por lo menos dos casos de uso: El caso en el que el parametro coincide con un ID de un usuario en la base de datos y el caso en el que no.
 
 ```javascript
 /* Usamos Jasmine para crear tests en
@@ -38,7 +38,7 @@ describe('buscarUsuario', function () {
 
   /* `beforeAll` se va a ejecutar antes
      que los tests. Aca vamos a definir
-     nuestras precondiciones. */
+     nuestras pre-condiciones. */
   beforeAll(function () {
     usuario = { id: 123, email: 'usuario@servicio.com' };
     baseDeDatos.insertar(usuario); // Asumimos que funciona!
@@ -60,6 +60,8 @@ describe('buscarUsuario', function () {
   });
 });
 ```
+
+A veces tambien es importante agregar una cuarta etapa, que podemos llamar post-condicion, para quitar los efectos secundarios del test. En este caso podriamos usar la post-condicion para dejar la base de datos vacia como estaba antes de empezar.
 
 ### Tipos de test
 
