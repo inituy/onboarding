@@ -77,7 +77,7 @@ Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y da
 
 #### Integration testing
 
-Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que vamos a probar a este nivel depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio) y base de datos.
+Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que probamos depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio) y base de datos.
 
 ![Integration testing](./tdd_3.png)
 
@@ -85,7 +85,19 @@ Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de e
 
 La [explicacion de Martin Fowler](https://martinfowler.com/bliki/IntegrationTest.html) es interesante y vale la pena leer. Tambien incluye *contract testing* que es lo que vamos a ver mas abajo. Lo que hacemos nosotros es lo que el describe como "broad" integration testing.
 
+Los tipos de tests que siguen tambien se pueden considerar tests de integracion porque prueban mas de una funcion interactuando entre ellas. Pero cuando hablemos de "integration testing" vamos a estar refiriendonos solamente a los tests que hacemos a traves del servidor HTTP.
+
 #### End-to-end testing
+
+Los tests *end-to-end* son los que simulan una persona real usando el sistema. Idealmente se ejecutan en un ambiente lo mas similar posible al de produccion y sin tomar atajos en cuanto a la interfaz de usuario.
+
+![End-to-end testing](./tdd_4.png)
+
+Estos tests pueden ser los que mas valor agregan al test suite pero son costosos, tanto para ejecutar como para desarrollarlos.
+
+Cuando hacemos tests que van de una punta tenemos que considerar desde el CSS hasta los servicios externos. Por ejemplo, algunas herramientas para testing en el browser fallan si un boton que queremos cliquear no esta visible en la pantalla. Tambien podemos cometer el error de llamar una API que usa un servicio externo que cobra por uso y generar un gasto cada vez que corremos los tests.
+
+Al mismo tiempo precisa de muchas cosas funcionando a la vez y eso hace que que ejecutar los tests lleve mucho tiempo y recursos. Por eso es que este tipo de test no es parte del dia a dia del programador, sino que se ejecutan de vez en cuando.
 
 ### Contract testing y test doubles 
 
