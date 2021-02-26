@@ -12,9 +12,9 @@ Cambiar de tester a developer y viceversa puede ser particularmente dificil, y q
 
 #### Composicion
 
-![Test](./tdd_1.png)
-
 Un test tiene tres etapas que van en este orden: Precondicion, ejecucion y evaluacion.
+
+![Test](./tdd_1.png)
 
 La etapa de precondicion se usa para crear el contexto necesario para poder ejecutar la funcion en cuestion de manera significativa. Por ejemplo, si estuvieramos probando una funcion que busca un usuario en la base de datos, usariamos la etapa de precondicion para insertar ese usuario. Si no tenemos el usuario en la base de datos, ejecutar la funcion no nos seria util ya que no podriamos evaluar si funciona como queremos o no.
 
@@ -79,9 +79,11 @@ Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y da
 
 Un *integration test* prueba mas de una funcion en conjunto. El nivel de integracion que vamos a probar a este nivel depende mucho de las opiniones del equipo. En nuestro caso vamos a probar la integracion entre servidor HTTP, aplicacion (logica de negocio) y base de datos.
 
-![Unit testing](./tdd_3.png)
+![Integration testing](./tdd_3.png)
 
 Un test de interaccion desde el servidor HTTP nos ayuda a probar los puntos de entrada de nuestra API tal cual lo haria un usuario y tambien sirve de documentacion.
+
+La [explicacion de Martin Fowler](https://martinfowler.com/bliki/IntegrationTest.html) es interesante y vale la pena leer. Tambien incluye *contract testing* que es lo que vamos a ver mas abajo. Lo que hacemos nosotros es lo que el describe como "broad" integration testing.
 
 #### End-to-end testing
 
