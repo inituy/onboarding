@@ -65,9 +65,9 @@ A veces tambien es importante agregar una cuarta etapa, que podemos llamar post-
 
 ### Tipos de test
 
-Un programa se puede probar de muchas maneras diferentes. Podemos crear pruebas que simulen ser personas reales que usan el programa desde la interfaz de usuario, que interactuen directamente con el servidor HTTP o que trabajen sobre una unica funcion.
+Un programa se puede probar de muchas maneras diferentes. Podemos crear pruebas que simulen ser personas reales que usan el programa desde la interfaz de usuario, que interactuen con el servidor HTTP o que trabajen sobre una sola funcion.
 
-El tipo de test va a depender del objetivo del test y de la parte del programa con la que interactua. Como las "capas" de un programa son muchas y hay muchas razones diferentes para probar cada una, los tipos de test que podemos escribir son muchos tambien.
+El tipo de test va a depender de la parte del programa con la que interactua y del objetivo del test. Como las "capas" de un programa son muchas y hay muchas razones diferentes para probar cada una, los tipos de test que podemos escribir son muchos tambien.
 
 En este onboarding nos vamos a enfocar en tres tipos de test: Unitarios, de integracion y de punto a punto.
 
