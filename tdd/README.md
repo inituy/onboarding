@@ -6,13 +6,13 @@ TDD es una disciplina que consiste de crear pruebas automatizadas (tests) antes 
 
 Una *test suite* es un programa que escribimos en paralelo con el codigo de aplicacion que se encarga de usar el programa principal y evaluar su funcionamiento.
 
-![Test](./tdd_1.png)
-
-Cuando escribimos una prueba automatizada tenemos que dejar de lado la actitud creativa que nos acompaña cuando buscamos la solucion a un problema y empezar a ver el codigo desde un punto de vista critico. Crear un test no es un ejercicio de creatividad sino de control de calidad.
+Cuando escribimos una prueba automatizada tenemos que dejar de lado la creatividad que nos ayuda a crear soluciones y ver el codigo con ojo critico. Crear un test no es un ejercicio de creatividad sino de control de calidad.
 
 Cambiar de tester a developer y viceversa puede ser particularmente dificil, y quizas sea la parte mas dificil de practicar test-driven development.
 
 #### Composicion
+
+![Test](./tdd_1.png)
 
 Un test tiene tres etapas que van en este orden: Precondicion, ejecucion y evaluacion.
 
@@ -71,7 +71,7 @@ En este onboarding nos vamos a enfocar en tres tipos de test: Unitarios, de inte
 
 ![Unit testing](./tdd_2.png)
 
-Llamamos *unit test* al que prueba una unica funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En nuestro caso le vamos a llamar unidad a cada `function`.
+Llamamos *unit test* al que prueba una sola funcion de nuestro sistema. El concepto de "unidad" puede cambiar segun cada programa, paradigma o equipo de trabajo. En nuestro caso le vamos a llamar unidad a cada `function`.
 
 Los unit tests nos permiten empezar a probar nuestro sistema desde temprano y dan granularidad tal que podemos asegurar de manera individual y aislada que cada elemento en el nivel mas bajo del programa funciona bien.
 
