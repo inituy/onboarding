@@ -123,6 +123,8 @@ Basicamente en cualquier test que no sea un *unit test* vamos a crear test doubl
 
 Tanto en integration testing como end-to-end, cuando inicialicemos el servidor HTTP lo vamos a hacer pasandole sus dependencias reales excepto las que sean adaptadores a servicios externos. Estos adaptadores los vamos a remplazar por test doubles que respeten el contrato, pero que devuelvan resultados preestablecidos. Estos test doubles van a recolectar informacion de uso que luego vamos a usar para verificar que el resto de las funciones hayan respetado el contrato en su interaccion.
 
+![Test double](./tdd_6.png)
+
 <hr />
 
 [![Ver en YouTube](../youtube.png)](https://www.youtube.com/watch?v=qs6LNiqffGk)
