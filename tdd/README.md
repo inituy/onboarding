@@ -123,7 +123,25 @@ Basicamente en cualquier test que no sea un *unit test* vamos a crear test doubl
 
 Tanto en integration testing como end-to-end, cuando inicialicemos el servidor HTTP lo vamos a hacer pasandole sus dependencias reales excepto las que sean adaptadores a servicios externos. Estos adaptadores los vamos a remplazar por test doubles que respeten el contrato, pero que devuelvan resultados preestablecidos. Estos test doubles van a recolectar informacion de uso que luego vamos a usar para verificar que el resto de las funciones hayan respetado el contrato en su interaccion.
 
-![Test double](./tdd_6.png)
+![Test double en integration testing](./tdd_6.png)
+
+Asi logramos probar nuestro sistema a traves del servidor HTTP sin gastar creditos en los servicios externos y reducimos el tiempo que lleva ejecutar los tests.
+
+#### Unit testing
+
+El otro caso en el que vamos a querer hacer *contract testing* es cuando probamos funciones que dependen de otras funciones. Cuando hacemos unit testing no queremos que participen otras funciones aparte de la que queremos probar entonces creamos test doubles para cada una de las dependencias de la funcion que queremos probar, y verificamos las interacciones.
+
+![Test doubles en unit testing](./tdd_7.png)
+
+### Las tres reglas de test-driven development
+
+Finalmente, las tres reglas que hay que respetar para aplicar TDD correctamente son las siguientes:
+
+1. No se debe escribir codigo de aplicacion a menos que sea para satisfacer un test que esta fallando. Esto quiere decir que debemos empezar por escribir el test.
+2. No se debe escribir del test de lo necesario para que este falle.
+3. No se debe escribir mas codigo de aplicacion que el necesario para satisfacer el test que esta fallando.
+
+Si seguimos estas reglas al pie de la letra terminamos yendo y viniendo de los tests al codigo en ciclos muy cortos. Como deciamos al principio, la dificultad esta en cambiar de la mentalidad creativa a la critica con cada vuelta.
 
 <hr />
 
