@@ -101,7 +101,7 @@ Estos tests pueden ser los que mas valor agregan al test suite pero son costosos
 
 Cuando hacemos tests que van de una punta a la otra tenemos que considerar desde el CSS hasta los servicios externos. Por ejemplo, algunas herramientas para testing en el browser fallan si un boton que queremos cliquear no esta visible en la pantalla. Tambien podemos cometer el error de llamar una API que usa un servicio externo pago y generar un gasto innecesario.
 
-Al mismo tiempo, este tipo de tests precisan muchas cosas funcionando a la vez y eso hace que ejecutarlos lleve mucho tiempo y recursos. Por eso es que no es parte del dia a dia del programador mantener estos tests, sino que se ejecutan de vez en cuando y se desarrollan de otra manera, dependiendo que decida el equipo.
+Al mismo tiempo, este tipo de tests precisan muchas cosas funcionando a la vez y eso hace que ejecutarlos lleve mucho tiempo y recursos. Por eso es que no es parte del dia a dia del programador mantener estos tests, sino que se ejecutan de vez en cuando y no se escriben junto con la aplicacion sino despues.
 
 ### Contract testing y test doubles 
 
