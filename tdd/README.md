@@ -8,7 +8,9 @@ Una *test suite* es un programa que escribimos en paralelo con el codigo de apli
 
 La test suite deberia interactuar con todos los elementos de la aplicacion mas de una vez, de todas las maneras posibles y desde varios niveles de abstraccion. Cuando practicamos test-driven development correctamente, podemos estar seguros que nuestros tests cubren todo el codigo de aplicacion.
 
-Cuando escribimos una prueba automatizada tenemos que dejar de lado la creatividad que nos ayuda a crear soluciones y ver el codigo con ojo critico. Crear un test no es un ejercicio de creatividad sino de control de calidad. Cambiar de tester a developer y viceversa puede ser particularmente dificil, y quizas sea la parte mas dificil de practicar test-driven development.
+Cuando escribimos una prueba automatizada tenemos que dejar de lado la creatividad y ver el codigo con ojo critico. Crear un test no es un ejercicio de creatividad sino de control de calidad.
+
+El cambio de perspectiva de tester a developer y viceversa puede ser particularmente dificil, y quizas sea la parte mas dificil de practicar test-driven development.
 
 #### Composicion
 
@@ -16,11 +18,11 @@ Un test tiene tres etapas que van en este orden: Precondicion, ejecucion y evalu
 
 ![Test](./tdd_1.png)
 
-La etapa de precondicion se usa para crear el contexto necesario para poder ejecutar la funcion en cuestion de manera significativa. Por ejemplo, si estuvieramos probando una funcion que busca un usuario en la base de datos, usariamos la etapa de precondicion para insertar ese usuario. Si no tenemos el usuario en la base de datos, ejecutar la funcion no nos seria util ya que no podriamos evaluar si funciona como queremos o no.
+La etapa de precondicion la usamos para crear el contexto necesario para poder ejecutar la funcion en cuestion de manera significativa. Por ejemplo, si estuvieramos probando una funcion que busca un usuario en la base de datos, usariamos la etapa de precondicion para insertar ese usuario. Si no tenemos el usuario en la base de datos, ejecutar la funcion no nos seria util ya que no podriamos evaluar si funciona.
 
-En la segunda etapa vamos a ejecutar la funcion. Siguiendo con el ejemplo de la funcion que busca el usuario, este es el momento en el que llamamos a la funcion con los parametros que corresponda.
+En la segunda etapa vamos a ejecutar la funcion con los parametros que correspondan.
 
-La ultima etapa es la de evaluacion. En base a los parametros que le pasamos en la etapa de ejecucion, vamos a verificar que el resultado de la funcion es lo que esperabamos. En el caso de nuestro ejemplo vamos a ver si la funcion encontro el usuario.
+La ultima etapa es la de evaluacion. En base a los parametros que le pasamos en la etapa de ejecucion, vamos a verificar que el resultado de la funcion es lo que esperabamos. Siguiendo con el ejemplo de la funcion que busca el usuario, en esta etapa vamos a verificar que la funcion encontro el usuario.
 
 En un mismo test vamos a repetir estas tres etapas tantas veces como casos de uso tenga la funcion.
 
