@@ -16,11 +16,11 @@ En los proyectos en los que trabajamos generalmente incluimos archivos de config
 
 Para instalar Vagrant con VirtualBox se necesita primero descargar e instalar VirtualBox (https://www.virtualbox.org/wiki/Downloads) y luego descargar e instalar Vagrant (https://www.vagrantup.com/downloads).
 
-Nuestro archivo de configuracion global lo podes encontrar aca: https://github.com/inituy/vagrant/releases/tag/1.
+Nuestro archivo de configuracion global lo podes encontrar aca: https://github.com/inituy/vagrant/releases/tag/1.2.
 
 Para crear una maquina virtual a partir de nuestro archivo tenes que:
 
-1. Descargar el release de Github: https://github.com/inituy/vagrant/releases/tag/1.
+1. Descargar el release de Github: https://github.com/inituy/vagrant/releases/tag/1.2.
 2. Descomprimir el zip.
 3. Abrir una terminal.
 4. Ir al directorio donde se descomprimio el zip.
