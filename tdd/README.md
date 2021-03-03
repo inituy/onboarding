@@ -138,6 +138,6 @@ Si seguimos estas reglas al pie de la letra terminamos yendo y viniendo de los t
 
 <hr />
 
-[![Ver en YouTube](../youtube.png)](https://www.youtube.com/watch?v=qs6LNiqffGk)
+[![Ver en YouTube](../youtube.png)](https://youtu.be/Twjysgzmphk)
 
 [![Siguiente](../next.png)](../)
