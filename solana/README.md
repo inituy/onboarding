@@ -8,7 +8,7 @@ Una blockchain es para todos los efectos practicos una base de datos. La caracte
 
 ##### Estado actual
 
-Como toda base de datos, la blockchain tiene un estado actual. En el caso de Solana, Ethereum y Bitcoin consultar el estado actual del blockchain siempre es gratis. Modificar el estado del blockchain siempre tiene un costo.
+Como toda base de datos, la blockchain tiene un estado actual. En el caso de Solana, Ethereum y Bitcoin [consultar el estado actual del blockchain siempre es gratis](https://explorer.solana.com/). Modificar el estado del blockchain siempre tiene un costo.
 
 ##### Transacciones
 
@@ -20,4 +20,17 @@ Se pueden crear transacciones que sean erroneas y no sean procesables, por ejemp
 
 Cada blockchain tiene como proceso de verificacion de transacciones un [algoritmo de conseso](https://www.geeksforgeeks.org/consensus-algorithms-in-blockchain/). A traves de este algoritmo es que todas las computadoras en la red se ponen de acuerdo (de ahi el "consenso") en que transacciones incorporar al blockchain. Solana utiliza un algoritmo llamado [Proof of History](https://solana.com/solana-whitepaper.pdf).
 
+
+
 ### Solana programming model
+
+El [programming model](https://docs.solana.com/developing/programming-model/overview) refiere a la arquitectura que se usa para organizar la informacion en Solana. Muy parecido a Unix donde [todo es un archivo](https://en.wikipedia.org/wiki/Everything_is_a_file), en Solana, todo lo que forma parte del estado del blockchain es un [account](https://docs.solana.com/developing/programming-model/accounts).
+
+##### Accounts
+
+Igual que los archivos en cualquier sistema operativo, una account en Solana es la abstraccion que se utiliza para almacenar informacion. Un account tiene las siguientes propieadades:
+
+* Address: Es la manera de identificar el account, igual que un archivo tiene un `path` unico en el disco, un account tiene un address unico.
+* Data: El contenido de la account, igual que el contenido de un archivo.
+* Balance: A diferencia de un sistema operativo comun y corriente donde uno puede tener tantos archivos como quiera, en Solana las accounts necesitan pagar para justificar su estadia en la blockchain. Cuando uno crea un account, deposita en ella una cantidad determinada de SOL para que el blockchain se cobre su renta. El monto de la renta es directamente proporcional al espacio reservado para la `data` del account. Si el balance depositado en la account es suficiente, el blockchain le perdona la renta y la account pasa a ser permanente.
+* Owner: El programa que tiene permiso para editar la account.
