@@ -22,7 +22,7 @@ Cada blockchain tiene como proceso de verificacion de transacciones un [algoritm
 
 
 
-### Solana programming model
+### Programming model
 
 El [programming model](https://docs.solana.com/developing/programming-model/overview) refiere a la arquitectura que se usa para organizar la informacion en Solana. Muy parecido a Unix donde [todo es un archivo](https://en.wikipedia.org/wiki/Everything_is_a_file), en Solana, todo lo que forma parte del estado del blockchain es un [account](https://docs.solana.com/developing/programming-model/accounts).
 
@@ -34,3 +34,29 @@ Igual que los archivos en cualquier sistema operativo, una account en Solana es 
 * Data: El contenido de la account, igual que el contenido de un archivo.
 * Balance: A diferencia de un sistema operativo comun y corriente donde uno puede tener tantos archivos como quiera, en Solana las accounts necesitan pagar para justificar su estadia en la blockchain. Cuando uno crea un account, deposita en ella una cantidad determinada de SOL para que el blockchain se cobre su renta. El monto de la renta es directamente proporcional al espacio reservado para la `data` del account. Si el balance depositado en la account es suficiente, el blockchain le perdona la renta y la account pasa a ser permanente.
 * Owner: El programa que tiene permiso para editar la account.
+
+##### Wallets
+
+Son accounts cuyo owner es el System Program y usamos comunmente para firmar transacciones.
+
+##### Programs
+
+Son accounts ejecutables.
+
+##### Instructions
+
+Las invocaciones a programas en Solana se llaman instrucciones. Cada instruction tiene:
+
+* Program ID: A que program va dirigida la instruccion.
+* Instruction data: Carga de datos que va a recibir el program como parte de la invocacion.
+* Accounts: Lista de accounts que el cliente decidio enviarle al program como parte de la invocacion.
+
+##### Transactions
+
+Son el mecanismo para modificar el estado del blockchain. Una transaccion esta hecha de una o mas instrucciones.
+
+Como las transacciones de otras tecnologias de base de datos, las transacciones de Solana son "atomicas", es decir, que son indivisibles en su ejecuccion. Una transaccion siempre es completamente exitosa o falla completamente. Una instruccion fallida hace fallar la transaccion completa.
+
+Cada transaccion tiene un signature que lo identifica en el blockchain. Es posible usar el explorar para encontrar transacciones usando su signature.
+
+### Runtime
